@@ -1,0 +1,2 @@
+# Proyecto Integrador - Sistema de Asesorías Universitarias
+Una plataforma web diseñada para optimizar y automatizar el proceso de gestión de asesorías académicas en el ámbito universitario. El sistema facilita la comunicación entre estudiantes y docentes, permitiendo a los profesores administrar sus horarios, organizar sus sesiones y reducir la carga administrativa para que puedan enfocarse en el desarrollo académico de los alumnos.
