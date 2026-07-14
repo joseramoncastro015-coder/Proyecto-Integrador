@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Maestros | IAEV Asesorías</title>
+
+    <link rel="stylesheet" href="Estilo.css">
+
+</head>
+
+<body>
+
+    <!--=================================
+            MENÚ LATERAL
+    =================================-->
+
+    <nav class="sidebar">
+
+        <h2>IAEV ASESORÍAS</h2>
+
+        <hr>
+
+        <a href="Inicio.html">
+
+            Inicio
+
+        </a>
+
+        <a href="Registrar.html">
+
+            Registrar
+
+        </a>
+
+        <a href="Historial.html">
+
+            Historial
+
+        </a>
+
+        <a href="Reportes.html">
+
+            Reportes
+
+        </a>
+
+        <a href="Perfil.html">
+
+            Perfil
+
+        </a>
+
+        <div id="menuAdmin">
+
+            <a href="Usuarios.html">
+
+                Usuarios
+
+            </a>
+
+            <a href="Maestros.html" class="active">
+
+                Maestros
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!--=================================
+            CONTENIDO
+    =================================-->
+
+    <main class="main">
+
+        <!--=================================
+                HEADER
+        =================================-->
+
+        <header class="header">
+
+            <div class="user-info">
+
+                <div
+                    class="avatar"
+                    id="avatar">
+
+                    AD
+
+                </div>
+
+                <div>
+
+                    <h3 id="nombreUsuario">
+
+                        Administrador
+
+                    </h3>
+
+                    <small id="rolUsuario">
+
+                        Administrador
+
+                    </small>
+
+                </div>
+
+                <img
+                    src="logoIAEV.png"
+                    alt="Logo IAEV"
+                    class="header-logo">
+
+            </div>
+
+            <div class="header-buttons">
+
+                <a
+                    href="Login.html"
+                    class="btn btn-danger"
+                    id="cerrarSesion">
+
+                    Salir
+
+                </a>
+
+            </div>
+
+        </header>
+
+        <!--=================================
+                TÍTULO
+        =================================-->
+
+        <h1 class="mb-30">
+
+            Administración de Maestros
+
+        </h1>
+
+        <!--=================================
+                FORMULARIO
+        =================================-->
+
+        <section class="card">
+
+            <h2 class="mb-20">
+
+                Registrar Maestro
+
+            </h2>
+
+            <form id="formMaestro">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Número de Empleado</label>
+
+                        <input
+                            type="text"
+                            id="numeroEmpleado"
+                            placeholder="Ej. MT001"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Nombre Completo</label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            placeholder="Nombre del maestro"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Correo Institucional</label>
+
+                        <input
+                            type="email"
+                            id="correo"
+                            placeholder="correo@upgop.edu.mx"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Carrera</label>
+
+                        <input
+                            type="text"
+                            id="carrera"
+                            placeholder="Programa educativo"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100">
+
+                    Guardar Maestro
+
+                </button>
+
+            </form>
+
+        </section>
+
+        <!--=================================
+                TABLA
+        =================================-->
+
+        <section class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>No. Empleado</th>
+
+                        <th>Nombre</th>
+
+                        <th>Correo</th>
+
+                        <th>Carrera</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaMaestros">
+
+                    <tr>
+
+                        <td>MT001</td>
+
+                        <td>Maicol Gaytan</td>
+
+                        <td>maicol@upgop.edu.mx</td>
+
+                        <td>Ingeniería en Animación y Efectos Visuales</td>
+
+                        <td>
+
+                            <button class="btn btn-primary">
+
+                                Editar
+
+                            </button>
+
+                            <button class="btn btn-danger">
+
+                                Eliminar
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+        <script>
+
+        //====================================
+        // OBTENER DATOS DEL LOGIN
+        //====================================
+
+        const rolLogin = localStorage.getItem("rol");
+
+        const nombreLogin = localStorage.getItem("nombre");
+
+        //====================================
+        // VERIFICAR SESIÓN
+        //====================================
+
+        if(!rolLogin){
+
+            window.location.href="Login.html";
+
+        }
+
+        //====================================
+        // SOLO ADMINISTRADOR
+        //====================================
+
+        if(rolLogin!=="administrador"){
+
+            alert("No tienes permisos para acceder a esta página.");
+
+            window.location.href="Inicio.html";
+
+        }
+
+        //====================================
+        // MOSTRAR DATOS DEL ADMINISTRADOR
+        //====================================
+
+        document.getElementById("nombreUsuario").innerHTML = nombreLogin;
+
+        document.getElementById("rolUsuario").innerHTML = "Administrador";
+
+        document.getElementById("avatar").innerHTML = "AD";
+
+        //====================================
+        // CERRAR SESIÓN
+        //====================================
+
+        document.getElementById("cerrarSesion").addEventListener("click",function(){
+
+            localStorage.clear();
+
+        });
+
+        //====================================
+        // REGISTRAR MAESTRO
+        //====================================
+
+        document.getElementById("formMaestro").addEventListener("submit",function(e){
+
+            e.preventDefault();
+
+            const numeroEmpleado = document.getElementById("numeroEmpleado").value;
+
+            const nombre = document.getElementById("nombre").value;
+
+            const correo = document.getElementById("correo").value;
+
+            const carrera = document.getElementById("carrera").value;
+
+            const tabla = document.getElementById("tablaMaestros");
+
+            const fila = tabla.insertRow();
+
+            fila.insertCell(0).innerHTML = numeroEmpleado;
+
+            fila.insertCell(1).innerHTML = nombre;
+
+            fila.insertCell(2).innerHTML = correo;
+
+            fila.insertCell(3).innerHTML = carrera;
+
+            fila.insertCell(4).innerHTML = `
+                <button class="btn btn-primary">Editar</button>
+                <button class="btn btn-danger" onclick="eliminarFila(this)">Eliminar</button>
+            `;
+
+            console.log({
+
+                numeroEmpleado,
+
+                nombre,
+
+                correo,
+
+                carrera
+
+            });
+
+            alert("Maestro registrado correctamente.");
+
+            document.getElementById("formMaestro").reset();
+
+        });
+
+        //====================================
+        // ELIMINAR MAESTRO
+        //====================================
+
+        function eliminarFila(boton){
+
+            if(confirm("¿Deseas eliminar este maestro?")){
+
+                boton.parentElement.parentElement.remove();
+
+            }
+
+        }
+
+        //====================================
+        // FIREBASE
+        //====================================
+        // Aquí se guardarán los maestros
+        // y posteriormente se cargarán
+        // automáticamente desde Firestore.
+
+    </script>
+
+</body>
+
+</html>

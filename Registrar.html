@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registrar Asesoría | IAEV</title>
+
+    <link rel="stylesheet" href="Estilo.css">
+
+</head>
+
+<body>
+
+    <!--=================================
+            MENÚ LATERAL
+    =================================-->
+
+    <nav class="sidebar">
+
+        <h2>IAEV ASESORÍAS</h2>
+
+        <hr>
+
+        <a href="Inicio.html">
+
+            Inicio
+
+        </a>
+
+        <a href="Registrar.html" class="active">
+
+            Registrar
+
+        </a>
+
+        <a href="Historial.html">
+
+            Historial
+
+        </a>
+
+        <a href="Reportes.html">
+
+            Reportes
+
+        </a>
+
+        <a href="Perfil.html">
+
+            Perfil
+
+        </a>
+
+        <!-- SOLO ADMINISTRADOR -->
+
+        <div id="menuAdmin">
+
+            <a href="Usuarios.html">
+
+                Usuarios
+
+            </a>
+
+            <a href="Maestros.html">
+
+                Maestros
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!--=================================
+            CONTENIDO
+    =================================-->
+
+    <main class="main">
+
+        <!--=================================
+                HEADER
+        =================================-->
+
+        <header class="header">
+
+            <div class="user-info">
+
+                <div
+                    class="avatar"
+                    id="avatar">
+
+                    MA
+
+                </div>
+
+                <div>
+
+                    <h3 id="nombreUsuario">
+
+                        Usuario
+
+                    </h3>
+
+                    <small id="rolUsuario">
+
+                        Maestro
+
+                    </small>
+
+                </div>
+
+                <img
+                    src="logoIAEV.png"
+                    alt="Logo IAEV"
+                    class="header-logo">
+
+            </div>
+
+            <div class="header-buttons">
+
+                <a
+                    href="Login.html"
+                    class="btn btn-danger"
+                    id="cerrarSesion">
+
+                    Salir
+
+                </a>
+
+            </div>
+
+        </header>
+
+        <!--=================================
+                TÍTULO
+        =================================-->
+
+        <h1 class="mb-30">
+
+            Registrar Asesoría
+
+        </h1>
+
+        <!--=================================
+                FORMULARIO
+        =================================-->
+
+        <section class="card">
+
+            <form id="formAsesoria">
+
+                <!-- Primera fila -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Matrícula</label>
+
+                        <input
+                            type="text"
+                            id="matricula"
+                            placeholder="Ej. 25080529"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Nombre del alumno</label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            placeholder="Nombre completo"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Segunda fila -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Cuatrimestre</label>
+
+                        <select
+                            id="cuatrimestre"
+                            required>
+
+                            <option value="">Seleccionar</option>
+
+                            <option>1°</option>
+                            <option>2°</option>
+                            <option>3°</option>
+                            <option>4°</option>
+                            <option>5°</option>
+                            <option>6°</option>
+                            <option>7°</option>
+                            <option>8°</option>
+                            <option>9°</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Materia</label>
+
+                        <select
+                            id="materia"
+                            required>
+
+                            <option value="">Seleccionar materia</option>
+
+                            <option>Programación</option>
+                            <option>Base de Datos</option>
+                            <option>Cálculo Diferencial</option>
+                            <option>Redes de Computadoras</option>
+                            <option>Matemáticas</option>
+                            <option>Física</option>
+                            <option>Animación 2D</option>
+                            <option>Animación 3D</option>
+                            <option>Modelado 3D</option>
+                            <option>Diseño Digital</option>
+                            <option>Efectos Visuales</option>
+                            <option>Renderizado</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Tercera fila -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Tipo de asesoría</label>
+
+                        <select id="tipo">
+
+                            <option>Académica</option>
+
+                            <option>Proyecto</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Fecha</label>
+
+                        <input
+                            type="date"
+                            id="fecha"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Cuarta fila -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Hora de inicio</label>
+
+                        <input
+                            type="time"
+                            id="horaInicio"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Hora de fin</label>
+
+                        <input
+                            type="time"
+                            id="horaFin"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Tema -->
+
+                <div class="form-group">
+
+                    <label>Tema tratado</label>
+
+                    <textarea
+                        id="tema"
+                        placeholder="Describe el tema tratado durante la asesoría..."
+                        required></textarea>
+
+                </div>
+
+                <!-- Botón -->
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100">
+
+                    Guardar Asesoría
+
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+        <script>
+
+        //====================================
+        // OBTENER DATOS DEL LOGIN
+        //====================================
+
+        const rol = localStorage.getItem("rol");
+
+        const nombre = localStorage.getItem("nombre");
+
+        const menuAdmin = document.getElementById("menuAdmin");
+
+        const nombreUsuario = document.getElementById("nombreUsuario");
+
+        const rolUsuario = document.getElementById("rolUsuario");
+
+        const avatar = document.getElementById("avatar");
+
+        //====================================
+        // VERIFICAR SESIÓN
+        //====================================
+
+        if(!rol){
+
+            window.location.href="Login.html";
+
+        }
+
+        //====================================
+        // CONFIGURAR MAESTRO
+        //====================================
+
+        if(rol==="maestro"){
+
+            menuAdmin.style.display="none";
+
+            nombreUsuario.innerHTML=nombre;
+
+            rolUsuario.innerHTML="Maestro";
+
+            avatar.innerHTML="MA";
+
+        }
+
+        //====================================
+        // CONFIGURAR ADMINISTRADOR
+        //====================================
+
+        if(rol==="administrador"){
+
+            menuAdmin.style.display="block";
+
+            nombreUsuario.innerHTML=nombre;
+
+            rolUsuario.innerHTML="Administrador";
+
+            avatar.innerHTML="AD";
+
+        }
+
+        //====================================
+        // CERRAR SESIÓN
+        //====================================
+
+        document.getElementById("cerrarSesion").addEventListener("click",function(){
+
+            localStorage.clear();
+
+        });
+
+        //====================================
+        // REGISTRAR ASESORÍA
+        //====================================
+
+        document.getElementById("formAsesoria").addEventListener("submit",function(e){
+
+            e.preventDefault();
+
+            const asesoria={
+
+                matricula:document.getElementById("matricula").value,
+
+                nombre:document.getElementById("nombre").value,
+
+                cuatrimestre:document.getElementById("cuatrimestre").value,
+
+                materia:document.getElementById("materia").value,
+
+                tipo:document.getElementById("tipo").value,
+
+                fecha:document.getElementById("fecha").value,
+
+                horaInicio:document.getElementById("horaInicio").value,
+
+                horaFin:document.getElementById("horaFin").value,
+
+                tema:document.getElementById("tema").value,
+
+                maestro:nombre
+
+            };
+
+            console.log("Asesoría registrada:");
+
+            console.table(asesoria);
+
+            alert("La asesoría se registró correctamente.");
+
+            document.getElementById("formAsesoria").reset();
+
+        });
+
+    </script>
+
+</body>
+
+</html>

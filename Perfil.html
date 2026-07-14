@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Perfil | IAEV Asesorías</title>
+
+    <link rel="stylesheet" href="Estilo.css">
+
+</head>
+
+<body>
+
+    <!--=================================
+            MENÚ LATERAL
+    =================================-->
+
+    <nav class="sidebar">
+
+        <h2>IAEV ASESORÍAS</h2>
+
+        <hr>
+
+        <a href="Inicio.html">
+
+            Inicio
+
+        </a>
+
+        <a href="Registrar.html">
+
+            Registrar
+
+        </a>
+
+        <a href="Historial.html">
+
+            Historial
+
+        </a>
+
+        <a href="Reportes.html">
+
+            Reportes
+
+        </a>
+
+        <a href="Perfil.html" class="active">
+
+            Perfil
+
+        </a>
+
+        <!-- SOLO ADMINISTRADOR -->
+
+        <div id="menuAdmin">
+
+            <a href="Usuarios.html">
+
+                Usuarios
+
+            </a>
+
+            <a href="Maestros.html">
+
+                Maestros
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!--=================================
+            CONTENIDO
+    =================================-->
+
+    <main class="main">
+
+        <!--=================================
+                HEADER
+        =================================-->
+
+        <header class="header">
+
+            <div class="user-info">
+
+                <div
+                    class="avatar"
+                    id="avatar">
+
+                    MA
+
+                </div>
+
+                <div>
+
+                    <h3 id="nombreUsuario">
+
+                        Usuario
+
+                    </h3>
+
+                    <small id="rolUsuario">
+
+                        Maestro
+
+                    </small>
+
+                </div>
+
+                <img
+                    src="logoIAEV.png"
+                    alt="Logo IAEV"
+                    class="header-logo">
+
+            </div>
+
+            <div class="header-buttons">
+
+                <a
+                    href="Login.html"
+                    class="btn btn-danger"
+                    id="cerrarSesion">
+
+                    Salir
+
+                </a>
+
+            </div>
+
+        </header>
+
+        <!--=================================
+                TÍTULO
+        =================================-->
+
+        <h1 class="mb-30">
+
+            Mi Perfil
+
+        </h1>
+
+        <!--=================================
+                PERFIL
+        =================================-->
+
+        <section class="profile-card">
+
+            <div class="profile-header">
+
+                <div class="avatar" id="avatarPerfil">
+
+                    MA
+
+                </div>
+
+                <h2 id="nombrePerfil">
+
+                    Usuario
+
+                </h2>
+
+            </div>
+
+            <div class="profile-info">
+
+                <label>Usuario</label>
+
+                <p id="usuarioPerfil">
+
+                    25080529
+
+                </p>
+
+                <label>Correo</label>
+
+                <p id="correoPerfil">
+
+                    usuario@upgop.edu.mx
+
+                </p>
+
+                <label>Carrera</label>
+
+                <p id="carreraPerfil">
+
+                    Ingeniería en Animación y Efectos Visuales
+
+                </p>
+
+                <label>Rol</label>
+
+                <p id="rolPerfil">
+
+                    Maestro
+
+                </p>
+
+            </div>
+
+        </section>
+
+        <!--=================================
+            SOLO ADMINISTRADOR
+        =================================-->
+
+        <section
+            class="card"
+            id="panelAdministrador">
+
+            <h2 class="mb-20">
+
+                Información del Sistema
+
+            </h2>
+
+            <div class="card-grid">
+
+                <div class="card">
+
+                    <h3>Usuarios</h3>
+
+                    <h2 id="usuariosSistema">
+
+                        2
+
+                    </h2>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Maestros</h3>
+
+                    <h2 id="maestrosSistema">
+
+                        1
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+        <script>
+
+        //====================================
+        // OBTENER DATOS DEL LOGIN
+        //====================================
+
+        const rol = localStorage.getItem("rol");
+
+        const nombre = localStorage.getItem("nombre");
+
+        const usuario = localStorage.getItem("usuario");
+
+        const menuAdmin = document.getElementById("menuAdmin");
+
+        const nombreUsuario = document.getElementById("nombreUsuario");
+
+        const rolUsuario = document.getElementById("rolUsuario");
+
+        const avatar = document.getElementById("avatar");
+
+        const avatarPerfil = document.getElementById("avatarPerfil");
+
+        const nombrePerfil = document.getElementById("nombrePerfil");
+
+        const usuarioPerfil = document.getElementById("usuarioPerfil");
+
+        const correoPerfil = document.getElementById("correoPerfil");
+
+        const carreraPerfil = document.getElementById("carreraPerfil");
+
+        const rolPerfil = document.getElementById("rolPerfil");
+
+        const panelAdministrador = document.getElementById("panelAdministrador");
+
+        //====================================
+        // VERIFICAR SESIÓN
+        //====================================
+
+        if(!rol){
+
+            window.location.href="Login.html";
+
+        }
+
+        //====================================
+        // DATOS GENERALES
+        //====================================
+
+        nombreUsuario.innerHTML = nombre;
+
+        nombrePerfil.innerHTML = nombre;
+
+        usuarioPerfil.innerHTML = usuario;
+
+        //====================================
+        // MAESTRO
+        //====================================
+
+        if(rol==="maestro"){
+
+            menuAdmin.style.display="none";
+
+            panelAdministrador.style.display="none";
+
+            rolUsuario.innerHTML="Maestro";
+
+            rolPerfil.innerHTML="Maestro";
+
+            avatar.innerHTML="MA";
+
+            avatarPerfil.innerHTML="MA";
+
+            correoPerfil.innerHTML="maicol@upgop.edu.mx";
+
+            carreraPerfil.innerHTML="Ingeniería en Animación y Efectos Visuales";
+
+        }
+
+        //====================================
+        // ADMINISTRADOR
+        //====================================
+
+        if(rol==="administrador"){
+
+            menuAdmin.style.display="block";
+
+            panelAdministrador.style.display="block";
+
+            rolUsuario.innerHTML="Administrador";
+
+            rolPerfil.innerHTML="Administrador";
+
+            avatar.innerHTML="AD";
+
+            avatarPerfil.innerHTML="AD";
+
+            correoPerfil.innerHTML="admin@upgop.edu.mx";
+
+            carreraPerfil.innerHTML="Administración del Sistema";
+
+            document.getElementById("usuariosSistema").innerHTML="2";
+
+            document.getElementById("maestrosSistema").innerHTML="1";
+
+        }
+
+        //====================================
+        // CERRAR SESIÓN
+        //====================================
+
+        document.getElementById("cerrarSesion").addEventListener("click",function(){
+
+            localStorage.clear();
+
+        });
+
+        //====================================
+        // FIREBASE
+        //====================================
+        // Más adelante aquí se cargarán
+        // automáticamente los datos del usuario
+        // desde Firestore.
+
+    </script>
+
+</body>
+
+</html>

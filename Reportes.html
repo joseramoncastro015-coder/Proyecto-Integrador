@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reportes | IAEV Asesorías</title>
+
+    <link rel="stylesheet" href="Estilo.css">
+
+</head>
+
+<body>
+
+    <!--=================================
+            MENÚ LATERAL
+    =================================-->
+
+    <nav class="sidebar">
+
+        <h2>IAEV ASESORÍAS</h2>
+
+        <hr>
+
+        <a href="Inicio.html">
+
+            Inicio
+
+        </a>
+
+        <a href="Registrar.html">
+
+            Registrar
+
+        </a>
+
+        <a href="Historial.html">
+
+            Historial
+
+        </a>
+
+        <a href="Reportes.html" class="active">
+
+            Reportes
+
+        </a>
+
+        <a href="Perfil.html">
+
+            Perfil
+
+        </a>
+
+        <!-- SOLO ADMINISTRADOR -->
+
+        <div id="menuAdmin">
+
+            <a href="Usuarios.html">
+
+                Usuarios
+
+            </a>
+
+            <a href="Maestros.html">
+
+                Maestros
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!--=================================
+            CONTENIDO
+    =================================-->
+
+    <main class="main">
+
+        <!--=================================
+                HEADER
+        =================================-->
+
+        <header class="header">
+
+            <div class="user-info">
+
+                <div
+                    class="avatar"
+                    id="avatar">
+
+                    MA
+
+                </div>
+
+                <div>
+
+                    <h3 id="nombreUsuario">
+
+                        Usuario
+
+                    </h3>
+
+                    <small id="rolUsuario">
+
+                        Maestro
+
+                    </small>
+
+                </div>
+
+                <img
+                    src="logoIAEV.png"
+                    alt="Logo IAEV"
+                    class="header-logo">
+
+            </div>
+
+            <div class="header-buttons">
+
+                <a
+                    href="Login.html"
+                    class="btn btn-danger"
+                    id="cerrarSesion">
+
+                    Salir
+
+                </a>
+
+            </div>
+
+        </header>
+
+        <!--=================================
+                TÍTULO
+        =================================-->
+
+        <h1 class="mb-30">
+
+            Reportes
+
+        </h1>
+
+        <!--=================================
+                TARJETAS
+        =================================-->
+
+        <section class="card-grid">
+
+            <div class="card">
+
+                <h3>Total de Asesorías</h3>
+
+                <h2 id="totalAsesorias">
+
+                    8
+
+                </h2>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Horas Totales</h3>
+
+                <h2 id="horasTotales">
+
+                    10 h
+
+                </h2>
+
+            </div>
+
+            <!-- SOLO ADMINISTRADOR -->
+
+            <div
+                class="card"
+                id="cardUsuarios">
+
+                <h3>Usuarios</h3>
+
+                <h2 id="totalUsuarios">
+
+                    2
+
+                </h2>
+
+            </div>
+
+            <div
+                class="card"
+                id="cardMaestros">
+
+                <h3>Maestros</h3>
+
+                <h2 id="totalMaestros">
+
+                    1
+
+                </h2>
+
+            </div>
+
+        </section>
+
+        <!--=================================
+                TABLA
+        =================================-->
+
+        <section class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Materia</th>
+
+                        <th>Asesorías</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaReportes">
+
+                    <tr>
+
+                        <td>Programación</td>
+
+                        <td>3</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Base de Datos</td>
+
+                        <td>2</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Redes de Computadoras</td>
+
+                        <td>2</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Cálculo Diferencial</td>
+
+                        <td>1</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+        <script>
+
+        //====================================
+        // OBTENER DATOS DEL LOGIN
+        //====================================
+
+        const rol = localStorage.getItem("rol");
+
+        const nombre = localStorage.getItem("nombre");
+
+        const menuAdmin = document.getElementById("menuAdmin");
+
+        const nombreUsuario = document.getElementById("nombreUsuario");
+
+        const rolUsuario = document.getElementById("rolUsuario");
+
+        const avatar = document.getElementById("avatar");
+
+        const cardUsuarios = document.getElementById("cardUsuarios");
+
+        const cardMaestros = document.getElementById("cardMaestros");
+
+        //====================================
+        // VERIFICAR SESIÓN
+        //====================================
+
+        if(!rol){
+
+            window.location.href="Login.html";
+
+        }
+
+        //====================================
+        // MAESTRO
+        //====================================
+
+        if(rol==="maestro"){
+
+            menuAdmin.style.display="none";
+
+            cardUsuarios.style.display="none";
+
+            cardMaestros.style.display="none";
+
+            nombreUsuario.innerHTML=nombre;
+
+            rolUsuario.innerHTML="Maestro";
+
+            avatar.innerHTML="MA";
+
+        }
+
+        //====================================
+        // ADMINISTRADOR
+        //====================================
+
+        if(rol==="administrador"){
+
+            menuAdmin.style.display="block";
+
+            cardUsuarios.style.display="block";
+
+            cardMaestros.style.display="block";
+
+            nombreUsuario.innerHTML=nombre;
+
+            rolUsuario.innerHTML="Administrador";
+
+            avatar.innerHTML="AD";
+
+        }
+
+        //====================================
+        // CERRAR SESIÓN
+        //====================================
+
+        document.getElementById("cerrarSesion").addEventListener("click",function(){
+
+            localStorage.clear();
+
+        });
+
+        //====================================
+        // DATOS DE EJEMPLO
+        //====================================
+        // Estos valores serán reemplazados
+        // cuando se conecte Firebase.
+
+        document.getElementById("totalAsesorias").innerHTML="8";
+
+        document.getElementById("horasTotales").innerHTML="10 h";
+
+        if(rol==="administrador"){
+
+            document.getElementById("totalUsuarios").innerHTML="2";
+
+            document.getElementById("totalMaestros").innerHTML="1";
+
+        }
+
+        //====================================
+        // FIREBASE
+        //====================================
+        // Aquí se cargarán automáticamente:
+        //
+        // • Total de asesorías
+        // • Horas totales
+        // • Total de usuarios
+        // • Total de maestros
+        // • Reportes por materia
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Usuarios | IAEV Asesorías</title>
+
+    <link rel="stylesheet" href="Estilo.css">
+
+</head>
+
+<body>
+
+    <!--=================================
+            MENÚ LATERAL
+    =================================-->
+
+    <nav class="sidebar">
+
+        <h2>IAEV ASESORÍAS</h2>
+
+        <hr>
+
+        <a href="Inicio.html">
+
+            Inicio
+
+        </a>
+
+        <a href="Registrar.html">
+
+            Registrar
+
+        </a>
+
+        <a href="Historial.html">
+
+            Historial
+
+        </a>
+
+        <a href="Reportes.html">
+
+            Reportes
+
+        </a>
+
+        <a href="Perfil.html">
+
+            Perfil
+
+        </a>
+
+        <div id="menuAdmin">
+
+            <a href="Usuarios.html" class="active">
+
+                Usuarios
+
+            </a>
+
+            <a href="Maestros.html">
+
+                Maestros
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!--=================================
+            CONTENIDO
+    =================================-->
+
+    <main class="main">
+
+        <!--=================================
+                HEADER
+        =================================-->
+
+        <header class="header">
+
+            <div class="user-info">
+
+                <div class="avatar" id="avatar">
+
+                    AD
+
+                </div>
+
+                <div>
+
+                    <h3 id="nombreUsuario">
+
+                        Administrador
+
+                    </h3>
+
+                    <small id="rolUsuario">
+
+                        Administrador
+
+                    </small>
+
+                </div>
+
+                <img
+                    src="logoIAEV.png"
+                    alt="Logo IAEV"
+                    class="header-logo">
+
+            </div>
+
+            <div class="header-buttons">
+
+                <a
+                    href="Login.html"
+                    class="btn btn-danger"
+                    id="cerrarSesion">
+
+                    Salir
+
+                </a>
+
+            </div>
+
+        </header>
+
+        <!--=================================
+                TÍTULO
+        =================================-->
+
+        <h1 class="mb-30">
+
+            Administración de Usuarios
+
+        </h1>
+
+        <!--=================================
+            FORMULARIO
+        =================================-->
+
+        <section class="card">
+
+            <h2 class="mb-20">
+
+                Agregar Usuario
+
+            </h2>
+
+            <form id="formUsuario">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Nombre</label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            placeholder="Nombre completo"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Usuario</label>
+
+                        <input
+                            type="text"
+                            id="usuario"
+                            placeholder="Usuario"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Contraseña</label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Contraseña"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Rol</label>
+
+                        <select id="rol" required>
+
+                            <option value="">Seleccionar</option>
+
+                            <option value="maestro">
+
+                                Maestro
+
+                            </option>
+
+                            <option value="administrador">
+
+                                Administrador
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100">
+
+                    Guardar Usuario
+
+                </button>
+
+            </form>
+
+        </section>
+
+        <!--=================================
+                TABLA
+        =================================-->
+
+        <section class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Usuario</th>
+
+                        <th>Nombre</th>
+
+                        <th>Rol</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaUsuarios">
+
+                    <tr>
+
+                        <td>25080529</td>
+
+                        <td>Maicol Gaytan</td>
+
+                        <td>Maestro</td>
+
+                        <td>
+
+                            <button class="btn btn-primary">
+
+                                Editar
+
+                            </button>
+
+                            <button class="btn btn-danger">
+
+                                Eliminar
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>admin</td>
+
+                        <td>Administrador General</td>
+
+                        <td>Administrador</td>
+
+                        <td>
+
+                            <button class="btn btn-primary">
+
+                                Editar
+
+                            </button>
+
+                            <button class="btn btn-danger">
+
+                                Eliminar
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+        <script>
+
+        //====================================
+        // OBTENER DATOS DEL LOGIN
+        //====================================
+
+        const rolLogin = localStorage.getItem("rol");
+
+        const nombreLogin = localStorage.getItem("nombre");
+
+        //====================================
+        // VERIFICAR SESIÓN
+        //====================================
+
+        if(!rolLogin){
+
+            window.location.href="Login.html";
+
+        }
+
+        //====================================
+        // SOLO ADMINISTRADOR
+        //====================================
+
+        if(rolLogin!=="administrador"){
+
+            alert("No tienes permisos para acceder a esta página.");
+
+            window.location.href="Inicio.html";
+
+        }
+
+        //====================================
+        // MOSTRAR DATOS DEL ADMINISTRADOR
+        //====================================
+
+        document.getElementById("nombreUsuario").innerHTML=nombreLogin;
+
+        document.getElementById("rolUsuario").innerHTML="Administrador";
+
+        document.getElementById("avatar").innerHTML="AD";
+
+        //====================================
+        // CERRAR SESIÓN
+        //====================================
+
+        document.getElementById("cerrarSesion").addEventListener("click",function(){
+
+            localStorage.clear();
+
+        });
+
+        //====================================
+        // AGREGAR USUARIO
+        //====================================
+
+        document.getElementById("formUsuario").addEventListener("submit",function(e){
+
+            e.preventDefault();
+
+            const nombre=document.getElementById("nombre").value;
+
+            const usuario=document.getElementById("usuario").value;
+
+            const password=document.getElementById("password").value;
+
+            const rol=document.getElementById("rol").value;
+
+            const tabla=document.getElementById("tablaUsuarios");
+
+            const fila=tabla.insertRow();
+
+            fila.insertCell(0).innerHTML=usuario;
+
+            fila.insertCell(1).innerHTML=nombre;
+
+            fila.insertCell(2).innerHTML=rol.charAt(0).toUpperCase()+rol.slice(1);
+
+            fila.insertCell(3).innerHTML=
+            `
+            <button class="btn btn-primary">Editar</button>
+            <button class="btn btn-danger" onclick="eliminarFila(this)">Eliminar</button>
+            `;
+
+            console.log({
+
+                nombre,
+
+                usuario,
+
+                password,
+
+                rol
+
+            });
+
+            alert("Usuario agregado correctamente.");
+
+            document.getElementById("formUsuario").reset();
+
+        });
+
+        //====================================
+        // ELIMINAR FILA
+        //====================================
+
+        function eliminarFila(boton){
+
+            if(confirm("¿Deseas eliminar este usuario?")){
+
+                boton.parentElement.parentElement.remove();
+
+            }
+
+        }
+
+        //====================================
+        // FIREBASE
+        //====================================
+        // Aquí se guardarán y consultarán
+        // los usuarios desde Firestore.
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Historial | IAEV Asesorías</title>
+
+    <link rel="stylesheet" href="Estilo.css">
+
+</head>
+
+<body>
+
+    <!--=================================
+            MENÚ LATERAL
+    =================================-->
+
+    <nav class="sidebar">
+
+        <h2>IAEV ASESORÍAS</h2>
+
+        <hr>
+
+        <a href="Inicio.html">
+
+            Inicio
+
+        </a>
+
+        <a href="Registrar.html">
+
+            Registrar
+
+        </a>
+
+        <a href="Historial.html" class="active">
+
+            Historial
+
+        </a>
+
+        <a href="Reportes.html">
+
+            Reportes
+
+        </a>
+
+        <a href="Perfil.html">
+
+            Perfil
+
+        </a>
+
+        <!-- SOLO ADMINISTRADOR -->
+
+        <div id="menuAdmin">
+
+            <a href="Usuarios.html">
+
+                Usuarios
+
+            </a>
+
+            <a href="Maestros.html">
+
+                Maestros
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!--=================================
+            CONTENIDO
+    =================================-->
+
+    <main class="main">
+
+        <!--=================================
+                HEADER
+        =================================-->
+
+        <header class="header">
+
+            <div class="user-info">
+
+                <div
+                    class="avatar"
+                    id="avatar">
+
+                    MA
+
+                </div>
+
+                <div>
+
+                    <h3 id="nombreUsuario">
+
+                        Usuario
+
+                    </h3>
+
+                    <small id="rolUsuario">
+
+                        Maestro
+
+                    </small>
+
+                </div>
+
+                <img
+                    src="logoIAEV.png"
+                    alt="Logo IAEV"
+                    class="header-logo">
+
+            </div>
+
+            <div class="header-buttons">
+
+                <a
+                    href="Login.html"
+                    class="btn btn-danger"
+                    id="cerrarSesion">
+
+                    Salir
+
+                </a>
+
+            </div>
+
+        </header>
+
+        <!--=================================
+                TÍTULO
+        =================================-->
+
+        <h1 class="mb-30">
+
+            Historial de Asesorías
+
+        </h1>
+
+        <!--=================================
+                BUSCADOR
+        =================================-->
+
+        <section class="card">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="buscar"
+                    placeholder="Buscar asesoría...">
+
+            </div>
+
+        </section>
+
+        <!--=================================
+                TABLA
+        =================================-->
+
+        <section class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Matrícula</th>
+
+                        <th>Alumno</th>
+
+                        <th>Materia</th>
+
+                        <th>Tipo</th>
+
+                        <th>Fecha</th>
+
+                        <!-- SOLO ADMINISTRADOR -->
+
+                        <th id="columnaMaestro">
+
+                            Maestro
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaHistorial">
+
+                    <tr>
+
+                        <td>25080529</td>
+
+                        <td>Sofía Ramírez</td>
+
+                        <td>Cálculo Diferencial</td>
+
+                        <td>
+
+                            <span class="badge badge-academica">
+
+                                Académica
+
+                            </span>
+
+                        </td>
+
+                        <td>19/05/2025</td>
+
+                        <td class="datoMaestro">
+
+                            Maicol Gaytan
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>25080530</td>
+
+                        <td>Mateo López</td>
+
+                        <td>Redes de Computadoras</td>
+
+                        <td>
+
+                            <span class="badge badge-proyecto">
+
+                                Proyecto
+
+                            </span>
+
+                        </td>
+
+                        <td>13/05/2025</td>
+
+                        <td class="datoMaestro">
+
+                            Maicol Gaytan
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+        <script>
+
+        //====================================
+        // OBTENER DATOS DEL LOGIN
+        //====================================
+
+        const rol = localStorage.getItem("rol");
+
+        const nombre = localStorage.getItem("nombre");
+
+        const menuAdmin = document.getElementById("menuAdmin");
+
+        const nombreUsuario = document.getElementById("nombreUsuario");
+
+        const rolUsuario = document.getElementById("rolUsuario");
+
+        const avatar = document.getElementById("avatar");
+
+        const columnaMaestro = document.getElementById("columnaMaestro");
+
+        const datosMaestro = document.querySelectorAll(".datoMaestro");
+
+        //====================================
+        // VERIFICAR SESIÓN
+        //====================================
+
+        if(!rol){
+
+            window.location.href="Login.html";
+
+        }
+
+        //====================================
+        // MAESTRO
+        //====================================
+
+        if(rol==="maestro"){
+
+            menuAdmin.style.display="none";
+
+            nombreUsuario.innerHTML=nombre;
+
+            rolUsuario.innerHTML="Maestro";
+
+            avatar.innerHTML="MA";
+
+            columnaMaestro.style.display="none";
+
+            datosMaestro.forEach(function(columna){
+
+                columna.style.display="none";
+
+            });
+
+        }
+
+        //====================================
+        // ADMINISTRADOR
+        //====================================
+
+        if(rol==="administrador"){
+
+            menuAdmin.style.display="block";
+
+            nombreUsuario.innerHTML=nombre;
+
+            rolUsuario.innerHTML="Administrador";
+
+            avatar.innerHTML="AD";
+
+            columnaMaestro.style.display="";
+
+            datosMaestro.forEach(function(columna){
+
+                columna.style.display="";
+
+            });
+
+        }
+
+        //====================================
+        // CERRAR SESIÓN
+        //====================================
+
+        document.getElementById("cerrarSesion").addEventListener("click",function(){
+
+            localStorage.clear();
+
+        });
+
+        //====================================
+        // BUSCADOR
+        //====================================
+
+        const buscar=document.getElementById("buscar");
+
+        buscar.addEventListener("keyup",function(){
+
+            let texto=buscar.value.toLowerCase();
+
+            let filas=document.querySelectorAll("#tablaHistorial tr");
+
+            filas.forEach(function(fila){
+
+                fila.style.display=fila.textContent.toLowerCase().includes(texto)
+
+                ? ""
+
+                : "none";
+
+            });
+
+        });
+
+        //====================================
+        // FIREBASE
+        //====================================
+        // Aquí se cargarán automáticamente
+        // las asesorías desde Firestore.
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | IAEV Asesorías</title>
+
+    <link rel="stylesheet" href="Estilo.css">
+
+</head>
+
+<body class="login-body">
+
+    <div class="login-card">
+
+        <!--=========================
+                LOGO
+        =========================-->
+
+        <img src="logo.png" alt="Logo IAEV">
+
+        <h2>IAEV ASESORÍAS</h2>
+
+        <!--=========================
+                FORMULARIO
+        =========================-->
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <input
+                    type="text"
+                    id="usuario"
+                    placeholder="Usuario"
+                    autocomplete="off"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Contraseña"
+                    required>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100">
+
+                Iniciar Sesión
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <script>
+
+        //=====================================
+        // LOGIN
+        //=====================================
+
+        const formulario = document.getElementById("loginForm");
+
+        formulario.addEventListener("submit", function(e){
+
+            e.preventDefault();
+
+            const usuario = document.getElementById("usuario").value.trim();
+
+            const password = document.getElementById("password").value.trim();
+
+            //=====================================
+            // MAESTRO
+            //=====================================
+
+            if(usuario === "maestro" && password === "maestro123"){
+
+                localStorage.setItem("rol","maestro");
+
+                localStorage.setItem("nombre","Maestro");
+
+                localStorage.setItem("usuario","Maestro");
+
+                window.location.href="Inicio.html";
+
+                return;
+
+            }
+
+            //=====================================
+            // ADMINISTRADOR
+            //=====================================
+
+            if(usuario === "admin" && password === "admin123"){
+
+                localStorage.setItem("rol","administrador");
+
+                localStorage.setItem("nombre","Administrador General");
+
+                localStorage.setItem("usuario","admin");
+
+                window.location.href="Inicio.html";
+
+                return;
+
+            }
+
+            //=====================================
+            // USUARIO INCORRECTO
+            //=====================================
+
+            alert("Usuario o contraseña incorrectos.");
+
+            formulario.reset();
+
+            document.getElementById("usuario").focus();
+
+        });
+
+    </script>
+
+</body>
+
+</html>
