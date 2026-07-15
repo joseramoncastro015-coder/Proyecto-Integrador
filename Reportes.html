@@ -55,8 +55,6 @@
 
         </a>
 
-        <!-- SOLO ADMINISTRADOR -->
-
         <div id="menuAdmin">
 
             <a href="Usuarios.html">
@@ -89,9 +87,7 @@
 
             <div class="user-info">
 
-                <div
-                    class="avatar"
-                    id="avatar">
+                <div class="avatar" id="avatar">
 
                     MA
 
@@ -208,6 +204,22 @@
         </section>
 
         <!--=================================
+            GRÁFICA DE BARRAS
+        =================================-->
+
+        <section class="card">
+
+            <h2 class="mb-20">
+
+                Asesorías por Materia
+
+            </h2>
+
+            <canvas id="graficaMaterias"></canvas>
+
+        </section>
+
+        <!--=================================
                 TABLA
         =================================-->
 
@@ -221,19 +233,19 @@
 
                         <th>Materia</th>
 
-                        <th>Asesorías</th>
+                        <th>Total de Asesorías</th>
 
                     </tr>
 
                 </thead>
 
-                <tbody id="tablaReportes">
+                <tbody>
 
                     <tr>
 
                         <td>Programación</td>
 
-                        <td>3</td>
+                        <td>8</td>
 
                     </tr>
 
@@ -241,7 +253,7 @@
 
                         <td>Base de Datos</td>
 
-                        <td>2</td>
+                        <td>5</td>
 
                     </tr>
 
@@ -249,13 +261,21 @@
 
                         <td>Redes de Computadoras</td>
 
+                        <td>4</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Animación 3D</td>
+
                         <td>2</td>
 
                     </tr>
 
                     <tr>
 
-                        <td>Cálculo Diferencial</td>
+                        <td>Física</td>
 
                         <td>1</td>
 
@@ -269,118 +289,216 @@
 
     </main>
 
-        <script>
+    <!--=================================
+        CHART.JS
+==================================-->
 
-        //====================================
-        // OBTENER DATOS DEL LOGIN
-        //====================================
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        const rol = localStorage.getItem("rol");
+<script>
 
-        const nombre = localStorage.getItem("nombre");
+    //====================================
+    // OBTENER DATOS DEL LOGIN
+    //====================================
 
-        const menuAdmin = document.getElementById("menuAdmin");
+    const rol = localStorage.getItem("rol");
 
-        const nombreUsuario = document.getElementById("nombreUsuario");
+    const nombre = localStorage.getItem("nombre");
 
-        const rolUsuario = document.getElementById("rolUsuario");
+    const menuAdmin = document.getElementById("menuAdmin");
 
-        const avatar = document.getElementById("avatar");
+    const nombreUsuario = document.getElementById("nombreUsuario");
 
-        const cardUsuarios = document.getElementById("cardUsuarios");
+    const rolUsuario = document.getElementById("rolUsuario");
 
-        const cardMaestros = document.getElementById("cardMaestros");
+    const avatar = document.getElementById("avatar");
 
-        //====================================
-        // VERIFICAR SESIÓN
-        //====================================
+    const cardUsuarios = document.getElementById("cardUsuarios");
 
-        if(!rol){
+    const cardMaestros = document.getElementById("cardMaestros");
 
-            window.location.href="Login.html";
+    //====================================
+    // VERIFICAR SESIÓN
+    //====================================
+
+    if(!rol){
+
+        window.location.href="Login.html";
+
+    }
+
+    //====================================
+    // MAESTRO
+    //====================================
+
+    if(rol==="maestro"){
+
+        menuAdmin.style.display="none";
+
+        cardUsuarios.style.display="none";
+
+        cardMaestros.style.display="none";
+
+        nombreUsuario.innerHTML=nombre;
+
+        rolUsuario.innerHTML="Maestro";
+
+        avatar.innerHTML="MA";
+
+    }
+
+    //====================================
+    // ADMINISTRADOR
+    //====================================
+
+    if(rol==="administrador"){
+
+        menuAdmin.style.display="block";
+
+        cardUsuarios.style.display="block";
+
+        cardMaestros.style.display="block";
+
+        nombreUsuario.innerHTML=nombre;
+
+        rolUsuario.innerHTML="Administrador";
+
+        avatar.innerHTML="AD";
+
+    }
+
+    //====================================
+    // CERRAR SESIÓN
+    //====================================
+
+    document.getElementById("cerrarSesion").addEventListener("click",function(){
+
+        localStorage.clear();
+
+    });
+
+    //====================================
+    // GRÁFICA DE BARRAS
+    //====================================
+
+    const ctx=document.getElementById("graficaMaterias");
+
+    new Chart(ctx,{
+
+        type:"bar",
+
+        data:{
+
+            labels:[
+
+                "Programación",
+
+                "Base de Datos",
+
+                "Redes",
+
+                "Animación 3D",
+
+                "Física"
+
+            ],
+
+            datasets:[{
+
+                label:"Asesorías",
+
+                data:[
+
+                    8,
+
+                    5,
+
+                    4,
+
+                    2,
+
+                    1
+
+                ],
+
+                backgroundColor:[
+
+                    "#FFC107",
+
+                    "#FFC107",
+
+                    "#FFC107",
+
+                    "#FFC107",
+
+                    "#FFC107"
+
+                ],
+
+                borderColor:[
+
+                    "#E0A800",
+
+                    "#E0A800",
+
+                    "#E0A800",
+
+                    "#E0A800",
+
+                    "#E0A800"
+
+                ],
+
+                borderWidth:1
+
+            }]
+
+        },
+
+        options:{
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+            plugins:{
+
+                legend:{
+
+                    display:false
+
+                }
+
+            },
+
+            scales:{
+
+                y:{
+
+                    beginAtZero:true,
+
+                    ticks:{
+
+                        stepSize:1
+
+                    }
+
+                }
+
+            }
 
         }
 
-        //====================================
-        // MAESTRO
-        //====================================
+    });
 
-        if(rol==="maestro"){
+    //====================================
+    // FIREBASE
+    //====================================
+    // Más adelante la gráfica,
+    // tarjetas y tabla cargarán
+    // los datos desde Firestore.
 
-            menuAdmin.style.display="none";
-
-            cardUsuarios.style.display="none";
-
-            cardMaestros.style.display="none";
-
-            nombreUsuario.innerHTML=nombre;
-
-            rolUsuario.innerHTML="Maestro";
-
-            avatar.innerHTML="MA";
-
-        }
-
-        //====================================
-        // ADMINISTRADOR
-        //====================================
-
-        if(rol==="administrador"){
-
-            menuAdmin.style.display="block";
-
-            cardUsuarios.style.display="block";
-
-            cardMaestros.style.display="block";
-
-            nombreUsuario.innerHTML=nombre;
-
-            rolUsuario.innerHTML="Administrador";
-
-            avatar.innerHTML="AD";
-
-        }
-
-        //====================================
-        // CERRAR SESIÓN
-        //====================================
-
-        document.getElementById("cerrarSesion").addEventListener("click",function(){
-
-            localStorage.clear();
-
-        });
-
-        //====================================
-        // DATOS DE EJEMPLO
-        //====================================
-        // Estos valores serán reemplazados
-        // cuando se conecte Firebase.
-
-        document.getElementById("totalAsesorias").innerHTML="8";
-
-        document.getElementById("horasTotales").innerHTML="10 h";
-
-        if(rol==="administrador"){
-
-            document.getElementById("totalUsuarios").innerHTML="2";
-
-            document.getElementById("totalMaestros").innerHTML="1";
-
-        }
-
-        //====================================
-        // FIREBASE
-        //====================================
-        // Aquí se cargarán automáticamente:
-        //
-        // • Total de asesorías
-        // • Horas totales
-        // • Total de usuarios
-        // • Total de maestros
-        // • Reportes por materia
-
-    </script>
+</script>
 
 </body>
 
