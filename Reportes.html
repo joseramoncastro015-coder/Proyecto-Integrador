@@ -5,23 +5,31 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Reportes | IAEV Asesorías</title>
 
-    <link rel="stylesheet" href="Estilo.css">
+    <link rel="stylesheet"
+          href="Estilo.css">
 
 </head>
 
 <body>
 
-    <!--=================================
+    <!--==========================
             MENÚ LATERAL
-    =================================-->
+    ===========================-->
 
     <nav class="sidebar">
 
-        <h2>IAEV ASESORÍAS</h2>
+        <h2>
+
+            IAEV
+            <br>
+            ASESORÍAS
+
+        </h2>
 
         <hr>
 
@@ -43,7 +51,8 @@
 
         </a>
 
-        <a href="Reportes.html" class="active">
+        <a href="Reportes.html"
+           class="active">
 
             Reportes
 
@@ -73,23 +82,25 @@
 
     </nav>
 
-    <!--=================================
+    <!--==========================
             CONTENIDO
-    =================================-->
+    ===========================-->
 
     <main class="main">
 
-        <!--=================================
-                HEADER
-        =================================-->
+        <!--==========================
+                ENCABEZADO
+        ===========================-->
 
         <header class="header">
 
             <div class="user-info">
 
-                <div class="avatar" id="avatar">
+                <div
+                    class="avatar"
+                    id="avatar">
 
-                    MA
+                    AD
 
                 </div>
 
@@ -103,7 +114,7 @@
 
                     <small id="rolUsuario">
 
-                        Maestro
+                        Rol
 
                     </small>
 
@@ -111,394 +122,383 @@
 
                 <img
                     src="logoIAEV.png"
-                    alt="Logo IAEV"
                     class="header-logo">
 
             </div>
 
-            <div class="header-buttons">
+            <a
+                href="#"
+                id="cerrarSesion"
+                class="btn btn-danger">
 
-                <a
-                    href="Login.html"
-                    class="btn btn-danger"
-                    id="cerrarSesion">
+                Salir
 
-                    Salir
-
-                </a>
-
-            </div>
+            </a>
 
         </header>
 
-        <!--=================================
+        <!--==========================
                 TÍTULO
-        =================================-->
+        ===========================-->
 
-        <h1 class="mb-30">
+        <h1>
 
-            Reportes
+            📊 Reportes Académicos
 
         </h1>
 
-        <!--=================================
+        <p>
+
+            Estadísticas generales obtenidas automáticamente desde Firebase.
+
+        </p>
+
+        <!--==========================
                 TARJETAS
-        =================================-->
+        ===========================-->
 
-        <section class="card-grid">
+        <section class="cards-grid">
 
-            <div class="card">
+            <div class="card card-info">
 
-                <h3>Total de Asesorías</h3>
+                <h3>
 
-                <h2 id="totalAsesorias">
+                    📚 Total de Asesorías
 
-                    8
+                </h3>
 
-                </h2>
+                <h1 id="totalAsesorias">
 
-            </div>
+                    0
 
-            <div class="card">
-
-                <h3>Horas Totales</h3>
-
-                <h2 id="horasTotales">
-
-                    10 h
-
-                </h2>
+                </h1>
 
             </div>
 
-            <!-- SOLO ADMINISTRADOR -->
+            <div class="card card-info">
 
-            <div
-                class="card"
-                id="cardUsuarios">
+                <h3>
 
-                <h3>Usuarios</h3>
+                    👨‍🎓 Alumnos Atendidos
 
-                <h2 id="totalUsuarios">
+                </h3>
 
-                    2
+                <h1 id="totalAlumnos">
 
-                </h2>
+                    0
+
+                </h1>
 
             </div>
 
-            <div
-                class="card"
-                id="cardMaestros">
+            <div class="card card-info">
 
-                <h3>Maestros</h3>
+                <h3>
 
-                <h2 id="totalMaestros">
+                    ⏰ Horas Impartidas
 
-                    1
+                </h3>
 
-                </h2>
+                <h1 id="totalHoras">
+
+                    0 h
+
+                </h1>
+
+            </div>
+
+            <div class="card card-info">
+
+                <h3>
+
+                    👨‍🏫 Total de Maestros
+
+                </h3>
+
+                <h1 id="totalMaestros">
+
+                    0
+
+                </h1>
 
             </div>
 
         </section>
 
-        <!--=================================
-            GRÁFICA DE BARRAS
-        =================================-->
+        <script type="module">
 
-        <section class="card">
+/*=========================================
+        IMPORTAR FIREBASE
+=========================================*/
 
-            <h2 class="mb-20">
+import { auth, db } from "./firebase.js";
 
-                Asesorías por Materia
+import {
 
-            </h2>
+    signOut
 
-            <canvas id="graficaMaterias"></canvas>
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-        </section>
+import {
 
-        <!--=================================
-                TABLA
-        =================================-->
+    collection,
+    getDocs
 
-        <section class="table-container">
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-            <table>
 
-                <thead>
+/*=========================================
+        REFERENCIAS FIRESTORE
+=========================================*/
 
-                    <tr>
+const asesoriasRef = collection(db, "asesorias");
 
-                        <th>Materia</th>
+const usuariosRef = collection(db, "usuarios");
 
-                        <th>Total de Asesorías</th>
 
-                    </tr>
+/*=========================================
+        DATOS DEL USUARIO
+=========================================*/
 
-                </thead>
+const uid = localStorage.getItem("uid");
 
-                <tbody>
+const nombre = localStorage.getItem("nombre");
 
-                    <tr>
+const rol = localStorage.getItem("rol");
 
-                        <td>Programación</td>
 
-                        <td>8</td>
+/*=========================================
+        VALIDAR SESIÓN
+=========================================*/
 
-                    </tr>
+if (!uid) {
 
-                    <tr>
+    window.location.href = "Login.html";
 
-                        <td>Base de Datos</td>
+}
 
-                        <td>5</td>
 
-                    </tr>
+/*=========================================
+        MOSTRAR USUARIO
+=========================================*/
 
-                    <tr>
+document.getElementById("nombreUsuario").textContent = nombre;
 
-                        <td>Redes de Computadoras</td>
+document.getElementById("rolUsuario").textContent = rol;
 
-                        <td>4</td>
 
-                    </tr>
+/*=========================================
+        AVATAR
+=========================================*/
 
-                    <tr>
+const iniciales = nombre
 
-                        <td>Animación 3D</td>
+    .split(" ")
 
-                        <td>2</td>
+    .map(p => p.charAt(0))
 
-                    </tr>
+    .join("")
 
-                    <tr>
+    .substring(0,2)
 
-                        <td>Física</td>
+    .toUpperCase();
 
-                        <td>1</td>
+document.getElementById("avatar").textContent = iniciales;
 
-                    </tr>
 
-                </tbody>
+/*=========================================
+        OCULTAR MENÚ ADMIN
+=========================================*/
 
-            </table>
+if(rol !== "administrador"){
 
-        </section>
+    document.getElementById("menuAdmin").style.display = "none";
 
-    </main>
+}
 
-    <!--=================================
-        CHART.JS
-==================================-->
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+/*=========================================
+        VARIABLES
+=========================================*/
 
-<script>
+let asesorias = [];
 
-    //====================================
-    // OBTENER DATOS DEL LOGIN
-    //====================================
+let usuarios = [];
 
-    const rol = localStorage.getItem("rol");
 
-    const nombre = localStorage.getItem("nombre");
+/*=========================================
+        ELEMENTOS HTML
+=========================================*/
 
-    const menuAdmin = document.getElementById("menuAdmin");
+const totalAsesorias = document.getElementById("totalAsesorias");
 
-    const nombreUsuario = document.getElementById("nombreUsuario");
+const totalAlumnos = document.getElementById("totalAlumnos");
 
-    const rolUsuario = document.getElementById("rolUsuario");
+const totalHoras = document.getElementById("totalHoras");
 
-    const avatar = document.getElementById("avatar");
+const totalMaestros = document.getElementById("totalMaestros");
 
-    const cardUsuarios = document.getElementById("cardUsuarios");
 
-    const cardMaestros = document.getElementById("cardMaestros");
+/*=========================================
+        CERRAR SESIÓN
+=========================================*/
 
-    //====================================
-    // VERIFICAR SESIÓN
-    //====================================
+document.getElementById("cerrarSesion").addEventListener("click", async(e)=>{
 
-    if(!rol){
+    e.preventDefault();
 
-        window.location.href="Login.html";
+    await signOut(auth);
+
+    localStorage.clear();
+
+    window.location.href="Login.html";
+
+});
+
+/*=========================================
+        CARGAR DATOS
+=========================================*/
+
+async function cargarDatos(){
+
+    try{
+
+        asesorias = [];
+
+        usuarios = [];
+
+        /*==============================
+            LEER ASESORÍAS
+        ==============================*/
+
+        const snapshotAsesorias = await getDocs(asesoriasRef);
+
+        snapshotAsesorias.forEach((doc)=>{
+
+            asesorias.push({
+
+                id: doc.id,
+
+                ...doc.data()
+
+            });
+
+        });
+
+
+        /*==============================
+            LEER USUARIOS
+        ==============================*/
+
+        const snapshotUsuarios = await getDocs(usuariosRef);
+
+        snapshotUsuarios.forEach((doc)=>{
+
+            usuarios.push({
+
+                id: doc.id,
+
+                ...doc.data()
+
+            });
+
+        });
+
+
+        actualizarDashboard();
 
     }
 
-    //====================================
-    // MAESTRO
-    //====================================
+    catch(error){
 
-    if(rol==="maestro"){
+        console.error("Error al cargar datos:", error);
 
-        menuAdmin.style.display="none";
-
-        cardUsuarios.style.display="none";
-
-        cardMaestros.style.display="none";
-
-        nombreUsuario.innerHTML=nombre;
-
-        rolUsuario.innerHTML="Maestro";
-
-        avatar.innerHTML="MA";
+        alert("No fue posible cargar las estadísticas.");
 
     }
 
-    //====================================
-    // ADMINISTRADOR
-    //====================================
+}
 
-    if(rol==="administrador"){
 
-        menuAdmin.style.display="block";
 
-        cardUsuarios.style.display="block";
+/*=========================================
+        ACTUALIZAR TARJETAS
+=========================================*/
 
-        cardMaestros.style.display="block";
+function actualizarDashboard(){
 
-        nombreUsuario.innerHTML=nombre;
+    /*==============================
+            TOTAL ASESORÍAS
+    ==============================*/
 
-        rolUsuario.innerHTML="Administrador";
+    totalAsesorias.textContent = asesorias.length;
 
-        avatar.innerHTML="AD";
 
-    }
+    /*==============================
+            ALUMNOS ÚNICOS
+    ==============================*/
 
-    //====================================
-    // CERRAR SESIÓN
-    //====================================
+    const alumnos = new Set();
 
-    document.getElementById("cerrarSesion").addEventListener("click",function(){
+    asesorias.forEach((asesoria)=>{
 
-        localStorage.clear();
+        alumnos.add(asesoria.matricula);
 
     });
 
-    //====================================
-    // GRÁFICA DE BARRAS
-    //====================================
+    totalAlumnos.textContent = alumnos.size;
 
-    const ctx=document.getElementById("graficaMaterias");
 
-    new Chart(ctx,{
+    /*==============================
+            HORAS IMPARTIDAS
+    ==============================*/
 
-        type:"bar",
+    let minutosTotales = 0;
 
-        data:{
+    asesorias.forEach((asesoria)=>{
 
-            labels:[
+        if(!asesoria.horaInicio || !asesoria.horaFin){
 
-                "Programación",
-
-                "Base de Datos",
-
-                "Redes",
-
-                "Animación 3D",
-
-                "Física"
-
-            ],
-
-            datasets:[{
-
-                label:"Asesorías",
-
-                data:[
-
-                    8,
-
-                    5,
-
-                    4,
-
-                    2,
-
-                    1
-
-                ],
-
-                backgroundColor:[
-
-                    "#FFC107",
-
-                    "#FFC107",
-
-                    "#FFC107",
-
-                    "#FFC107",
-
-                    "#FFC107"
-
-                ],
-
-                borderColor:[
-
-                    "#E0A800",
-
-                    "#E0A800",
-
-                    "#E0A800",
-
-                    "#E0A800",
-
-                    "#E0A800"
-
-                ],
-
-                borderWidth:1
-
-            }]
-
-        },
-
-        options:{
-
-            responsive:true,
-
-            maintainAspectRatio:false,
-
-            plugins:{
-
-                legend:{
-
-                    display:false
-
-                }
-
-            },
-
-            scales:{
-
-                y:{
-
-                    beginAtZero:true,
-
-                    ticks:{
-
-                        stepSize:1
-
-                    }
-
-                }
-
-            }
+            return;
 
         }
 
+        const inicio = new Date("2000-01-01T" + asesoria.horaInicio);
+
+        const fin = new Date("2000-01-01T" + asesoria.horaFin);
+
+        minutosTotales += (fin - inicio) / 60000;
+
     });
 
-    //====================================
-    // FIREBASE
-    //====================================
-    // Más adelante la gráfica,
-    // tarjetas y tabla cargarán
-    // los datos desde Firestore.
+    const horas = Math.floor(minutosTotales / 60);
+
+    const minutos = minutosTotales % 60;
+
+    totalHoras.textContent = horas + " h " + minutos + " min";
+
+
+    /*==============================
+            TOTAL MAESTROS
+    ==============================*/
+
+    const maestros = usuarios.filter(usuario => usuario.rol === "maestro");
+
+    totalMaestros.textContent = maestros.length;
+
+}
+
+
+
+/*=========================================
+        INICIAR
+=========================================*/
+
+cargarDatos();
 
 </script>
+
+    </main>
 
 </body>
 

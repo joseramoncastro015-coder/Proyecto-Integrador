@@ -15,116 +15,175 @@
 
 <body class="login-body">
 
-    <div class="login-card">
+    <div class="login-container">
 
-        <!--=========================
-                LOGO
-        =========================-->
+        <div class="login-card">
 
-        <img src="logo.png" alt="Logo IAEV">
+            <img
+                src="logoIAEV.png"
+                alt="Logo"
+                class="login-logo">
 
-        <h2>IAEV ASESORÍAS</h2>
+            <h2>
 
-        <!--=========================
-                FORMULARIO
-        =========================-->
+                IAEV ASESORÍAS
 
-        <form id="loginForm">
+            </h2>
 
-            <div class="form-group">
+            <p>
 
-                <input
-                    type="text"
-                    id="usuario"
-                    placeholder="Usuario"
-                    autocomplete="off"
-                    required>
+                Iniciar sesión
 
-            </div>
+            </p>
 
-            <div class="form-group">
+            <form id="loginForm">
 
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Contraseña"
-                    required>
+                <div class="form-group">
 
-            </div>
+                    <label>
 
-            <button
-                type="submit"
-                class="btn btn-primary w-100">
+                        Correo electrónico
 
-                Iniciar Sesión
+                    </label>
 
-            </button>
+                    <input
+                        type="email"
+                        id="correo"
+                        placeholder="correo@ejemplo.com"
+                        required>
 
-        </form>
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Contraseña
+
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="********"
+                        required>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100">
+
+                    Iniciar Sesión
+
+                </button>
+
+            </form>
+
+            <p
+                id="mensaje"
+                style="margin-top:15px;color:red;text-align:center;">
+
+            </p>
+
+        </div>
 
     </div>
 
-    <script>
+        <script type="module">
 
-        //=====================================
-        // LOGIN
-        //=====================================
+        import { auth, db } from "./firebase.js";
+
+        import {
+
+            signInWithEmailAndPassword
+
+        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+        import {
+
+            collection,
+            getDocs
+
+        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
         const formulario = document.getElementById("loginForm");
 
-        formulario.addEventListener("submit", function(e){
+        const mensaje = document.getElementById("mensaje");
+
+        formulario.addEventListener("submit", async function(e){
 
             e.preventDefault();
 
-            const usuario = document.getElementById("usuario").value.trim();
+            const correo = document.getElementById("correo").value.trim();
 
-            const password = document.getElementById("password").value.trim();
+            const password = document.getElementById("password").value;
 
-            //=====================================
-            // MAESTRO
-            //=====================================
+            mensaje.textContent = "";
 
-            if(usuario === "maestro" && password === "maestro123"){
+            try{
 
-                localStorage.setItem("rol","maestro");
+                // Iniciar sesión en Firebase Authentication
+                const credencial = await signInWithEmailAndPassword(
 
-                localStorage.setItem("nombre","Maestro");
+                    auth,
+                    correo,
+                    password
 
-                localStorage.setItem("usuario","Maestro");
+                );
 
-                window.location.href="Inicio.html";
+                const uid = credencial.user.uid;
 
-                return;
+                // Buscar los datos del usuario en Firestore
+                const consulta = await getDocs(collection(db,"usuarios"));
+
+                let usuarioEncontrado = null;
+
+                consulta.forEach((documento)=>{
+
+                    const datos = documento.data();
+
+                    if(datos.correo === correo){
+
+                        usuarioEncontrado = datos;
+
+                    }
+
+                });
+
+                if(!usuarioEncontrado){
+
+                    mensaje.textContent = "No se encontró información del usuario.";
+
+                    return;
+
+                }
+
+                // Guardar datos para usarlos en el resto del sistema
+                localStorage.setItem("uid", uid);
+
+                localStorage.setItem("nombre", usuarioEncontrado.nombre);
+
+                localStorage.setItem("usuario", usuarioEncontrado.usuario);
+
+                localStorage.setItem("correo", usuarioEncontrado.correo);
+
+                localStorage.setItem("carrera", usuarioEncontrado.carrera);
+
+                localStorage.setItem("rol", usuarioEncontrado.rol);
+
+                // Ir al inicio
+                window.location.href = "Inicio.html";
 
             }
 
-            //=====================================
-            // ADMINISTRADOR
-            //=====================================
+            catch(error){
 
-            if(usuario === "admin" && password === "admin123"){
+                console.error(error);
 
-                localStorage.setItem("rol","administrador");
-
-                localStorage.setItem("nombre","Administrador General");
-
-                localStorage.setItem("usuario","admin");
-
-                window.location.href="Inicio.html";
-
-                return;
+                mensaje.textContent = "Correo o contraseña incorrectos.";
 
             }
-
-            //=====================================
-            // USUARIO INCORRECTO
-            //=====================================
-
-            alert("Usuario o contraseña incorrectos.");
-
-            formulario.reset();
-
-            document.getElementById("usuario").focus();
 
         });
 

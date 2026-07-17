@@ -251,8 +251,17 @@
 
     </main>
 
-        <script>
+        <script type="module">
+            import { auth, db } from "./firebase.js";
 
+import { signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+import {
+    collection,
+    query,
+    where,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
         //====================================
         // OBTENER DATOS DEL LOGIN
         //====================================
@@ -261,7 +270,7 @@
 
         const nombre = localStorage.getItem("nombre");
 
-        const usuario = localStorage.getItem("usuario");
+        const correo = localStorage.getItem("correo");
 
         const menuAdmin = document.getElementById("menuAdmin");
 
@@ -299,80 +308,133 @@
         // DATOS GENERALES
         //====================================
 
-        nombreUsuario.innerHTML = nombre;
-
-        nombrePerfil.innerHTML = nombre;
-
-        usuarioPerfil.innerHTML = usuario;
-
         //====================================
-        // MAESTRO
-        //====================================
+// DATOS GENERALES
+//====================================
 
-        if(rol==="maestro"){
+nombreUsuario.textContent = nombre;
 
-            menuAdmin.style.display="none";
+nombrePerfil.textContent = nombre;
 
-            panelAdministrador.style.display="none";
+//====================================
+// MAESTRO Y ADMINISTRADOR
+//====================================
 
-            rolUsuario.innerHTML="Maestro";
+if(rol==="maestro"){
 
-            rolPerfil.innerHTML="Maestro";
+    menuAdmin.style.display="none";
 
-            avatar.innerHTML="MA";
+    panelAdministrador.style.display="none";
 
-            avatarPerfil.innerHTML="MA";
+    rolUsuario.textContent="Maestro";
 
-            correoPerfil.innerHTML="maicol@upgop.edu.mx";
+    rolPerfil.textContent="Maestro";
 
-            carreraPerfil.innerHTML="Ingeniería en Animación y Efectos Visuales";
+    avatar.textContent="MA";
 
-        }
+    avatarPerfil.textContent="MA";
 
-        //====================================
-        // ADMINISTRADOR
-        //====================================
+}
 
-        if(rol==="administrador"){
+if(rol==="administrador"){
 
-            menuAdmin.style.display="block";
+    menuAdmin.style.display="block";
 
-            panelAdministrador.style.display="block";
+    panelAdministrador.style.display="block";
 
-            rolUsuario.innerHTML="Administrador";
+    rolUsuario.textContent="Administrador";
 
-            rolPerfil.innerHTML="Administrador";
+    rolPerfil.textContent="Administrador";
 
-            avatar.innerHTML="AD";
+    avatar.textContent="AD";
 
-            avatarPerfil.innerHTML="AD";
+    avatarPerfil.textContent="AD";
 
-            correoPerfil.innerHTML="admin@upgop.edu.mx";
-
-            carreraPerfil.innerHTML="Administración del Sistema";
-
-            document.getElementById("usuariosSistema").innerHTML="2";
-
-            document.getElementById("maestrosSistema").innerHTML="1";
-
-        }
+}        
 
         //====================================
         // CERRAR SESIÓN
         //====================================
 
-        document.getElementById("cerrarSesion").addEventListener("click",function(){
+        document.getElementById("cerrarSesion").addEventListener("click", async function(e){
 
-            localStorage.clear();
+    e.preventDefault();
+
+    await signOut(auth);
+
+    localStorage.clear();
+
+    window.location.href="Login.html";
+
+});
+        //====================================
+// CARGAR DATOS DEL USUARIO
+//====================================
+
+async function cargarPerfil(){
+
+    try{
+
+        const consulta = query(
+
+            collection(db,"usuarios"),
+
+            where("correo","==",correo)
+
+        );
+
+        const resultado = await getDocs(consulta);
+
+        resultado.forEach((doc)=>{
+
+            const datos = doc.data();
+
+            usuarioPerfil.textContent = datos.usuario || "No disponible";
+
+            correoPerfil.textContent = datos.correo || "No disponible";
+
+            carreraPerfil.textContent = datos.carrera || "No registrada";
 
         });
 
-        //====================================
-        // FIREBASE
-        //====================================
-        // Más adelante aquí se cargarán
-        // automáticamente los datos del usuario
-        // desde Firestore.
+        if(rol==="administrador"){
+
+            const usuarios = await getDocs(collection(db,"usuarios"));
+
+            let totalUsuarios = 0;
+            let totalMaestros = 0;
+
+            usuarios.forEach((doc)=>{
+
+                totalUsuarios++;
+
+                if(doc.data().rol==="maestro"){
+
+                    totalMaestros++;
+
+                }
+
+            });
+
+            document.getElementById("usuariosSistema").textContent = totalUsuarios;
+
+            document.getElementById("maestrosSistema").textContent = totalMaestros;
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("No se pudo cargar el perfil.");
+
+    }
+
+}
+
+cargarPerfil();
 
     </script>
 

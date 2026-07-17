@@ -1,7 +1,6 @@
 /*====================================================
                     COLORES
 ======================================================*/
-/* Variables para no repetir colores en todo el CSS */
 
 :root{
 
@@ -17,7 +16,6 @@
 /*====================================================
                 CONFIGURACIÓN GENERAL
 ======================================================*/
-/* Se eliminan márgenes y rellenos por defecto */
 
 *{
 
@@ -27,8 +25,6 @@
 
 }
 
-/* Configuración general del sitio */
-
 body{
 
     font-family:Arial, Helvetica, sans-serif;
@@ -37,108 +33,225 @@ body{
 
 }
 
+a{
+
+    text-decoration:none;
+
+}
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
 /*====================================================
                     LOGIN
 ======================================================*/
-/* Fondo gris del Login */
 
 .login-body{
 
     background:var(--gris);
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
-    height:100vh;
+
+    min-height:100vh;
 
 }
 
-/* Tarjeta blanca */
+.login-container{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+}
 
 .login-card{
 
-    width:400px;
+    width:430px;
+
     background:var(--blanco);
-    padding:35px;
-    border-radius:12px;
-    border-bottom:6px solid var(--amarillo);
+
+    border-radius:15px;
+
+    border-bottom:8px solid var(--amarillo);
+
+    padding:40px;
+
     text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.20);
 
 }
 
-/* Logo */
-
-.login-card img{
+.login-logo{
 
     width:120px;
+
+    margin:0 auto 20px;
+
+}
+
+.login-card h2{
+
+    font-size:42px;
+
+    margin-bottom:12px;
+
+}
+
+.login-card p{
+
+    font-size:18px;
+
+    margin-bottom:25px;
+
+}
+
+.login-card .form-group{
+
+    text-align:left;
+
     margin-bottom:20px;
 
 }
 
-/* Título */
+.login-card label{
 
-.login-card h2{
+    display:block;
 
-    margin-bottom:25px;
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+}
+
+.login-card input{
+
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid var(--borde);
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.login-card input:focus{
+
+    border-color:var(--amarillo);
+
+    box-shadow:0 0 6px rgba(255,193,7,.45);
+
+}
+
+.login-card button{
+
+    margin-top:10px;
+
+}
+
+#mensaje{
+
+    margin-top:15px;
+
+    color:var(--rojo);
+
+    font-weight:bold;
+
+    text-align:center;
 
 }
 
 /*====================================================
                 MENÚ LATERAL
 ======================================================*/
-/* Barra lateral */
 
 .sidebar{
 
     position:fixed;
+
     top:0;
+
     left:0;
+
     width:220px;
+
     height:100vh;
 
     background:var(--gris);
 
     padding:25px;
 
-}
+    overflow-y:auto;
 
-/* Título del menú */
+}
 
 .sidebar h2{
 
     color:var(--amarillo);
+
     text-align:center;
+
     margin-bottom:15px;
 
-}
+    font-size:24px;
 
-/* Línea amarilla */
+}
 
 .sidebar hr{
 
-    border:1px solid var(--amarillo);
+    border:none;
+
+    border-top:2px solid var(--amarillo);
+
     margin-bottom:25px;
 
 }
-
-/* Enlaces */
 
 .sidebar a{
 
     display:block;
 
-    text-decoration:none;
+    color:#E6E6E6;
 
-    color:#D9D9D9;
+    padding:14px 16px;
 
-    padding:14px;
+    margin-bottom:10px;
 
-    margin-bottom:8px;
+    border-radius:10px;
 
-    border-radius:8px;
+    transition:.3s;
+
+    font-size:16px;
 
 }
 
-/* Página actual */
+.sidebar a:hover{
+
+    background:#4A4A4A;
+
+}
 
 .sidebar a.active{
 
@@ -151,9 +264,8 @@ body{
 }
 
 /*====================================================
-                CONTENIDO
+                CONTENIDO PRINCIPAL
 ======================================================*/
-/* Todo el contenido de las páginas */
 
 .main{
 
@@ -161,18 +273,19 @@ body{
 
     padding:30px;
 
+    min-height:100vh;
+
 }
 
 /*====================================================
                     HEADER
 ======================================================*/
-/* Barra superior */
 
 .header{
 
     background:var(--blanco);
 
-    border-radius:12px;
+    border-radius:15px;
 
     padding:20px 25px;
 
@@ -184,9 +297,9 @@ body{
 
     margin-bottom:30px;
 
-}
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
 
-/* Usuario */
+}
 
 .user-info{
 
@@ -198,17 +311,17 @@ body{
 
 }
 
-/* Avatar */
-
 .avatar{
 
-    width:55px;
+    width:60px;
 
-    height:55px;
+    height:60px;
+
+    border-radius:50%;
 
     background:var(--amarillo);
 
-    border-radius:50%;
+    color:var(--gris);
 
     display:flex;
 
@@ -216,21 +329,27 @@ body{
 
     align-items:center;
 
-    font-size:22px;
+    font-size:24px;
 
     font-weight:bold;
 
 }
 
-/* Nombre */
-
 .user-info h3{
 
-    font-weight:normal;
+    margin-bottom:5px;
+
+    font-size:20px;
 
 }
 
-/* Logo */
+.user-info small{
+
+    color:#777;
+
+    font-size:14px;
+
+}
 
 .header-logo{
 
@@ -243,20 +362,22 @@ body{
 }
 
 /*====================================================
-                TÍTULOS
+                    TÍTULOS
 ======================================================*/
 
 h1{
 
-    margin-bottom:25px;
+    font-size:32px;
 
-    font-size:30px;
+    margin-bottom:25px;
 
 }
 
 h2{
 
     font-size:24px;
+
+    margin-bottom:20px;
 
 }
 
@@ -267,13 +388,8 @@ h3{
 }
 
 /*====================================================
-                ESTILO.CSS - PARTE 2
-======================================================*/
-
-/*====================================================
                     TARJETAS
 ======================================================*/
-/* Se utilizan en Inicio, Reportes, Historial y Perfil */
 
 .card,
 .profile-card,
@@ -282,20 +398,21 @@ h3{
 
     background:var(--blanco);
 
-    border-radius:12px;
+    border-radius:15px;
 
-    border-top:5px solid var(--amarillo);
+    border-top:6px solid var(--amarillo);
 
-    padding:20px;
+    padding:25px;
 
-    margin-bottom:25px;
+    margin-bottom:30px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
 
 }
 
 /*====================================================
             CONTENEDOR DE TARJETAS
 ======================================================*/
-/* Permite colocar varias tarjetas una junto a otra */
 
 .card-grid,
 .report-grid{
@@ -304,54 +421,65 @@ h3{
 
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 
-    gap:20px;
+    gap:25px;
 
-    margin-bottom:25px;
+    margin-bottom:30px;
 
 }
-
-/* Títulos y números de las tarjetas */
 
 .card h2,
 .report-card h2{
 
     font-size:34px;
 
-    margin-top:10px;
+    color:var(--amarillo);
+
+    margin-bottom:10px;
 
 }
 
 .card h3,
 .report-card h3{
 
+    font-size:18px;
+
     font-weight:normal;
+
+    color:#666;
 
 }
 
 /*====================================================
                     BOTONES
 ======================================================*/
-/* Botón general */
 
 .btn{
 
-    padding:12px 20px;
+    display:inline-block;
+
+    padding:12px 22px;
 
     border:none;
 
-    border-radius:8px;
+    border-radius:10px;
 
     cursor:pointer;
 
-    text-decoration:none;
+    font-size:15px;
 
     font-weight:bold;
 
-    display:inline-block;
+    transition:.3s;
+
+    text-decoration:none;
 
 }
 
-/* Botón amarillo */
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
 
 .btn-primary{
 
@@ -361,36 +489,43 @@ h3{
 
 }
 
-/* Botón rojo */
+.btn-primary:hover{
+
+    background:#E5AC00;
+
+}
 
 .btn-danger{
 
     background:var(--rojo);
 
-    color:white;
+    color:var(--blanco);
 
 }
 
-/* Botón ancho completo */
+.btn-danger:hover{
+
+    background:#B02A37;
+
+}
 
 .w-100{
 
-    width:100%;
+    width:250px;
 
+    height:55px;
+    
 }
 
 /*====================================================
                 FORMULARIOS
 ======================================================*/
-/* Cada campo del formulario */
 
 .form-group{
 
     margin-bottom:20px;
 
 }
-
-/* Etiquetas */
 
 .form-group label{
 
@@ -400,9 +535,9 @@ h3{
 
     font-weight:bold;
 
-}
+    color:var(--gris);
 
-/* Inputs */
+}
 
 input,
 select,
@@ -410,19 +545,33 @@ textarea{
 
     width:100%;
 
-    padding:12px;
+    padding:13px 15px;
 
     border:1px solid var(--borde);
 
-    border-radius:8px;
+    border-radius:10px;
 
     font-size:15px;
 
-    font-family:Arial, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
+
+    transition:.3s;
+
+    background:var(--blanco);
 
 }
 
-/* Área de texto */
+input:focus,
+select:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:var(--amarillo);
+
+    box-shadow:0 0 6px rgba(255,193,7,.45);
+
+}
 
 textarea{
 
@@ -431,8 +580,6 @@ textarea{
     min-height:120px;
 
 }
-
-/* Dos columnas */
 
 .form-row{
 
@@ -443,8 +590,6 @@ textarea{
     gap:20px;
 
 }
-
-/* Tres columnas */
 
 .form-row-3{
 
@@ -462,13 +607,25 @@ textarea{
 
 .search-box{
 
-    margin-bottom:10px;
+    margin-bottom:20px;
+
+}
+
+.search-box input{
+
+    width:100%;
 
 }
 
 /*====================================================
                     TABLAS
 ======================================================*/
+
+.table-container{
+
+    overflow-x:auto;
+
+}
 
 table{
 
@@ -478,19 +635,25 @@ table{
 
 }
 
-/* Encabezados */
-
-th{
+thead{
 
     background:#F8F8F8;
+
+}
+
+th{
 
     padding:15px;
 
     text-align:left;
 
-}
+    font-size:15px;
 
-/* Celdas */
+    color:var(--gris);
+
+    border-bottom:2px solid var(--borde);
+
+}
 
 td{
 
@@ -498,12 +661,25 @@ td{
 
     border-bottom:1px solid #EEEEEE;
 
+    vertical-align:middle;
+
+}
+
+tbody tr:hover{
+
+    background:#FAFAFA;
+
+}
+
+td .btn{
+
+    margin-right:8px;
+
 }
 
 /*====================================================
                     BADGES
 ======================================================*/
-/* Etiqueta amarilla */
 
 .badge{
 
@@ -519,8 +695,6 @@ td{
 
 }
 
-/* Académica */
-
 .badge-academica{
 
     background:var(--amarillo);
@@ -528,8 +702,6 @@ td{
     color:var(--gris);
 
 }
-
-/* Proyecto */
 
 .badge-proyecto{
 
@@ -540,34 +712,8 @@ td{
 }
 
 /*====================================================
-                LISTAS
-======================================================*/
-/* Se usa si más adelante agregas listas */
-
-.list-item{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:15px 0;
-
-    border-bottom:1px solid #EEEEEE;
-
-}
-
-.list-item:last-child{
-
-    border-bottom:none;
-
-}
-
-/*====================================================
                     PERFIL
 ======================================================*/
-/* Contenedor de la información del perfil */
 
 .profile-header{
 
@@ -576,8 +722,6 @@ td{
     margin-bottom:30px;
 
 }
-
-/* Foto de perfil */
 
 .profile-photo{
 
@@ -591,11 +735,9 @@ td{
 
     object-fit:cover;
 
-    margin-bottom:15px;
+    margin:0 auto 20px;
 
 }
-
-/* Información */
 
 .profile-info p{
 
@@ -603,11 +745,11 @@ td{
 
     border:1px solid var(--borde);
 
-    border-radius:8px;
+    border-radius:10px;
 
-    padding:12px;
+    padding:14px;
 
-    margin-bottom:20px;
+    margin-bottom:18px;
 
 }
 
@@ -615,17 +757,15 @@ td{
 
     font-weight:bold;
 
-}
+    display:block;
 
-/* Espacio entre tarjetas */
-
-.report-grid{
-
-    margin-bottom:30px;
+    margin-bottom:6px;
 
 }
 
-/* Centrar texto */
+/*====================================================
+                CLASES DE UTILIDAD
+======================================================*/
 
 .text-center{
 
@@ -633,15 +773,11 @@ td{
 
 }
 
-/* Alinear texto a la derecha */
-
 .text-right{
 
     text-align:right;
 
 }
-
-/* Márgenes superiores */
 
 .mt-10{
 
@@ -661,8 +797,6 @@ td{
 
 }
 
-/* Márgenes inferiores */
-
 .mb-10{
 
     margin-bottom:10px;
@@ -681,7 +815,9 @@ td{
 
 }
 
-/* Ajustes para tablets */
+/*====================================================
+                RESPONSIVE
+======================================================*/
 
 @media(max-width:992px){
 
@@ -708,8 +844,6 @@ td{
 
 }
 
-/* Ajustes para celulares */
-
 @media(max-width:768px){
 
     .sidebar{
@@ -734,19 +868,19 @@ td{
 
         flex-direction:column;
 
-        gap:15px;
-
         align-items:flex-start;
+
+        gap:15px;
 
     }
 
     .avatar{
 
-        width:45px;
+        width:50px;
 
-        height:45px;
+        height:50px;
 
-        font-size:18px;
+        font-size:20px;
 
     }
 
@@ -766,10 +900,19 @@ td{
 
     }
 
+    .login-card{
+
+        width:95%;
+
+        padding:30px;
+
+    }
+
 }
-/*====================================
-        GRÁFICA
-=====================================*/
+
+/*====================================================
+                    GRÁFICA
+======================================================*/
 
 #graficaMaterias{
 

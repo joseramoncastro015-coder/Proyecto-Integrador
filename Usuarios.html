@@ -142,7 +142,7 @@
         </h1>
 
         <!--=================================
-            FORMULARIO
+                FORMULARIO
         =================================-->
 
         <section class="card">
@@ -187,15 +187,31 @@
 
                     <div class="form-group">
 
-                        <label>Contraseña</label>
+                        <label>Correo</label>
 
                         <input
-                            type="password"
-                            id="password"
-                            placeholder="Contraseña"
+                            type="email"
+                            id="correo"
+                            placeholder="correo@ejemplo.com"
                             required>
 
                     </div>
+
+                    <div class="form-group">
+
+                        <label>Carrera</label>
+
+                        <input
+                            type="text"
+                            id="carrera"
+                            placeholder="Ingeniería..."
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="form-row">
 
                     <div class="form-group">
 
@@ -203,7 +219,11 @@
 
                         <select id="rol" required>
 
-                            <option value="">Seleccionar</option>
+                            <option value="">
+
+                                Seleccionar
+
+                            </option>
 
                             <option value="maestro">
 
@@ -235,8 +255,8 @@
 
         </section>
 
-        <!--=================================
-                TABLA
+                <!--=================================
+                TABLA DE USUARIOS
         =================================-->
 
         <section class="table-container">
@@ -251,6 +271,8 @@
 
                         <th>Nombre</th>
 
+                        <th>Correo</th>
+
                         <th>Rol</th>
 
                         <th>Acciones</th>
@@ -261,58 +283,6 @@
 
                 <tbody id="tablaUsuarios">
 
-                    <tr>
-
-                        <td>25080529</td>
-
-                        <td>Maicol Gaytan</td>
-
-                        <td>Maestro</td>
-
-                        <td>
-
-                            <button class="btn btn-primary">
-
-                                Editar
-
-                            </button>
-
-                            <button class="btn btn-danger">
-
-                                Eliminar
-
-                            </button>
-
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>admin</td>
-
-                        <td>Administrador General</td>
-
-                        <td>Administrador</td>
-
-                        <td>
-
-                            <button class="btn btn-primary">
-
-                                Editar
-
-                            </button>
-
-                            <button class="btn btn-danger">
-
-                                Eliminar
-
-                            </button>
-
-                        </td>
-
-                    </tr>
-
                 </tbody>
 
             </table>
@@ -321,29 +291,36 @@
 
     </main>
 
-        <script>
+    <script type="module">
+
+        import { auth, db } from "./firebase.js";
+
+        import { signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+        import {
+
+            collection,
+            addDoc,
+            getDocs,
+            deleteDoc,
+            updateDoc,
+            doc
+
+        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
         //====================================
-        // OBTENER DATOS DEL LOGIN
+        // DATOS DEL USUARIO
         //====================================
 
         const rolLogin = localStorage.getItem("rol");
 
         const nombreLogin = localStorage.getItem("nombre");
 
-        //====================================
-        // VERIFICAR SESIÓN
-        //====================================
-
         if(!rolLogin){
 
             window.location.href="Login.html";
 
         }
-
-        //====================================
-        // SOLO ADMINISTRADOR
-        //====================================
 
         if(rolLogin!=="administrador"){
 
@@ -353,95 +330,231 @@
 
         }
 
-        //====================================
-        // MOSTRAR DATOS DEL ADMINISTRADOR
-        //====================================
+        document.getElementById("nombreUsuario").textContent=nombreLogin;
 
-        document.getElementById("nombreUsuario").innerHTML=nombreLogin;
+        document.getElementById("rolUsuario").textContent="Administrador";
 
-        document.getElementById("rolUsuario").innerHTML="Administrador";
-
-        document.getElementById("avatar").innerHTML="AD";
+        document.getElementById("avatar").textContent="AD";
 
         //====================================
         // CERRAR SESIÓN
         //====================================
 
-        document.getElementById("cerrarSesion").addEventListener("click",function(){
-
-            localStorage.clear();
-
-        });
-
-        //====================================
-        // AGREGAR USUARIO
-        //====================================
-
-        document.getElementById("formUsuario").addEventListener("submit",function(e){
+        document.getElementById("cerrarSesion").addEventListener("click",async function(e){
 
             e.preventDefault();
 
-            const nombre=document.getElementById("nombre").value;
+            await signOut(auth);
 
-            const usuario=document.getElementById("usuario").value;
+            localStorage.clear();
 
-            const password=document.getElementById("password").value;
+            window.location.href="Login.html";
 
-            const rol=document.getElementById("rol").value;
+        });
 
-            const tabla=document.getElementById("tablaUsuarios");
+                //====================================
+        // AGREGAR USUARIO
+        //====================================
 
-            const fila=tabla.insertRow();
+        document.getElementById("formUsuario").addEventListener("submit", async function(e){
 
-            fila.insertCell(0).innerHTML=usuario;
+            e.preventDefault();
 
-            fila.insertCell(1).innerHTML=nombre;
+            try{
 
-            fila.insertCell(2).innerHTML=rol.charAt(0).toUpperCase()+rol.slice(1);
+                await addDoc(collection(db,"usuarios"),{
 
-            fila.insertCell(3).innerHTML=
-            `
-            <button class="btn btn-primary">Editar</button>
-            <button class="btn btn-danger" onclick="eliminarFila(this)">Eliminar</button>
-            `;
+                    nombre: document.getElementById("nombre").value,
 
-            console.log({
+                    usuario: document.getElementById("usuario").value,
 
-                nombre,
+                    correo: document.getElementById("correo").value,
 
-                usuario,
+                    carrera: document.getElementById("carrera").value,
 
-                password,
+                    rol: document.getElementById("rol").value
 
-                rol
+                });
 
-            });
+                alert("Usuario guardado correctamente.");
 
-            alert("Usuario agregado correctamente.");
+                document.getElementById("formUsuario").reset();
 
-            document.getElementById("formUsuario").reset();
+                cargarUsuarios();
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                alert("Error al guardar el usuario.");
+
+            }
 
         });
 
         //====================================
-        // ELIMINAR FILA
+        // CARGAR USUARIOS
         //====================================
 
-        function eliminarFila(boton){
+        async function cargarUsuarios(){
 
-            if(confirm("¿Deseas eliminar este usuario?")){
+            const tabla = document.getElementById("tablaUsuarios");
 
-                boton.parentElement.parentElement.remove();
+            tabla.innerHTML = "";
+
+            try{
+
+                const consulta = await getDocs(collection(db,"usuarios"));
+
+                consulta.forEach((documento)=>{
+
+                    const datos = documento.data();
+
+                    tabla.innerHTML += `
+
+                    <tr>
+
+                        <td>${datos.usuario}</td>
+
+                        <td>${datos.nombre}</td>
+
+                        <td>${datos.correo}</td>
+
+                        <td>${datos.rol.charAt(0).toUpperCase()+datos.rol.slice(1)}</td>
+
+                        <td>
+
+                            <button
+                                class="btn btn-primary"
+                                onclick="editarUsuario('${documento.id}')">
+
+                                Editar
+
+                            </button>
+
+                            <button
+                                class="btn btn-danger"
+                                onclick="eliminarUsuario('${documento.id}')">
+
+                                Eliminar
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    `;
+
+                });
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                alert("No se pudieron cargar los usuarios.");
 
             }
 
         }
 
+        cargarUsuarios();
+
+                //====================================
+        // EDITAR USUARIO
         //====================================
-        // FIREBASE
+
+        window.editarUsuario = async function(id){
+
+            try{
+
+                const nuevoNombre = prompt("Nuevo nombre:");
+
+                if(nuevoNombre===null) return;
+
+                const nuevoUsuario = prompt("Nuevo usuario:");
+
+                if(nuevoUsuario===null) return;
+
+                const nuevoCorreo = prompt("Nuevo correo:");
+
+                if(nuevoCorreo===null) return;
+
+                const nuevaCarrera = prompt("Nueva carrera:");
+
+                if(nuevaCarrera===null) return;
+
+                const nuevoRol = prompt("Rol (maestro o administrador):");
+
+                if(nuevoRol===null) return;
+
+                await updateDoc(doc(db,"usuarios",id),{
+
+                    nombre:nuevoNombre,
+
+                    usuario:nuevoUsuario,
+
+                    correo:nuevoCorreo,
+
+                    carrera:nuevaCarrera,
+
+                    rol:nuevoRol.toLowerCase()
+
+                });
+
+                alert("Usuario actualizado correctamente.");
+
+                cargarUsuarios();
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                alert("No se pudo actualizar el usuario.");
+
+            }
+
+        };
+
         //====================================
-        // Aquí se guardarán y consultarán
-        // los usuarios desde Firestore.
+        // ELIMINAR USUARIO
+        //====================================
+
+        window.eliminarUsuario = async function(id){
+
+            const confirmar = confirm("¿Deseas eliminar este usuario?");
+
+            if(!confirmar){
+
+                return;
+
+            }
+
+            try{
+
+                await deleteDoc(doc(db,"usuarios",id));
+
+                alert("Usuario eliminado correctamente.");
+
+                cargarUsuarios();
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                alert("No se pudo eliminar el usuario.");
+
+            }
+
+        };
 
     </script>
 

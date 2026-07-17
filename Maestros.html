@@ -79,10 +79,6 @@
 
     <main class="main">
 
-        <!--=================================
-                HEADER
-        =================================-->
-
         <header class="header">
 
             <div class="user-info">
@@ -113,7 +109,7 @@
 
                 <img
                     src="logoIAEV.png"
-                    alt="Logo IAEV"
+                    alt="Logo"
                     class="header-logo">
 
             </div>
@@ -133,101 +129,11 @@
 
         </header>
 
-        <!--=================================
-                TÍTULO
-        =================================-->
-
         <h1 class="mb-30">
 
             Administración de Maestros
 
         </h1>
-
-        <!--=================================
-                FORMULARIO
-        =================================-->
-
-        <section class="card">
-
-            <h2 class="mb-20">
-
-                Registrar Maestro
-
-            </h2>
-
-            <form id="formMaestro">
-
-                <div class="form-row">
-
-                    <div class="form-group">
-
-                        <label>Número de Empleado</label>
-
-                        <input
-                            type="text"
-                            id="numeroEmpleado"
-                            placeholder="Ej. MT001"
-                            required>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>Nombre Completo</label>
-
-                        <input
-                            type="text"
-                            id="nombre"
-                            placeholder="Nombre del maestro"
-                            required>
-
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-
-                    <div class="form-group">
-
-                        <label>Correo Institucional</label>
-
-                        <input
-                            type="email"
-                            id="correo"
-                            placeholder="correo@upgop.edu.mx"
-                            required>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>Carrera</label>
-
-                        <input
-                            type="text"
-                            id="carrera"
-                            placeholder="Programa educativo"
-                            required>
-
-                    </div>
-
-                </div>
-
-                <button
-                    type="submit"
-                    class="btn btn-primary w-100">
-
-                    Guardar Maestro
-
-                </button>
-
-            </form>
-
-        </section>
-
-        <!--=================================
-                TABLA
-        =================================-->
 
         <section class="table-container">
 
@@ -237,7 +143,7 @@
 
                     <tr>
 
-                        <th>No. Empleado</th>
+                        <th>Usuario</th>
 
                         <th>Nombre</th>
 
@@ -253,65 +159,43 @@
 
                 <tbody id="tablaMaestros">
 
-                    <tr>
-
-                        <td>MT001</td>
-
-                        <td>Maicol Gaytan</td>
-
-                        <td>maicol@upgop.edu.mx</td>
-
-                        <td>Ingeniería en Animación y Efectos Visuales</td>
-
-                        <td>
-
-                            <button class="btn btn-primary">
-
-                                Editar
-
-                            </button>
-
-                            <button class="btn btn-danger">
-
-                                Eliminar
-
-                            </button>
-
-                        </td>
-
-                    </tr>
-
                 </tbody>
 
             </table>
 
         </section>
 
-    </main>
+            </main>
 
-        <script>
+    <script type="module">
+
+        import { auth, db } from "./firebase.js";
+
+        import { signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+        import {
+
+            collection,
+            getDocs,
+            deleteDoc,
+            updateDoc,
+            doc
+
+        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
         //====================================
-        // OBTENER DATOS DEL LOGIN
+        // DATOS DEL USUARIO
         //====================================
 
         const rolLogin = localStorage.getItem("rol");
 
         const nombreLogin = localStorage.getItem("nombre");
 
-        //====================================
-        // VERIFICAR SESIÓN
-        //====================================
-
         if(!rolLogin){
 
             window.location.href="Login.html";
 
         }
-
-        //====================================
-        // SOLO ADMINISTRADOR
-        //====================================
 
         if(rolLogin!=="administrador"){
 
@@ -321,97 +205,188 @@
 
         }
 
-        //====================================
-        // MOSTRAR DATOS DEL ADMINISTRADOR
-        //====================================
+        document.getElementById("nombreUsuario").textContent = nombreLogin;
 
-        document.getElementById("nombreUsuario").innerHTML = nombreLogin;
+        document.getElementById("rolUsuario").textContent = "Administrador";
 
-        document.getElementById("rolUsuario").innerHTML = "Administrador";
-
-        document.getElementById("avatar").innerHTML = "AD";
+        document.getElementById("avatar").textContent = "AD";
 
         //====================================
         // CERRAR SESIÓN
         //====================================
 
-        document.getElementById("cerrarSesion").addEventListener("click",function(){
-
-            localStorage.clear();
-
-        });
-
-        //====================================
-        // REGISTRAR MAESTRO
-        //====================================
-
-        document.getElementById("formMaestro").addEventListener("submit",function(e){
+        document.getElementById("cerrarSesion").addEventListener("click", async function(e){
 
             e.preventDefault();
 
-            const numeroEmpleado = document.getElementById("numeroEmpleado").value;
+            await signOut(auth);
 
-            const nombre = document.getElementById("nombre").value;
+            localStorage.clear();
 
-            const correo = document.getElementById("correo").value;
-
-            const carrera = document.getElementById("carrera").value;
-
-            const tabla = document.getElementById("tablaMaestros");
-
-            const fila = tabla.insertRow();
-
-            fila.insertCell(0).innerHTML = numeroEmpleado;
-
-            fila.insertCell(1).innerHTML = nombre;
-
-            fila.insertCell(2).innerHTML = correo;
-
-            fila.insertCell(3).innerHTML = carrera;
-
-            fila.insertCell(4).innerHTML = `
-                <button class="btn btn-primary">Editar</button>
-                <button class="btn btn-danger" onclick="eliminarFila(this)">Eliminar</button>
-            `;
-
-            console.log({
-
-                numeroEmpleado,
-
-                nombre,
-
-                correo,
-
-                carrera
-
-            });
-
-            alert("Maestro registrado correctamente.");
-
-            document.getElementById("formMaestro").reset();
+            window.location.href = "Login.html";
 
         });
 
         //====================================
-        // ELIMINAR MAESTRO
+        // CARGAR MAESTROS
         //====================================
 
-        function eliminarFila(boton){
+        async function cargarMaestros(){
 
-            if(confirm("¿Deseas eliminar este maestro?")){
+            const tabla = document.getElementById("tablaMaestros");
 
-                boton.parentElement.parentElement.remove();
+            tabla.innerHTML = "";
+
+            try{
+
+                const consulta = await getDocs(collection(db,"usuarios"));
+
+                consulta.forEach((documento)=>{
+
+                    const datos = documento.data();
+
+                    // Mostrar únicamente los maestros
+                    if(datos.rol !== "maestro") return;
+
+                    tabla.innerHTML += `
+
+                    <tr>
+
+                        <td>${datos.usuario}</td>
+
+                        <td>${datos.nombre}</td>
+
+                        <td>${datos.correo}</td>
+
+                        <td>${datos.carrera}</td>
+
+                        <td>
+
+                            <button
+                                class="btn btn-primary"
+                                onclick="editarMaestro('${documento.id}')">
+
+                                Editar
+
+                            </button>
+
+                            <button
+                                class="btn btn-danger"
+                                onclick="eliminarMaestro('${documento.id}')">
+
+                                Eliminar
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    `;
+
+                });
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                alert("No se pudieron cargar los maestros.");
 
             }
 
         }
 
+        cargarMaestros();
+
+                //====================================
+        // EDITAR MAESTRO
         //====================================
-        // FIREBASE
+
+        window.editarMaestro = async function(id){
+
+            try{
+
+                const nuevoNombre = prompt("Nuevo nombre:");
+
+                if(nuevoNombre===null) return;
+
+                const nuevoUsuario = prompt("Nuevo usuario:");
+
+                if(nuevoUsuario===null) return;
+
+                const nuevoCorreo = prompt("Nuevo correo:");
+
+                if(nuevoCorreo===null) return;
+
+                const nuevaCarrera = prompt("Nueva carrera:");
+
+                if(nuevaCarrera===null) return;
+
+                await updateDoc(doc(db,"usuarios",id),{
+
+                    nombre: nuevoNombre,
+
+                    usuario: nuevoUsuario,
+
+                    correo: nuevoCorreo,
+
+                    carrera: nuevaCarrera,
+
+                    rol: "maestro"
+
+                });
+
+                alert("Maestro actualizado correctamente.");
+
+                cargarMaestros();
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                alert("No se pudo actualizar el maestro.");
+
+            }
+
+        };
+
         //====================================
-        // Aquí se guardarán los maestros
-        // y posteriormente se cargarán
-        // automáticamente desde Firestore.
+        // ELIMINAR MAESTRO
+        //====================================
+
+        window.eliminarMaestro = async function(id){
+
+            const confirmar = confirm("¿Deseas eliminar este maestro?");
+
+            if(!confirmar){
+
+                return;
+
+            }
+
+            try{
+
+                await deleteDoc(doc(db,"usuarios",id));
+
+                alert("Maestro eliminado correctamente.");
+
+                cargarMaestros();
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                alert("No se pudo eliminar el maestro.");
+
+            }
+
+        };
 
     </script>
 
