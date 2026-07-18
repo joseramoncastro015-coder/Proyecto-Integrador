@@ -4,501 +4,338 @@
 <head>
 
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Reportes | IAEV Asesorías</title>
 
-    <link rel="stylesheet"
-          href="Estilo.css">
+    <link rel="stylesheet" href="Estilo.css">
 
 </head>
 
 <body>
 
-    <!--==========================
-            MENÚ LATERAL
-    ===========================-->
-
     <nav class="sidebar">
 
-        <h2>
-
-            IAEV
-            <br>
-            ASESORÍAS
-
-        </h2>
+        <h2>IAEV ASESORÍAS</h2>
 
         <hr>
 
-        <a href="Inicio.html">
-
-            Inicio
-
-        </a>
-
-        <a href="Registrar.html">
-
-            Registrar
-
-        </a>
-
-        <a href="Historial.html">
-
-            Historial
-
-        </a>
-
-        <a href="Reportes.html"
-           class="active">
-
-            Reportes
-
-        </a>
-
-        <a href="Perfil.html">
-
-            Perfil
-
-        </a>
+        <a href="Inicio.html">Inicio</a>
+        <a href="Registrar.html">Registrar</a>
+        <a href="Historial.html">Historial</a>
+        <a href="Reportes.html" class="active">Reportes</a>
+        <a href="Perfil.html">Perfil</a>
 
         <div id="menuAdmin">
 
-            <a href="Usuarios.html">
-
-                Usuarios
-
-            </a>
-
-            <a href="Maestros.html">
-
-                Maestros
-
-            </a>
+            <a href="Usuarios.html">Usuarios</a>
+            <a href="Maestros.html">Maestros</a>
 
         </div>
 
     </nav>
 
-    <!--==========================
-            CONTENIDO
-    ===========================-->
-
     <main class="main">
-
-        <!--==========================
-                ENCABEZADO
-        ===========================-->
 
         <header class="header">
 
             <div class="user-info">
 
-                <div
-                    class="avatar"
-                    id="avatar">
-
-                    AD
-
-                </div>
+                <div class="avatar" id="avatar">AD</div>
 
                 <div>
 
-                    <h3 id="nombreUsuario">
+                    <h3 id="nombreUsuario">Usuario</h3>
 
-                        Usuario
-
-                    </h3>
-
-                    <small id="rolUsuario">
-
-                        Rol
-
-                    </small>
+                    <small id="rolUsuario">Rol</small>
 
                 </div>
 
                 <img
                     src="logoIAEV.png"
+                    alt="Logo"
                     class="header-logo">
 
             </div>
 
-            <a
-                href="#"
-                id="cerrarSesion"
-                class="btn btn-danger">
+            <div>
 
-                Salir
+                <a
+                    href="Login.html"
+                    id="cerrarSesion"
+                    class="btn btn-danger">
 
-            </a>
+                    Salir
+
+                </a>
+
+            </div>
 
         </header>
 
-        <!--==========================
-                TÍTULO
-        ===========================-->
+        <h1>📊 Reportes Académicos</h1>
 
-        <h1>
+        <section class="card">
 
-            📊 Reportes Académicos
+            <p>
 
-        </h1>
+                Consulta las estadísticas generales del sistema de asesorías.
 
-        <p>
+            </p>
 
-            Estadísticas generales obtenidas automáticamente desde Firebase.
+            <p>
 
-        </p>
+                La información se obtiene automáticamente desde Firebase Firestore.
 
-        <!--==========================
-                TARJETAS
-        ===========================-->
+            </p>
 
-        <section class="cards-grid">
+        </section>
+
+                <section class="cards-grid">
 
             <div class="card card-info">
 
-                <h3>
+                <h3>📚 Total de Asesorías</h3>
 
-                    📚 Total de Asesorías
-
-                </h3>
-
-                <h1 id="totalAsesorias">
-
-                    0
-
-                </h1>
+                <h1 id="totalAsesorias">0</h1>
 
             </div>
 
             <div class="card card-info">
 
-                <h3>
+                <h3>⏱ Horas Totales</h3>
 
-                    👨‍🎓 Alumnos Atendidos
-
-                </h3>
-
-                <h1 id="totalAlumnos">
-
-                    0
-
-                </h1>
+                <h1 id="horasTotales">0 h</h1>
 
             </div>
 
-            <div class="card card-info">
+            <div
+                class="card card-info"
+                id="cardUsuarios">
 
-                <h3>
+                <h3>👥 Usuarios</h3>
 
-                    ⏰ Horas Impartidas
-
-                </h3>
-
-                <h1 id="totalHoras">
-
-                    0 h
-
-                </h1>
+                <h1 id="totalUsuarios">0</h1>
 
             </div>
 
-            <div class="card card-info">
+            <div
+                class="card card-info"
+                id="cardMaestros">
 
-                <h3>
+                <h3>👨‍🏫 Maestros</h3>
 
-                    👨‍🏫 Total de Maestros
-
-                </h3>
-
-                <h1 id="totalMaestros">
-
-                    0
-
-                </h1>
+                <h1 id="totalMaestros">0</h1>
 
             </div>
 
         </section>
 
-        <script type="module">
+        <section class="card">
 
-/*=========================================
-        IMPORTAR FIREBASE
-=========================================*/
+            <h2 class="mb-20">
 
-import { auth, db } from "./firebase.js";
+                Asesorías por Materia
 
-import {
+            </h2>
 
-    signOut
+            <canvas id="graficaMaterias"></canvas>
 
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+        </section>
 
-import {
+        <section class="table-container">
 
-    collection,
-    getDocs
+            <table>
 
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+                <thead>
 
+                    <tr>
 
-/*=========================================
-        REFERENCIAS FIRESTORE
-=========================================*/
+                        <th>Materia</th>
+                        <th>Total de Asesorías</th>
 
-const asesoriasRef = collection(db, "asesorias");
+                    </tr>
 
-const usuariosRef = collection(db, "usuarios");
+                </thead>
 
+                <tbody id="tablaMaterias"></tbody>
 
-/*=========================================
-        DATOS DEL USUARIO
-=========================================*/
+            </table>
 
-const uid = localStorage.getItem("uid");
+        </section>
 
-const nombre = localStorage.getItem("nombre");
+    </main>
 
-const rol = localStorage.getItem("rol");
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <script type="module">
 
-/*=========================================
-        VALIDAR SESIÓN
-=========================================*/
+        import { auth, db } from "./firebase.js";
 
-if (!uid) {
+        import { signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-    window.location.href = "Login.html";
+        import {
+            collection,
+            getDocs
+        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-}
+                const rol = localStorage.getItem("rol");
+        const nombre = localStorage.getItem("nombre");
 
+        if (!rol) {
 
-/*=========================================
-        MOSTRAR USUARIO
-=========================================*/
-
-document.getElementById("nombreUsuario").textContent = nombre;
-
-document.getElementById("rolUsuario").textContent = rol;
-
-
-/*=========================================
-        AVATAR
-=========================================*/
-
-const iniciales = nombre
-
-    .split(" ")
-
-    .map(p => p.charAt(0))
-
-    .join("")
-
-    .substring(0,2)
-
-    .toUpperCase();
-
-document.getElementById("avatar").textContent = iniciales;
-
-
-/*=========================================
-        OCULTAR MENÚ ADMIN
-=========================================*/
-
-if(rol !== "administrador"){
-
-    document.getElementById("menuAdmin").style.display = "none";
-
-}
-
-
-/*=========================================
-        VARIABLES
-=========================================*/
-
-let asesorias = [];
-
-let usuarios = [];
-
-
-/*=========================================
-        ELEMENTOS HTML
-=========================================*/
-
-const totalAsesorias = document.getElementById("totalAsesorias");
-
-const totalAlumnos = document.getElementById("totalAlumnos");
-
-const totalHoras = document.getElementById("totalHoras");
-
-const totalMaestros = document.getElementById("totalMaestros");
-
-
-/*=========================================
-        CERRAR SESIÓN
-=========================================*/
-
-document.getElementById("cerrarSesion").addEventListener("click", async(e)=>{
-
-    e.preventDefault();
-
-    await signOut(auth);
-
-    localStorage.clear();
-
-    window.location.href="Login.html";
-
-});
-
-/*=========================================
-        CARGAR DATOS
-=========================================*/
-
-async function cargarDatos(){
-
-    try{
-
-        asesorias = [];
-
-        usuarios = [];
-
-        /*==============================
-            LEER ASESORÍAS
-        ==============================*/
-
-        const snapshotAsesorias = await getDocs(asesoriasRef);
-
-        snapshotAsesorias.forEach((doc)=>{
-
-            asesorias.push({
-
-                id: doc.id,
-
-                ...doc.data()
-
-            });
-
-        });
-
-
-        /*==============================
-            LEER USUARIOS
-        ==============================*/
-
-        const snapshotUsuarios = await getDocs(usuariosRef);
-
-        snapshotUsuarios.forEach((doc)=>{
-
-            usuarios.push({
-
-                id: doc.id,
-
-                ...doc.data()
-
-            });
-
-        });
-
-
-        actualizarDashboard();
-
-    }
-
-    catch(error){
-
-        console.error("Error al cargar datos:", error);
-
-        alert("No fue posible cargar las estadísticas.");
-
-    }
-
-}
-
-
-
-/*=========================================
-        ACTUALIZAR TARJETAS
-=========================================*/
-
-function actualizarDashboard(){
-
-    /*==============================
-            TOTAL ASESORÍAS
-    ==============================*/
-
-    totalAsesorias.textContent = asesorias.length;
-
-
-    /*==============================
-            ALUMNOS ÚNICOS
-    ==============================*/
-
-    const alumnos = new Set();
-
-    asesorias.forEach((asesoria)=>{
-
-        alumnos.add(asesoria.matricula);
-
-    });
-
-    totalAlumnos.textContent = alumnos.size;
-
-
-    /*==============================
-            HORAS IMPARTIDAS
-    ==============================*/
-
-    let minutosTotales = 0;
-
-    asesorias.forEach((asesoria)=>{
-
-        if(!asesoria.horaInicio || !asesoria.horaFin){
-
-            return;
+            window.location.href = "Login.html";
 
         }
 
-        const inicio = new Date("2000-01-01T" + asesoria.horaInicio);
+        document.getElementById("nombreUsuario").textContent = nombre;
+        document.getElementById("rolUsuario").textContent =
+            rol.charAt(0).toUpperCase() + rol.slice(1);
 
-        const fin = new Date("2000-01-01T" + asesoria.horaFin);
+        document.getElementById("avatar").textContent = nombre
+            .split(" ")
+            .map(p => p.charAt(0))
+            .join("")
+            .substring(0, 2)
+            .toUpperCase();
 
-        minutosTotales += (fin - inicio) / 60000;
+        if (rol !== "administrador") {
 
-    });
+            document.getElementById("menuAdmin").style.display = "none";
+            document.getElementById("cardUsuarios").style.display = "none";
+            document.getElementById("cardMaestros").style.display = "none";
 
-    const horas = Math.floor(minutosTotales / 60);
+        }
 
-    const minutos = minutosTotales % 60;
+        document.getElementById("cerrarSesion").addEventListener("click", async e => {
 
-    totalHoras.textContent = horas + " h " + minutos + " min";
+            e.preventDefault();
 
+            await signOut(auth);
 
-    /*==============================
-            TOTAL MAESTROS
-    ==============================*/
+            localStorage.clear();
 
-    const maestros = usuarios.filter(usuario => usuario.rol === "maestro");
+            window.location.href = "Login.html";
 
-    totalMaestros.textContent = maestros.length;
+        });
 
-}
+        async function cargarReportes() {
 
+            const asesorias = await getDocs(collection(db, "asesorias"));
+            const usuarios = await getDocs(collection(db, "usuarios"));
 
+            let totalAsesorias = 0;
+            let horasTotales = 0;
+            let totalUsuarios = 0;
+            let totalMaestros = 0;
 
-/*=========================================
-        INICIAR
-=========================================*/
+            const materias = {};
 
-cargarDatos();
+            asesorias.forEach(doc => {
 
-</script>
+                const datos = doc.data();
 
-    </main>
+                totalAsesorias++;
+
+                if (datos.horaInicio && datos.horaFin) {
+
+                    const inicio = datos.horaInicio.split(":");
+                    const fin = datos.horaFin.split(":");
+
+                    const minutosInicio =
+                        parseInt(inicio[0]) * 60 + parseInt(inicio[1]);
+
+                    const minutosFin =
+                        parseInt(fin[0]) * 60 + parseInt(fin[1]);
+
+                    horasTotales += minutosFin - minutosInicio;
+
+                }
+
+                materias[datos.materia] =
+                    (materias[datos.materia] || 0) + 1;
+
+            });
+
+            usuarios.forEach(doc => {
+
+                totalUsuarios++;
+
+                if (doc.data().rol === "maestro") {
+
+                    totalMaestros++;
+
+                }
+
+            });
+
+            document.getElementById("totalAsesorias").textContent = totalAsesorias;
+            document.getElementById("horasTotales").textContent = (horasTotales / 60).toFixed(1) + " h";
+            document.getElementById("totalUsuarios").textContent = totalUsuarios;
+            document.getElementById("totalMaestros").textContent = totalMaestros;
+
+            const tabla = document.getElementById("tablaMaterias");
+
+            tabla.innerHTML = "";
+
+            Object.entries(materias).forEach(([materia, total]) => {
+
+                tabla.innerHTML += `
+                    <tr>
+                        <td>${materia}</td>
+                        <td>${total}</td>
+                    </tr>
+                `;
+
+            });
+
+            new Chart(document.getElementById("graficaMaterias"), {
+
+                type: "bar",
+
+                data: {
+
+                    labels: Object.keys(materias),
+
+                    datasets: [{
+
+                        label: "Asesorías",
+
+                        data: Object.values(materias),
+
+                        backgroundColor: "#FFC107",
+
+                        borderColor: "#E0A800",
+
+                        borderWidth: 1
+
+                    }]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+        }
+
+        cargarReportes();
+
+    </script>
 
 </body>
 

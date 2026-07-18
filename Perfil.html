@@ -4,119 +4,50 @@
 <head>
 
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Perfil | IAEV Asesorías</title>
 
-    <link rel="stylesheet"
-          href="Estilo.css">
+    <link rel="stylesheet" href="Estilo.css">
 
 </head>
 
 <body>
 
-    <!--=========================================
-                MENÚ LATERAL
-    ==========================================-->
-
     <nav class="sidebar">
 
-        <h2>
-
-            IAEV
-            <br>
-            ASESORÍAS
-
-        </h2>
+        <h2>IAEV<br>ASESORÍAS</h2>
 
         <hr>
 
-        <a href="Inicio.html">
-
-            Inicio
-
-        </a>
-
-        <a href="Registrar.html">
-
-            Registrar
-
-        </a>
-
-        <a href="Historial.html">
-
-            Historial
-
-        </a>
-
-        <a href="Reportes.html">
-
-            Reportes
-
-        </a>
-
-        <a href="Perfil.html"
-           class="active">
-
-            Perfil
-
-        </a>
+        <a href="Inicio.html">Inicio</a>
+        <a href="Registrar.html">Registrar</a>
+        <a href="Historial.html">Historial</a>
+        <a href="Reportes.html">Reportes</a>
+        <a href="Perfil.html" class="active">Perfil</a>
 
         <div id="menuAdmin">
 
-            <a href="Usuarios.html">
-
-                Usuarios
-
-            </a>
-
-            <a href="Maestros.html">
-
-                Maestros
-
-            </a>
+            <a href="Usuarios.html">Usuarios</a>
+            <a href="Maestros.html">Maestros</a>
 
         </div>
 
     </nav>
 
-    <!--=========================================
-                CONTENIDO
-    ==========================================-->
-
     <main class="main">
-
-        <!--=========================================
-                    ENCABEZADO
-        ==========================================-->
 
         <header class="header">
 
             <div class="user-info">
 
-                <div
-                    class="avatar"
-                    id="avatar">
-
-                    AD
-
-                </div>
+                <div class="avatar" id="avatar">AD</div>
 
                 <div>
 
-                    <h3 id="nombreUsuario">
+                    <h3 id="nombreUsuario">Usuario</h3>
 
-                        Usuario
-
-                    </h3>
-
-                    <small id="rolUsuario">
-
-                        Rol
-
-                    </small>
+                    <small id="rolUsuario">Rol</small>
 
                 </div>
 
@@ -138,25 +69,13 @@
 
         </header>
 
-        <!--=========================================
-                    TÍTULO
-        ==========================================-->
-
-        <h1>
-
-            👤 Mi Perfil
-
-        </h1>
+        <h1>👤 Mi Perfil</h1>
 
         <p>
 
             Consulta y actualiza tu información personal.
 
         </p>
-
-        <!--=========================================
-                    TARJETA PERFIL
-        ==========================================-->
 
         <section class="card">
 
@@ -170,58 +89,39 @@
 
             <br>
 
-            <div class="form-group">
+                        <div class="form-group">
 
-                <label>
-
-                    Nombre
-
-                </label>
+                <label>Nombre</label>
 
                 <input
                     type="text"
-                    id="perfilNombre"
-                    readonly>
+                    id="perfilNombre">
 
             </div>
 
             <div class="form-group">
 
-                <label>
-
-                    Usuario
-
-                </label>
+                <label>Usuario</label>
 
                 <input
                     type="text"
-                    id="perfilUsuario"
-                    readonly>
+                    id="perfilUsuario">
 
             </div>
 
             <div class="form-group">
 
-                <label>
-
-                    Correo
-
-                </label>
+                <label>Correo</label>
 
                 <input
                     type="email"
-                    id="perfilCorreo"
-                    readonly>
+                    id="perfilCorreo">
 
             </div>
 
             <div class="form-group">
 
-                <label>
-
-                    Carrera
-
-                </label>
+                <label>Carrera</label>
 
                 <input
                     type="text"
@@ -232,11 +132,7 @@
 
             <div class="form-group">
 
-                <label>
-
-                    Rol
-
-                </label>
+                <label>Rol</label>
 
                 <input
                     type="text"
@@ -249,172 +145,78 @@
 
         <script type="module">
 
-/*=========================================
-        IMPORTAR FIREBASE
-=========================================*/
+            import { auth, db } from "./firebase.js";
 
-import { auth, db } from "./firebase.js";
+            import { signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-import {
+            import {
+                doc,
+                getDoc,
+                updateDoc
+            } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-    signOut
+                        const nombre = localStorage.getItem("nombre");
+            const rol = localStorage.getItem("rol");
+            const documentoUsuario = localStorage.getItem("documentoUsuario");
 
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+            if(!nombre){
 
-import {
+                window.location.href="Login.html";
 
-    doc,
-    getDoc,
-    updateDoc
+            }
 
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+            document.getElementById("nombreUsuario").textContent = nombre;
+            document.getElementById("rolUsuario").textContent = rol;
 
+            const iniciales = nombre
+                .split(" ")
+                .map(p=>p.charAt(0))
+                .join("")
+                .substring(0,2)
+                .toUpperCase();
 
-/*=========================================
-        DATOS DEL USUARIO
-=========================================*/
+            document.getElementById("avatar").textContent = iniciales;
+            document.getElementById("avatarPerfil").textContent = iniciales;
 
-const documentoUsuario = localStorage.getItem("documentoUsuario");
+            if(rol!=="administrador"){
 
-const nombre = localStorage.getItem("nombre");
+                document.getElementById("menuAdmin").style.display="none";
 
-const rol = localStorage.getItem("rol");
+            }
 
+            document.getElementById("cerrarSesion").addEventListener("click",async e=>{
 
-/*=========================================
-        VALIDAR SESIÓN
-=========================================*/
+                e.preventDefault();
 
-if(!documentoUsuario){
+                await signOut(auth);
 
-    window.location.href = "Login.html";
+                localStorage.clear();
 
-}
+                window.location.href="Login.html";
 
+            });
 
-/*=========================================
-        MOSTRAR ENCABEZADO
-=========================================*/
+            async function cargarPerfil(){
 
-document.getElementById("nombreUsuario").textContent = nombre;
+                const referencia = doc(db,"usuarios",documentoUsuario);
 
-document.getElementById("rolUsuario").textContent = rol;
+                const consulta = await getDoc(referencia);
 
+                if(!consulta.exists()) return;
 
-/*=========================================
-        AVATAR
-=========================================*/
+                const datos = consulta.data();
 
-const iniciales = nombre
+                document.getElementById("perfilNombre").value = datos.nombre || "";
+                document.getElementById("perfilUsuario").value = datos.usuario || "";
+                document.getElementById("perfilCorreo").value = datos.correo || "";
+                document.getElementById("perfilCarrera").value = datos.carrera || "";
+                document.getElementById("perfilRol").value = datos.rol || "";
 
-.split(" ")
+            }
 
-.map(p=>p.charAt(0))
+            cargarPerfil();
 
-.join("")
-
-.substring(0,2)
-
-.toUpperCase();
-
-document.getElementById("avatar").textContent = iniciales;
-
-document.getElementById("avatarPerfil").textContent = iniciales;
-
-
-/*=========================================
-        OCULTAR MENÚ ADMIN
-=========================================*/
-
-if(rol !== "administrador"){
-
-    document.getElementById("menuAdmin").style.display = "none";
-
-}
-
-
-/*=========================================
-        CARGAR PERFIL
-=========================================*/
-
-async function cargarPerfil(){
-
-    try{
-
-        const referencia = doc(
-
-            db,
-
-            "usuarios",
-
-            documentoUsuario
-
-        );
-
-        const documento = await getDoc(referencia);
-
-        if(!documento.exists()){
-
-            alert("No se encontró el perfil.");
-
-            return;
-
-        }
-
-        const datos = documento.data();
-
-        document.getElementById("perfilNombre").value = datos.nombre || "";
-
-        document.getElementById("perfilUsuario").value = datos.usuario || "";
-
-        document.getElementById("perfilCorreo").value = datos.correo || "";
-
-        document.getElementById("perfilCarrera").value = datos.carrera || "";
-
-        document.getElementById("perfilRol").value = datos.rol || "";
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        alert("Error al cargar el perfil.");
-
-    }
-
-}
-
-
-/*=========================================
-        CERRAR SESIÓN
-=========================================*/
-
-document.getElementById("cerrarSesion").addEventListener(
-
-"click",
-
-async(e)=>{
-
-    e.preventDefault();
-
-    await signOut(auth);
-
-    localStorage.clear();
-
-    window.location.href="Login.html";
-
-});
-
-/*=========================================
-        INICIAR
-=========================================*/
-
-cargarPerfil();
-
-</script>
-
-    </main>
+        </script>
 
 </body>
 

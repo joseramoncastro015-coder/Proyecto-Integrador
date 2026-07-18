@@ -15,67 +15,31 @@
 
 <body>
 
-    <!--=================================
-            MENÚ LATERAL
-    =================================-->
-
     <nav class="sidebar">
 
         <h2>IAEV ASESORÍAS</h2>
 
         <hr>
 
-        <a href="Inicio.html">
+        <a href="Inicio.html">Inicio</a>
 
-            Inicio
+        <a href="Registrar.html">Registrar</a>
 
-        </a>
+        <a href="Historial.html">Historial</a>
 
-        <a href="Registrar.html">
+        <a href="Reportes.html">Reportes</a>
 
-            Registrar
-
-        </a>
-
-        <a href="Historial.html">
-
-            Historial
-
-        </a>
-
-        <a href="Reportes.html">
-
-            Reportes
-
-        </a>
-
-        <a href="Perfil.html">
-
-            Perfil
-
-        </a>
+        <a href="Perfil.html">Perfil</a>
 
         <div id="menuAdmin">
 
-            <a href="Usuarios.html">
+            <a href="Usuarios.html">Usuarios</a>
 
-                Usuarios
-
-            </a>
-
-            <a href="Maestros.html" class="active">
-
-                Maestros
-
-            </a>
+            <a href="Maestros.html" class="active">Maestros</a>
 
         </div>
 
     </nav>
-
-    <!--=================================
-            CONTENIDO
-    =================================-->
 
     <main class="main">
 
@@ -83,9 +47,7 @@
 
             <div class="user-info">
 
-                <div
-                    class="avatar"
-                    id="avatar">
+                <div class="avatar" id="avatar">
 
                     AD
 
@@ -165,7 +127,7 @@
 
         </section>
 
-            </main>
+    </main>
 
     <script type="module">
 
@@ -183,12 +145,7 @@
 
         } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-        //====================================
-        // DATOS DEL USUARIO
-        //====================================
-
-        const rolLogin = localStorage.getItem("rol");
-
+                const rolLogin = localStorage.getItem("rol");
         const nombreLogin = localStorage.getItem("nombre");
 
         if(!rolLogin){
@@ -205,17 +162,11 @@
 
         }
 
-        document.getElementById("nombreUsuario").textContent = nombreLogin;
+        document.getElementById("nombreUsuario").textContent=nombreLogin;
+        document.getElementById("rolUsuario").textContent="Administrador";
+        document.getElementById("avatar").textContent="AD";
 
-        document.getElementById("rolUsuario").textContent = "Administrador";
-
-        document.getElementById("avatar").textContent = "AD";
-
-        //====================================
-        // CERRAR SESIÓN
-        //====================================
-
-        document.getElementById("cerrarSesion").addEventListener("click", async function(e){
+        document.getElementById("cerrarSesion").addEventListener("click",async e=>{
 
             e.preventDefault();
 
@@ -223,32 +174,27 @@
 
             localStorage.clear();
 
-            window.location.href = "Login.html";
+            window.location.href="Login.html";
 
         });
 
-        //====================================
-        // CARGAR MAESTROS
-        //====================================
-
         async function cargarMaestros(){
 
-            const tabla = document.getElementById("tablaMaestros");
+            const tabla=document.getElementById("tablaMaestros");
 
-            tabla.innerHTML = "";
+            tabla.innerHTML="";
 
             try{
 
-                const consulta = await getDocs(collection(db,"usuarios"));
+                const consulta=await getDocs(collection(db,"usuarios"));
 
-                consulta.forEach((documento)=>{
+                consulta.forEach(documento=>{
 
-                    const datos = documento.data();
+                    const datos=documento.data();
 
-                    // Mostrar únicamente los maestros
-                    if(datos.rol !== "maestro") return;
+                    if(datos.rol!=="maestro") return;
 
-                    tabla.innerHTML += `
+                    tabla.innerHTML+=`
 
                     <tr>
 
@@ -286,9 +232,7 @@
 
                 });
 
-            }
-
-            catch(error){
+            }catch(error){
 
                 console.error(error);
 
@@ -300,41 +244,33 @@
 
         cargarMaestros();
 
-                //====================================
-        // EDITAR MAESTRO
-        //====================================
-
-        window.editarMaestro = async function(id){
+                window.editarMaestro = async function(id){
 
             try{
 
-                const nuevoNombre = prompt("Nuevo nombre:");
+                const nuevoNombre=prompt("Nuevo nombre:");
 
                 if(nuevoNombre===null) return;
 
-                const nuevoUsuario = prompt("Nuevo usuario:");
+                const nuevoUsuario=prompt("Nuevo usuario:");
 
                 if(nuevoUsuario===null) return;
 
-                const nuevoCorreo = prompt("Nuevo correo:");
+                const nuevoCorreo=prompt("Nuevo correo:");
 
                 if(nuevoCorreo===null) return;
 
-                const nuevaCarrera = prompt("Nueva carrera:");
+                const nuevaCarrera=prompt("Nueva carrera:");
 
                 if(nuevaCarrera===null) return;
 
                 await updateDoc(doc(db,"usuarios",id),{
 
-                    nombre: nuevoNombre,
-
-                    usuario: nuevoUsuario,
-
-                    correo: nuevoCorreo,
-
-                    carrera: nuevaCarrera,
-
-                    rol: "maestro"
+                    nombre:nuevoNombre,
+                    usuario:nuevoUsuario,
+                    correo:nuevoCorreo,
+                    carrera:nuevaCarrera,
+                    rol:"maestro"
 
                 });
 
@@ -342,9 +278,7 @@
 
                 cargarMaestros();
 
-            }
-
-            catch(error){
+            }catch(error){
 
                 console.error(error);
 
@@ -354,19 +288,11 @@
 
         };
 
-        //====================================
-        // ELIMINAR MAESTRO
-        //====================================
-
         window.eliminarMaestro = async function(id){
 
-            const confirmar = confirm("¿Deseas eliminar este maestro?");
+            const confirmar=confirm("¿Deseas eliminar este maestro?");
 
-            if(!confirmar){
-
-                return;
-
-            }
+            if(!confirmar) return;
 
             try{
 
@@ -376,9 +302,7 @@
 
                 cargarMaestros();
 
-            }
-
-            catch(error){
+            }catch(error){
 
                 console.error(error);
 

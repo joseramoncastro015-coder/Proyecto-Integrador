@@ -15,73 +15,29 @@
 
 <body>
 
-    <!--=================================
-            MENÚ LATERAL
-    =================================-->
-
     <nav class="sidebar">
 
         <h2>IAEV ASESORÍAS</h2>
 
         <hr>
 
-        <a href="Inicio.html">
-
-            Inicio
-
-        </a>
-
-        <a href="Registrar.html">
-
-            Registrar
-
-        </a>
-
-        <a href="Historial.html">
-
-            Historial
-
-        </a>
-
-        <a href="Reportes.html">
-
-            Reportes
-
-        </a>
-
-        <a href="Perfil.html">
-
-            Perfil
-
-        </a>
+        <a href="Inicio.html">Inicio</a>
+        <a href="Registrar.html">Registrar</a>
+        <a href="Historial.html">Historial</a>
+        <a href="Reportes.html">Reportes</a>
+        <a href="Perfil.html">Perfil</a>
 
         <div id="menuAdmin">
 
-            <a href="Usuarios.html" class="active">
+            <a href="Usuarios.html" class="active">Usuarios</a>
 
-                Usuarios
-
-            </a>
-
-            <a href="Maestros.html">
-
-                Maestros
-
-            </a>
+            <a href="Maestros.html">Maestros</a>
 
         </div>
 
     </nav>
 
-    <!--=================================
-            CONTENIDO
-    =================================-->
-
     <main class="main">
-
-        <!--=================================
-                HEADER
-        =================================-->
 
         <header class="header">
 
@@ -131,133 +87,74 @@
 
         </header>
 
-        <!--=================================
-                TÍTULO
-        =================================-->
-
         <h1 class="mb-30">
 
-            Administración de Usuarios
+            Usuarios
 
         </h1>
 
-        <!--=================================
-                FORMULARIO
-        =================================-->
-
         <section class="card">
-
-            <h2 class="mb-20">
-
-                Agregar Usuario
-
-            </h2>
 
             <form id="formUsuario">
 
-                <div class="form-row">
+                                <div class="form-group">
 
-                    <div class="form-group">
+                    <label>Nombre</label>
 
-                        <label>Nombre</label>
-
-                        <input
-                            type="text"
-                            id="nombre"
-                            placeholder="Nombre completo"
-                            required>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>Usuario</label>
-
-                        <input
-                            type="text"
-                            id="usuario"
-                            placeholder="Usuario"
-                            required>
-
-                    </div>
+                    <input
+                        type="text"
+                        id="nombre"
+                        required>
 
                 </div>
 
-                <div class="form-row">
+                <div class="form-group">
 
-                    <div class="form-group">
+                    <label>Usuario</label>
 
-                        <label>Correo</label>
-
-                        <input
-                            type="email"
-                            id="correo"
-                            placeholder="correo@ejemplo.com"
-                            required>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>Carrera</label>
-
-                        <input
-                            type="text"
-                            id="carrera"
-                            placeholder="Ingeniería..."
-                            required>
-
-                    </div>
+                    <input
+                        type="text"
+                        id="usuario"
+                        required>
 
                 </div>
 
-                <div class="form-row">
+                <div class="form-group">
 
-                    <div class="form-group">
+                    <label>Contraseña</label>
 
-                        <label>Rol</label>
+                    <input
+                        type="password"
+                        id="password"
+                        required>
 
-                        <select id="rol" required>
+                </div>
 
-                            <option value="">
+                <div class="form-group">
 
-                                Seleccionar
+                    <label>Rol</label>
 
-                            </option>
+                    <select id="rol" required>
 
-                            <option value="maestro">
+                        <option value="">Selecciona un rol</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="maestro">Maestro</option>
 
-                                Maestro
-
-                            </option>
-
-                            <option value="administrador">
-
-                                Administrador
-
-                            </option>
-
-                        </select>
-
-                    </div>
+                    </select>
 
                 </div>
 
                 <button
                     type="submit"
-                    class="btn btn-primary w-100">
+                    class="btn btn-primary">
 
-                    Guardar Usuario
+                    Agregar Usuario
 
                 </button>
 
             </form>
 
         </section>
-
-                <!--=================================
-                TABLA DE USUARIOS
-        =================================-->
 
         <section class="table-container">
 
@@ -268,22 +165,15 @@
                     <tr>
 
                         <th>Usuario</th>
-
                         <th>Nombre</th>
-
-                        <th>Correo</th>
-
                         <th>Rol</th>
-
                         <th>Acciones</th>
 
                     </tr>
 
                 </thead>
 
-                <tbody id="tablaUsuarios">
-
-                </tbody>
+                <tbody id="tablaUsuarios"></tbody>
 
             </table>
 
@@ -298,22 +188,15 @@
         import { signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
         import {
-
             collection,
             addDoc,
             getDocs,
             deleteDoc,
             updateDoc,
             doc
-
         } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-        //====================================
-        // DATOS DEL USUARIO
-        //====================================
-
-        const rolLogin = localStorage.getItem("rol");
-
+                const rolLogin = localStorage.getItem("rol");
         const nombreLogin = localStorage.getItem("nombre");
 
         if(!rolLogin){
@@ -331,16 +214,10 @@
         }
 
         document.getElementById("nombreUsuario").textContent=nombreLogin;
-
         document.getElementById("rolUsuario").textContent="Administrador";
-
         document.getElementById("avatar").textContent="AD";
 
-        //====================================
-        // CERRAR SESIÓN
-        //====================================
-
-        document.getElementById("cerrarSesion").addEventListener("click",async function(e){
+        document.getElementById("cerrarSesion").addEventListener("click",async e=>{
 
             e.preventDefault();
 
@@ -352,75 +229,61 @@
 
         });
 
-                //====================================
-        // AGREGAR USUARIO
-        //====================================
-
-        document.getElementById("formUsuario").addEventListener("submit", async function(e){
+        document.getElementById("formUsuario").addEventListener("submit",async e=>{
 
             e.preventDefault();
+
+            const nombre=document.getElementById("nombre").value.trim();
+            const usuario=document.getElementById("usuario").value.trim();
+            const password=document.getElementById("password").value;
+            const rol=document.getElementById("rol").value;
 
             try{
 
                 await addDoc(collection(db,"usuarios"),{
 
-                    nombre: document.getElementById("nombre").value,
-
-                    usuario: document.getElementById("usuario").value,
-
-                    correo: document.getElementById("correo").value,
-
-                    carrera: document.getElementById("carrera").value,
-
-                    rol: document.getElementById("rol").value
+                    nombre,
+                    usuario,
+                    password,
+                    rol
 
                 });
 
-                alert("Usuario guardado correctamente.");
+                alert("Usuario agregado correctamente.");
 
                 document.getElementById("formUsuario").reset();
 
                 cargarUsuarios();
 
-            }
+            }catch(error){
 
-            catch(error){
-
-                console.error(error);
-
-                alert("Error al guardar el usuario.");
+                alert(error.message);
 
             }
 
         });
 
-        //====================================
-        // CARGAR USUARIOS
-        //====================================
-
         async function cargarUsuarios(){
 
-            const tabla = document.getElementById("tablaUsuarios");
+            const tabla=document.getElementById("tablaUsuarios");
 
-            tabla.innerHTML = "";
+            tabla.innerHTML="";
 
             try{
 
-                const consulta = await getDocs(collection(db,"usuarios"));
+                const consulta=await getDocs(collection(db,"usuarios"));
 
-                consulta.forEach((documento)=>{
+                consulta.forEach(documento=>{
 
-                    const datos = documento.data();
+                    const datos=documento.data();
 
-                    tabla.innerHTML += `
+                    tabla.innerHTML+=`
 
                     <tr>
 
                         <td>${datos.usuario}</td>
 
                         <td>${datos.nombre}</td>
-
-                        <td>${datos.correo}</td>
 
                         <td>${datos.rol.charAt(0).toUpperCase()+datos.rol.slice(1)}</td>
 
@@ -450,9 +313,7 @@
 
                 });
 
-            }
-
-            catch(error){
+            }catch(error){
 
                 console.error(error);
 
@@ -464,44 +325,31 @@
 
         cargarUsuarios();
 
-                //====================================
-        // EDITAR USUARIO
-        //====================================
+                window.editarUsuario = async function(id){
 
-        window.editarUsuario = async function(id){
+            const nuevoNombre = prompt("Nuevo nombre:");
+
+            if(!nuevoNombre) return;
+
+            const nuevoUsuario = prompt("Nuevo usuario:");
+
+            if(!nuevoUsuario) return;
+
+            const nuevaCarrera = prompt("Nueva carrera:");
+
+            if(!nuevaCarrera) return;
+
+            const nuevoRol = prompt("Nuevo rol (maestro o administrador):");
+
+            if(!nuevoRol) return;
 
             try{
-
-                const nuevoNombre = prompt("Nuevo nombre:");
-
-                if(nuevoNombre===null) return;
-
-                const nuevoUsuario = prompt("Nuevo usuario:");
-
-                if(nuevoUsuario===null) return;
-
-                const nuevoCorreo = prompt("Nuevo correo:");
-
-                if(nuevoCorreo===null) return;
-
-                const nuevaCarrera = prompt("Nueva carrera:");
-
-                if(nuevaCarrera===null) return;
-
-                const nuevoRol = prompt("Rol (maestro o administrador):");
-
-                if(nuevoRol===null) return;
 
                 await updateDoc(doc(db,"usuarios",id),{
 
                     nombre:nuevoNombre,
-
                     usuario:nuevoUsuario,
-
-                    correo:nuevoCorreo,
-
                     carrera:nuevaCarrera,
-
                     rol:nuevoRol.toLowerCase()
 
                 });
@@ -510,31 +358,19 @@
 
                 cargarUsuarios();
 
-            }
+            }catch(error){
 
-            catch(error){
-
-                console.error(error);
-
-                alert("No se pudo actualizar el usuario.");
+                alert(error.message);
 
             }
 
-        };
-
-        //====================================
-        // ELIMINAR USUARIO
-        //====================================
+        }
 
         window.eliminarUsuario = async function(id){
 
             const confirmar = confirm("¿Deseas eliminar este usuario?");
 
-            if(!confirmar){
-
-                return;
-
-            }
+            if(!confirmar) return;
 
             try{
 
@@ -544,17 +380,13 @@
 
                 cargarUsuarios();
 
-            }
+            }catch(error){
 
-            catch(error){
-
-                console.error(error);
-
-                alert("No se pudo eliminar el usuario.");
+                alert(error.message);
 
             }
 
-        };
+        }
 
     </script>
 

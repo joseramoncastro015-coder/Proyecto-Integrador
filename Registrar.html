@@ -3,147 +3,65 @@
 
 <head>
 
-    <!--=========================================
-                CONFIGURACIÓN
-    ==========================================-->
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Registrar Asesoría | IAEV</title>
 
-    <!-- Hoja de estilos -->
-
-    <link rel="stylesheet"
-          href="Estilo.css">
+    <link rel="stylesheet" href="Estilo.css">
 
 </head>
 
 <body>
 
-    <!--=========================================
-                MENÚ LATERAL
-    ==========================================-->
-
     <nav class="sidebar">
 
-        <h2>
-
-            IAEV
-            <br>
-            ASESORÍAS
-
-        </h2>
+        <h2>IAEV ASESORÍAS</h2>
 
         <hr>
 
-        <a href="Inicio.html">
-
-            Inicio
-
-        </a>
-
-        <a href="Registrar.html"
-           class="active">
-
-            Registrar
-
-        </a>
-
-        <a href="Historial.html">
-
-            Historial
-
-        </a>
-
-        <a href="Reportes.html">
-
-            Reportes
-
-        </a>
-
-        <a href="Perfil.html">
-
-            Perfil
-
-        </a>
-
-        <!--
-            Este menú únicamente
-            lo verá el administrador.
-        -->
+        <a href="Inicio.html">Inicio</a>
+        <a href="Registrar.html" class="active">Registrar</a>
+        <a href="Historial.html">Historial</a>
+        <a href="Reportes.html">Reportes</a>
+        <a href="Perfil.html">Perfil</a>
 
         <div id="menuAdmin">
 
-            <a href="Usuarios.html">
-
-                Usuarios
-
-            </a>
-
-            <a href="Maestros.html">
-
-                Maestros
-
-            </a>
+            <a href="Usuarios.html">Usuarios</a>
+            <a href="Maestros.html">Maestros</a>
 
         </div>
 
     </nav>
 
-    <!--=========================================
-                CONTENIDO
-    ==========================================-->
-
     <main class="main">
-
-        <!--=========================================
-                    HEADER
-        ==========================================-->
 
         <header class="header">
 
             <div class="user-info">
 
-                <div
-                    class="avatar"
-                    id="avatar">
-
-                    AD
-
-                </div>
+                <div class="avatar" id="avatar">MA</div>
 
                 <div>
 
-                    <h3 id="nombreUsuario">
+                    <h3 id="nombreUsuario">Usuario</h3>
 
-                        Usuario
-
-                    </h3>
-
-                    <small id="rolUsuario">
-
-                        Rol
-
-                    </small>
+                    <small id="rolUsuario">Maestro</small>
 
                 </div>
 
-                <img
-                    src="logoIAEV.png"
-                    alt="Logo"
-                    class="header-logo">
+                <img src="logoIAEV.png"
+                     alt="Logo IAEV"
+                     class="header-logo">
 
             </div>
 
-            <div>
+            <div class="header-buttons">
 
-                <a
-                    href="Login.html"
-                    id="cerrarSesion"
-                    class="btn btn-danger">
+                <a href="Login.html"
+                   class="btn btn-danger"
+                   id="cerrarSesion">
 
                     Salir
 
@@ -153,77 +71,29 @@
 
         </header>
 
-        <!--=========================================
-                    TÍTULO
-        ==========================================-->
-
-        <h1>
-
-            📝 Registrar Nueva Asesoría
-
-        </h1>
-
-        <!--=========================================
-                INFORMACIÓN
-        ==========================================-->
-
-        <section class="card">
-
-            <p>
-
-                Complete la siguiente información para registrar una asesoría académica.
-
-            </p>
-
-            <p>
-
-                Todos los campos son obligatorios.
-
-            </p>
-
-        </section>
-
-                <!--=========================================
-                    FORMULARIO
-        ==========================================-->
+        <h1 class="mb-30">Registrar Asesoría</h1>
 
         <section class="card">
 
             <form id="formAsesoria">
 
-                <!--=========================================
-                        INFORMACIÓN DEL ALUMNO
-                ==========================================-->
-
-                <div class="form-row">
-
-                    <!-- Matrícula -->
+                                <div class="form-row">
 
                     <div class="form-group">
 
-                        <label for="matricula">
-
-                            Matrícula
-
-                        </label>
+                        <label>Matrícula</label>
 
                         <input
                             type="text"
                             id="matricula"
-                            placeholder="Ejemplo: 23123456"
+                            placeholder="Ej. 25080529"
                             required>
 
                     </div>
 
-                    <!-- Nombre -->
-
                     <div class="form-group">
 
-                        <label for="nombre">
-
-                            Nombre del Alumno
-
-                        </label>
+                        <label>Nombre del alumno</label>
 
                         <input
                             type="text"
@@ -235,71 +105,36 @@
 
                 </div>
 
-                <!--=========================================
-                        INFORMACIÓN ACADÉMICA
-                ==========================================-->
-
                 <div class="form-row">
-
-                    <!-- Cuatrimestre -->
 
                     <div class="form-group">
 
-                        <label for="cuatrimestre">
+                        <label>Materia</label>
 
-                            Cuatrimestre
-
-                        </label>
-
-                        <select
-                            id="cuatrimestre"
+                        <input
+                            type="text"
+                            id="materia"
+                            placeholder="Ej. Programación"
                             required>
-
-                            <option value="">
-
-                                Seleccionar
-
-                            </option>
-
-                            <option value="1">1° Cuatrimestre</option>
-                            <option value="2">2° Cuatrimestre</option>
-                            <option value="3">3° Cuatrimestre</option>
-                            <option value="4">4° Cuatrimestre</option>
-                            <option value="5">5° Cuatrimestre</option>
-                            <option value="6">6° Cuatrimestre</option>
-                            <option value="7">7° Cuatrimestre</option>
-                            <option value="8">8° Cuatrimestre</option>
-                            <option value="9">9° Cuatrimestre</option>
-
-                        </select>
 
                     </div>
 
-                    <!-- Materia -->
-
                     <div class="form-group">
 
-                        <label for="materia">
+                        <label>Cuatrimestre</label>
 
-                            Materia
+                        <select id="cuatrimestre" required>
 
-                        </label>
-
-                        <!--
-                            Este select será llenado
-                            automáticamente según el
-                            cuatrimestre seleccionado.
-                        -->
-
-                        <select
-                            id="materia"
-                            required>
-
-                            <option value="">
-
-                                Primero selecciona un cuatrimestre
-
-                            </option>
+                            <option value="">Selecciona</option>
+                            <option>1°</option>
+                            <option>2°</option>
+                            <option>3°</option>
+                            <option>4°</option>
+                            <option>5°</option>
+                            <option>6°</option>
+                            <option>7°</option>
+                            <option>8°</option>
+                            <option>9°</option>
 
                         </select>
 
@@ -307,41 +142,18 @@
 
                 </div>
 
-                <!--=========================================
-                        INFORMACIÓN DE LA ASESORÍA
-                ==========================================-->
-
                 <div class="form-row">
 
                     <div class="form-group">
 
-                        <label for="tipo">
+                        <label>Tipo de asesoría</label>
 
-                            Tipo de Asesoría
+                        <select id="tipo" required>
 
-                        </label>
-
-                        <select
-                            id="tipo"
-                            required>
-
-                            <option value="">
-
-                                Seleccionar
-
-                            </option>
-
-                            <option value="Académica">
-
-                                Académica
-
-                            </option>
-
-                            <option value="Proyecto">
-
-                                Proyecto
-
-                            </option>
+                            <option value="">Selecciona</option>
+                            <option>Académica</option>
+                            <option>Proyecto</option>
+                            <option>Regularización</option>
 
                         </select>
 
@@ -349,11 +161,7 @@
 
                     <div class="form-group">
 
-                        <label for="fecha">
-
-                            Fecha
-
-                        </label>
+                        <label>Fecha</label>
 
                         <input
                             type="date"
@@ -364,19 +172,11 @@
 
                 </div>
 
-                <!--=========================================
-                        HORARIO
-                ==========================================-->
-
-                <div class="form-row">
+                                <div class="form-row">
 
                     <div class="form-group">
 
-                        <label for="horaInicio">
-
-                            Hora de Inicio
-
-                        </label>
+                        <label>Hora de inicio</label>
 
                         <input
                             type="time"
@@ -387,11 +187,7 @@
 
                     <div class="form-group">
 
-                        <label for="horaFin">
-
-                            Hora de Fin
-
-                        </label>
+                        <label>Hora de fin</label>
 
                         <input
                             type="time"
@@ -402,211 +198,72 @@
 
                 </div>
 
-                <!--=========================================
-                        TEMA
-                ==========================================-->
+                <div class="form-group">
 
-                <div class="form-group mt-30">
-
-                    <label for="tema">
-
-                        Tema Tratado
-
-                    </label>
+                    <label>Tema tratado</label>
 
                     <textarea
                         id="tema"
-                        placeholder="Describe brevemente el tema visto durante la asesoría..."
+                        rows="4"
+                        placeholder="Describe el tema visto durante la asesoría..."
                         required></textarea>
 
                 </div>
 
-                <!--=========================================
-                        BOTÓN
-                ==========================================-->
+                <button
+                    type="submit"
+                    class="btn btn-primary">
 
-                <div class="text-center mt-30">
+                    Guardar Asesoría
 
-                    <button
-                        type="submit"
-                        class="btn btn-primary">
-
-                        💾 Guardar Asesoría
-
-                    </button>
-
-                </div>
+                </button>
 
             </form>
 
         </section>
 
-            <script type="module">
+    </main>
 
-        /*=========================================
-                IMPORTAR FIREBASE
-        ==========================================*/
-
-        /*
-            auth = Authentication
-
-            db = Cloud Firestore
-        */
+    <script type="module">
 
         import { auth, db } from "./firebase.js";
 
-        /*
-            Cerrar sesión
-        */
-
         import {
-
             signOut
-
         } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-        /*
-            Agregar documentos a Firestore
-        */
-
         import {
-
             collection,
             addDoc
-
         } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-
-
-        /*=========================================
-                DATOS DEL USUARIO
-        ==========================================*/
-
         const nombre = localStorage.getItem("nombre");
-
         const rol = localStorage.getItem("rol");
+        const documentoUsuario = localStorage.getItem("documentoUsuario");
 
+        if (!documentoUsuario) {
 
-
-        /*
-            Si no existe sesión,
-            regresar al Login.
-        */
-
-        if(!nombre){
-
-            window.location.href="Login.html";
+            window.location.href = "Login.html";
 
         }
 
-
-
-        /*=========================================
-                MOSTRAR USUARIO
-        ==========================================*/
-
         document.getElementById("nombreUsuario").textContent = nombre;
-
         document.getElementById("rolUsuario").textContent = rol;
 
-
-
-        /*
-            Crear las iniciales del avatar.
-
-            Ejemplo:
-
-            Juan Pérez
-
-            JP
-        */
-
-        const iniciales = nombre
-
+        document.getElementById("avatar").textContent = nombre
             .split(" ")
-
-            .map(palabra => palabra.charAt(0))
-
+            .map(p => p.charAt(0))
             .join("")
-
-            .substring(0,2)
-
+            .substring(0, 2)
             .toUpperCase();
 
-        document.getElementById("avatar").textContent = iniciales;
-
-
-
-        /*=========================================
-                MENÚ ADMINISTRADOR
-        ==========================================*/
-
-        if(rol !== "administrador"){
+        if (rol !== "administrador") {
 
             document.getElementById("menuAdmin").style.display = "none";
 
         }
 
-
-
-        /*=========================================
-                FECHA AUTOMÁTICA
-        ==========================================*/
-
-        /*
-            Coloca automáticamente
-            la fecha actual.
-        */
-
-        const hoy = new Date();
-
-        const fechaActual = hoy.toISOString().split("T")[0];
-
-        document.getElementById("fecha").value = fechaActual;
-
-
-
-        /*=========================================
-                HORA AUTOMÁTICA
-        ==========================================*/
-
-        /*
-            Coloca la hora actual
-            como hora de inicio.
-        */
-
-        const horas = String(hoy.getHours()).padStart(2,"0");
-
-        const minutos = String(hoy.getMinutes()).padStart(2,"0");
-
-        document.getElementById("horaInicio").value =
-        `${horas}:${minutos}`;
-
-
-
-        /*
-            Hora final automáticamente
-            una hora después.
-        */
-
-        const horaFin = new Date(hoy.getTime()+60*60000);
-
-        const horasFin =
-        String(horaFin.getHours()).padStart(2,"0");
-
-        const minutosFin =
-        String(horaFin.getMinutes()).padStart(2,"0");
-
-        document.getElementById("horaFin").value =
-        `${horasFin}:${minutosFin}`;
-
-
-
-        /*=========================================
-                CERRAR SESIÓN
-        ==========================================*/
-
-        document.getElementById("cerrarSesion").addEventListener("click",async function(e){
+        document.getElementById("cerrarSesion").addEventListener("click", async e => {
 
             e.preventDefault();
 
@@ -614,342 +271,40 @@
 
             localStorage.clear();
 
-            window.location.href="Login.html";
+            window.location.href = "Login.html";
 
         });
 
-                /*=========================================
-                MATERIAS POR CUATRIMESTRE
-        ==========================================*/
-
-        /*
-            Cada cuatrimestre contiene
-            únicamente sus materias.
-        */
-
-        const materias = {
-
-            1:[
-                "Inglés I",
-                "Desarrollo Humano y Valores",
-                "Fundamentos Matemáticos",
-                "Dibujo y Técnicas de Representación",
-                "Historia del Arte",
-                "Narrativa y Guionismo",
-                "Comunicación y Habilidades Digitales"
-            ],
-
-            2:[
-                "Inglés II",
-                "Habilidades Socioemocionales y Manejo de Conflictos",
-                "Cálculo Diferencial",
-                "Física",
-                "Dibujo Digital y Teoría del Color",
-                "Anatomía Humana y Animal",
-                "Storyboard"
-            ],
-
-            3:[
-                "Inglés III",
-                "Desarrollo del Pensamiento y Toma de Decisiones",
-                "Cálculo Integral",
-                "Semiótica y Creación de Personajes",
-                "Fundamentos de la Animación",
-                "Taller de Escultura y Maquetas",
-                "Proyecto Integrador I"
-            ],
-
-            4:[
-                "Inglés IV",
-                "Ética Profesional",
-                "Cálculo de Varias Variables",
-                "Probabilidad y Estadística",
-                "Animación 2D",
-                "Introducción al Modelado 3D",
-                "Dirección Fotográfica"
-            ],
-
-            5:[
-                "Inglés V",
-                "Liderazgo de Equipos de Alto Desempeño",
-                "Ecuaciones Diferenciales",
-                "Grabación y Diseño de Audio",
-                "Técnicas de Cine",
-                "Escultura Digital de Personajes",
-                "Proyecto Integrador II"
-            ],
-
-            6:[
-                "Inglés VI",
-                "Fundamentos y Producción de Efectos Visuales"
-            ],
-
-            7:[
-                "Inglés VII",
-                "Habilidades Gerenciales",
-                "Rendering",
-                "Introducción a la Animación 3D",
-                "Rigging",
-                "Texturizado e Iluminación 3D",
-                "Cinematografía"
-            ],
-
-            8:[
-                "Inglés VIII",
-                "Dinámicos y Fluidos",
-                "Postproducción Digital",
-                "Animación de Personajes en 3D",
-                "Rigging Facial",
-                "Composición de Efectos",
-                "Motion Graphics"
-            ],
-
-            9:[
-                "Dinámicos de Tela y Cabello",
-                "Animación 3D Avanzada",
-                "Motores Gráficos",
-                "Propiedad Intelectual",
-                "Proyecto Integrador III"
-            ]
-
-        };
-
-
-
-        /*=========================================
-            CAMBIAR MATERIAS AUTOMÁTICAMENTE
-        ==========================================*/
-
-        document.getElementById("cuatrimestre").addEventListener("change",function(){
-
-            const cuatri=this.value;
-
-            const selectMateria=document.getElementById("materia");
-
-            /*
-                Limpiar el select.
-            */
-
-            selectMateria.innerHTML="";
-
-            /*
-                Agregar opción inicial.
-            */
-
-            selectMateria.innerHTML+=`
-
-                <option value="">
-
-                    Seleccionar materia
-
-                </option>
-
-            `;
-
-            /*
-                Si existe el cuatrimestre,
-                agregar las materias.
-            */
-
-            if(materias[cuatri]){
-
-                materias[cuatri].forEach(function(materia){
-
-                    selectMateria.innerHTML+=`
-
-                        <option value="${materia}">
-
-                            ${materia}
-
-                        </option>
-
-                    `;
-
-                });
-
-            }
-
-        });
-
-                /*=========================================
-                GUARDAR ASESORÍA
-        ==========================================*/
-
-        document.getElementById("formAsesoria").addEventListener("submit", async function(e){
+                document.getElementById("formAsesoria").addEventListener("submit", async e => {
 
             e.preventDefault();
 
-            /*=============================
-                OBTENER DATOS
-            =============================*/
+            try {
 
-            const matricula = document.getElementById("matricula").value.trim();
+                await addDoc(collection(db, "asesorias"), {
 
-            const nombreAlumno = document.getElementById("nombre").value.trim();
-
-            const cuatrimestre = document.getElementById("cuatrimestre").value;
-
-            const materia = document.getElementById("materia").value;
-
-            const tipo = document.getElementById("tipo").value;
-
-            const fecha = document.getElementById("fecha").value;
-
-            const horaInicio = document.getElementById("horaInicio").value;
-
-            const horaFin = document.getElementById("horaFin").value;
-
-            const tema = document.getElementById("tema").value.trim();
-
-
-            /*=============================
-                VALIDACIONES
-            =============================*/
-
-            if(
-                matricula==="" ||
-                nombreAlumno==="" ||
-                cuatrimestre==="" ||
-                materia==="" ||
-                tipo==="" ||
-                fecha==="" ||
-                horaInicio==="" ||
-                horaFin==="" ||
-                tema===""){
-
-                alert("Complete todos los campos.");
-
-                return;
-
-            }
-
-
-            if(horaFin <= horaInicio){
-
-                alert("La hora final debe ser mayor que la hora inicial.");
-
-                return;
-
-            }
-
-
-            /*=============================
-                CALCULAR DURACIÓN
-            =============================*/
-
-            const inicio = new Date(`2000-01-01T${horaInicio}`);
-
-            const fin = new Date(`2000-01-01T${horaFin}`);
-
-            const diferencia = (fin - inicio) / 60000;
-
-            const horas = Math.floor(diferencia / 60);
-
-            const minutos = diferencia % 60;
-
-            let tiempo = "";
-
-            if(horas>0){
-
-                tiempo += horas + " h ";
-
-            }
-
-            if(minutos>0){
-
-                tiempo += minutos + " min";
-
-            }
-
-
-            /*=============================
-                GUARDAR EN FIRESTORE
-            =============================*/
-
-            try{
-
-                await addDoc(collection(db,"asesorias"),{
-
-                    matricula:matricula,
-
-                    nombre:nombreAlumno,
-
-                    cuatrimestre:cuatrimestre,
-
-                    materia:materia,
-
-                    tipo:tipo,
-
-                    fecha:fecha,
-
-                    horaInicio:horaInicio,
-
-                    horaFin:horaFin,
-
-                    tiempo:tiempo,
-
-                    tema:tema,
-
-                    maestro:localStorage.getItem("nombre"),
-
-                    uid:localStorage.getItem("uid"),
-
-                    fechaRegistro:new Date()
+                    matricula: document.getElementById("matricula").value,
+                    nombre: document.getElementById("nombre").value,
+                    materia: document.getElementById("materia").value,
+                    cuatrimestre: document.getElementById("cuatrimestre").value,
+                    tipo: document.getElementById("tipo").value,
+                    fecha: document.getElementById("fecha").value,
+                    horaInicio: document.getElementById("horaInicio").value,
+                    horaFin: document.getElementById("horaFin").value,
+                    tema: document.getElementById("tema").value,
+                    maestro: nombre
 
                 });
 
-
-                /*=============================
-                    MENSAJE
-                =============================*/
-
-                alert("✅ Asesoría registrada correctamente.");
-
-
-                /*=============================
-                    LIMPIAR FORMULARIO
-                =============================*/
+                alert("Asesoría registrada correctamente.");
 
                 document.getElementById("formAsesoria").reset();
 
-
-                /*=============================
-                    VOLVER A PONER FECHA
-                =============================*/
-
-                const hoy = new Date();
-
-                document.getElementById("fecha").value =
-                hoy.toISOString().split("T")[0];
-
-                const horasActual =
-                String(hoy.getHours()).padStart(2,"0");
-
-                const minutosActual =
-                String(hoy.getMinutes()).padStart(2,"0");
-
-                document.getElementById("horaInicio").value =
-                `${horasActual}:${minutosActual}`;
-
-                const nuevaHoraFin =
-                new Date(hoy.getTime()+60*60000);
-
-                document.getElementById("horaFin").value =
-                `${String(nuevaHoraFin.getHours()).padStart(2,"0")}:${String(nuevaHoraFin.getMinutes()).padStart(2,"0")}`;
-
-                document.getElementById("materia").innerHTML = `
-                    <option value="">
-                        Primero selecciona un cuatrimestre
-                    </option>
-                `;
-
-            }
-
-            catch(error){
+            } catch (error) {
 
                 console.error(error);
 
-                alert("❌ Ocurrió un error al guardar la asesoría.");
+                alert("Ocurrió un error al registrar la asesoría.");
 
             }
 

@@ -1,155 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 
-    <!-- =====================================
-            CONFIGURACIÓN DEL DOCUMENTO
-    ====================================== -->
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Inicio | IAEV Asesorías</title>
 
-    <!-- Hoja de estilos -->
-
-    <link rel="stylesheet"
-          href="Estilo.css">
+    <link rel="stylesheet" href="Estilo.css">
 
 </head>
 
 <body>
 
-    <!-- =====================================
-                MENÚ LATERAL
-    ====================================== -->
-
     <nav class="sidebar">
 
-        <h2>
-
-            IAEV ASESORÍAS
-
-        </h2>
+        <h2>IAEV ASESORÍAS</h2>
 
         <hr>
 
-        <a href="Inicio.html"
-           class="active">
+        <a href="Inicio.html" class="active">Inicio</a>
 
-            Inicio
+        <a href="Registrar.html">Registrar</a>
 
-        </a>
+        <a href="Historial.html">Historial</a>
 
-        <a href="Registrar.html">
+        <a href="Reportes.html">Reportes</a>
 
-            Registrar
-
-        </a>
-
-        <a href="Historial.html">
-
-            Historial
-
-        </a>
-
-        <a href="Reportes.html">
-
-            Reportes
-
-        </a>
-
-        <a href="Perfil.html">
-
-            Perfil
-
-        </a>
-
-        <!--
-            Este menú solamente será visible
-            para los administradores.
-        -->
+        <a href="Perfil.html">Perfil</a>
 
         <div id="menuAdmin">
 
-            <a href="Usuarios.html">
+            <a href="Usuarios.html">Usuarios</a>
 
-                Usuarios
-
-            </a>
-
-            <a href="Maestros.html">
-
-                Maestros
-
-            </a>
+            <a href="Maestros.html">Maestros</a>
 
         </div>
 
     </nav>
 
-    <!-- =====================================
-                CONTENIDO
-    ====================================== -->
-
     <main class="main">
 
-        <!-- =====================================
-                    HEADER
-        ====================================== -->
-
-        <header class="header">
+                <header class="header">
 
             <div class="user-info">
 
-                <!-- Iniciales -->
-
-                <div
-                    class="avatar"
-                    id="avatar">
-
-                    AD
-
-                </div>
-
-                <!-- Nombre y rol -->
+                <div class="avatar" id="avatar">AD</div>
 
                 <div>
-
-                    <h3 id="nombreUsuario">
-
-                        Usuario
-
-                    </h3>
-
-                    <small id="rolUsuario">
-
-                        Rol
-
-                    </small>
-
+                    <h3 id="nombreUsuario">Usuario</h3>
+                    <small id="rolUsuario">Rol</small>
                 </div>
 
-                <!-- Logo -->
-
-                <img
-                    src="logoIAEV.png"
-                    alt="Logo"
-                    class="header-logo">
+                <img src="logoIAEV.png"
+                     alt="Logo"
+                     class="header-logo">
 
             </div>
 
-            <!-- Botón salir -->
-
             <div class="header-buttons">
 
-                <a
-                    href="Login.html"
-                    class="btn btn-danger"
-                    id="cerrarSesion">
+                <a href="Login.html"
+                   class="btn btn-danger"
+                   id="cerrarSesion">
 
                     Salir
 
@@ -159,576 +72,209 @@
 
         </header>
 
-        <!-- =====================================
-                    TÍTULO
-        ====================================== -->
-
-        <h1>
-
-            Bienvenido, Administrador 👋
-
-        </h1>
-
-        <!-- =====================================
-                BIENVENIDA
-        ====================================== -->
+        <h1>Bienvenido, Administrador 👋</h1>
 
         <section class="card">
 
-            <h2>
-
-                Bienvenido al Sistema
-
-            </h2>
+            <h2>Bienvenido al Sistema</h2>
 
             <p id="mensajeBienvenida">
 
-                Sistema para el registro y control
-                de asesorías académicas del IAEV.
-
-                Desde este panel podrás registrar
-                asesorías, consultar el historial,
-                generar reportes y administrar
-                la información del sistema.
+                Sistema para el registro y control de asesorías académicas del IAEV.
+                Desde este panel podrás registrar asesorías, consultar el historial,
+                generar reportes y administrar la información del sistema.
 
             </p>
 
         </section>
 
-                <!-- =====================================
-                TARJETAS DE INFORMACIÓN
-        ====================================== -->
-
         <section class="card-grid">
 
-            <!-- ==============================
-                    TOTAL DE ASESORÍAS
-            =============================== -->
-
             <div class="card">
 
-                <h3>
+                <h3>📚 Total de Asesorías</h3>
 
-                    📚 Total de Asesorías
+                <h2 id="totalAsesorias">0</h2>
 
-                </h3>
-
-                <!--
-                    Este número se cargará
-                    automáticamente desde Firestore.
-                -->
-
-                <h2 id="totalAsesorias">
-
-                    0
-
-                </h2>
-
-                <p>
-
-                    Asesorías registradas en el sistema.
-
-                </p>
+                <p>Asesorías registradas en el sistema.</p>
 
             </div>
 
-            <!-- ==============================
-                    ALUMNOS ATENDIDOS
-            =============================== -->
-
             <div class="card">
 
-                <h3>
+                <h3>👨‍🎓 Alumnos Atendidos</h3>
 
-                    👨‍🎓 Alumnos Atendidos
+                <h2 id="totalAlumnos">0</h2>
 
-                </h3>
-
-                <h2 id="totalAlumnos">
-
-                    0
-
-                </h2>
-
-                <p>
-
-                    Alumnos diferentes que han recibido asesoría.
-
-                </p>
+                <p>Alumnos diferentes que han recibido asesoría.</p>
 
             </div>
 
-            <!-- ==============================
-                    HORAS IMPARTIDAS
-            =============================== -->
-
             <div class="card">
 
-                <h3>
+                <h3>⏱ Horas Impartidas</h3>
 
-                    ⏱ Horas Impartidas
+                <h2 id="horasTotales">0</h2>
 
-                </h3>
-
-                <h2 id="horasTotales">
-
-                    0
-
-                </h2>
-
-                <p>
-
-                    Horas acumuladas de asesorías.
-
-                </p>
+                <p>Horas acumuladas de asesorías.</p>
 
             </div>
 
-            <!-- ==============================
-                    MAESTROS
-            =============================== -->
-
             <div class="card">
 
-                <h3>
+                <h3>👨‍🏫 Maestros</h3>
 
-                    👨‍🏫 Maestros
+                <h2 id="totalMaestros">0</h2>
 
-                </h3>
-
-                <h2 id="totalMaestros">
-
-                    0
-
-                </h2>
-
-                <p>
-
-                    Maestros registrados en el sistema.
-
-                </p>
+                <p>Maestros registrados en el sistema.</p>
 
             </div>
 
         </section>
 
-        <!-- =====================================
-                ÚLTIMAS ASESORÍAS
-        ====================================== -->
+                <section class="table-container">
 
-        <section class="table-container">
-
-            <h2>
-
-                Últimas Asesorías Registradas
-
-            </h2>
+            <h2>Últimas Asesorías Registradas</h2>
 
             <table>
 
                 <thead>
 
                     <tr>
-
-                        <th>
-
-                            Alumno
-
-                        </th>
-
-                        <th>
-
-                            Materia
-
-                        </th>
-
-                        <th>
-
-                            Tipo
-
-                        </th>
-
-                        <th>
-
-                            Fecha
-
-                        </th>
-
-                        <th>
-
-                            Horario
-
-                        </th>
-
+                        <th>Alumno</th>
+                        <th>Materia</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Horario</th>
                     </tr>
 
                 </thead>
 
-                <!--
-                    Esta tabla se llenará
-                    automáticamente con JavaScript.
-                -->
-
-                <tbody id="tablaRecientes">
-
-                </tbody>
+                <tbody id="tablaRecientes"></tbody>
 
             </table>
 
         </section>
 
-            <script type="module">
+    </main>
 
-        /*====================================
-                IMPORTAR FIREBASE
-        ====================================*/
-
-        /*
-            auth = Authentication
-
-            db = Cloud Firestore
-        */
+    <script type="module">
 
         import { auth, db } from "./firebase.js";
 
-        /*
-            Función para cerrar sesión
-        */
-
         import {
-
             signOut
-
         } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-        /*
-            Funciones para leer información
-            desde Firestore.
-        */
-
         import {
-
             collection,
             getDocs
-
         } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-
-        /*====================================
-                DATOS DEL USUARIO
-        ====================================*/
-
-        /*
-            Recuperamos los datos que fueron
-            guardados cuando el usuario inició
-            sesión.
-        */
-
         const nombre = localStorage.getItem("nombre");
-
         const rol = localStorage.getItem("rol");
 
-
-        /*
-            Si no existe una sesión,
-            regresamos al Login.
-        */
-
-        if(!nombre){
-
-            window.location.href="Login.html";
-
+        if (!nombre) {
+            window.location.href = "Login.html";
         }
 
-
-        /*====================================
-                MOSTRAR USUARIO
-        ====================================*/
-
-        /*
-            Mostrar nombre del usuario.
-        */
-
         document.getElementById("nombreUsuario").textContent = nombre;
-
-
-        /*
-            Mostrar el rol.
-        */
-
         document.getElementById("rolUsuario").textContent = rol;
 
-
-        /*
-            Crear las iniciales.
-
-            Ejemplo:
-
-            Juan Pérez
-
-            JP
-        */
-
         const iniciales = nombre
-
             .split(" ")
-
-            .map(palabra => palabra.charAt(0))
-
+            .map(p => p.charAt(0))
             .join("")
-
-            .substring(0,2)
-
+            .substring(0, 2)
             .toUpperCase();
-
 
         document.getElementById("avatar").textContent = iniciales;
 
-
-        /*====================================
-            MENÚ DEL ADMINISTRADOR
-        ====================================*/
-
-        /*
-            Si el usuario NO es administrador,
-            ocultamos las opciones Usuarios
-            y Maestros.
-        */
-
-        if(rol !== "administrador"){
-
-            document.getElementById("menuAdmin").style.display="none";
-
+        if (rol !== "administrador") {
+            document.getElementById("menuAdmin").style.display = "none";
         }
 
-
-        /*====================================
-                CERRAR SESIÓN
-        ====================================*/
-
-        document.getElementById("cerrarSesion").addEventListener("click", async function(e){
-
-            /*
-                Evita abrir Login antes
-                de cerrar la sesión.
-            */
+        document.getElementById("cerrarSesion").addEventListener("click", async (e) => {
 
             e.preventDefault();
 
-            /*
-                Cerrar sesión en Firebase.
-            */
-
             await signOut(auth);
-
-            /*
-                Borrar la información guardada
-                del usuario.
-            */
 
             localStorage.clear();
 
-            /*
-                Regresar al Login.
-            */
-
-            window.location.href="Login.html";
+            window.location.href = "Login.html";
 
         });
 
-                /*====================================
-            CARGAR INFORMACIÓN DEL DASHBOARD
-        ====================================*/
+                async function cargarDashboard() {
 
-        async function cargarDashboard(){
-
-            /*
-                Obtener las colecciones de Firestore.
-            */
-
-            const asesorias = await getDocs(collection(db,"asesorias"));
-
-            const usuarios = await getDocs(collection(db,"usuarios"));
-
-            /*
-                Variables para las tarjetas.
-            */
+            const asesorias = await getDocs(collection(db, "asesorias"));
+            const usuarios = await getDocs(collection(db, "usuarios"));
 
             let totalAsesorias = 0;
-
             let horasTotales = 0;
-
             let totalMaestros = 0;
 
-            /*
-                Set sirve para guardar alumnos
-                sin repetirlos.
-            */
-
             const alumnos = new Set();
-
-            /*
-                Tabla de asesorías recientes.
-            */
-
             const recientes = [];
 
+            usuarios.forEach(doc => {
 
+                const datos = doc.data();
 
-            /*====================================
-                    CONTAR MAESTROS
-            ====================================*/
-
-            usuarios.forEach((documento)=>{
-
-                const datos = documento.data();
-
-                if(datos.rol==="maestro"){
-
-                    totalMaestros++;
-
-                }
+                if (datos.rol === "maestro") totalMaestros++;
 
             });
 
+            asesorias.forEach(doc => {
 
+                const datos = doc.data();
 
-            /*====================================
-                RECORRER ASESORÍAS
-            ====================================*/
-
-            asesorias.forEach((documento)=>{
-
-                const datos=documento.data();
-
-                /*
-                    Si el usuario es maestro,
-                    solamente verá sus propias
-                    asesorías.
-                */
-
-                if(
-                    rol==="maestro" &&
-                    datos.maestro!==nombre
-                ){
-
-                    return;
-
-                }
-
-
-                /*
-                    Contar asesorías.
-                */
+                if (rol === "maestro" && datos.maestro !== nombre) return;
 
                 totalAsesorias++;
 
-
-                /*
-                    Guardar alumno sin repetir.
-                */
-
                 alumnos.add(datos.nombre);
 
+                const [h1, m1] = datos.horaInicio.split(":").map(Number);
+                const [h2, m2] = datos.horaFin.split(":").map(Number);
 
-                /*
-                    Calcular horas impartidas.
-                */
-
-                const inicio = datos.horaInicio.split(":");
-
-                const fin = datos.horaFin.split(":");
-
-                const minutosInicio =
-                parseInt(inicio[0])*60+
-                parseInt(inicio[1]);
-
-                const minutosFin =
-                parseInt(fin[0])*60+
-                parseInt(fin[1]);
-
-                horasTotales +=
-                (minutosFin-minutosInicio)/60;
-
-
-                /*
-                    Guardar asesoría
-                    para la tabla.
-                */
+                horasTotales += ((h2 * 60 + m2) - (h1 * 60 + m1)) / 60;
 
                 recientes.push(datos);
 
             });
 
+            document.getElementById("totalAsesorias").textContent = totalAsesorias;
+            document.getElementById("totalAlumnos").textContent = alumnos.size;
+            document.getElementById("horasTotales").textContent = horasTotales.toFixed(1);
+            document.getElementById("totalMaestros").textContent = totalMaestros;
 
+            recientes.sort((a, b) => b.fecha.localeCompare(a.fecha));
 
-            /*====================================
-                MOSTRAR TARJETAS
-            ====================================*/
+            const tabla = document.getElementById("tablaRecientes");
 
-            document.getElementById("totalAsesorias").textContent =
-            totalAsesorias;
+            tabla.innerHTML = "";
 
-            document.getElementById("totalAlumnos").textContent =
-            alumnos.size;
+            recientes.slice(0, 5).forEach(datos => {
 
-            document.getElementById("horasTotales").textContent =
-            horasTotales.toFixed(1);
-
-            document.getElementById("totalMaestros").textContent =
-            totalMaestros;
-
-
-
-            /*====================================
-                TABLA DE RECIENTES
-            ====================================*/
-
-            recientes.sort((a,b)=>
-
-                b.fecha.localeCompare(a.fecha)
-
-            );
-
-            const tabla =
-            document.getElementById("tablaRecientes");
-
-            tabla.innerHTML="";
-
-            recientes.slice(0,5).forEach((datos)=>{
-
-                tabla.innerHTML +=`
-
-                <tr>
-
-                    <td>${datos.nombre}</td>
-
-                    <td>${datos.materia}</td>
-
-                    <td>${datos.tipo}</td>
-
-                    <td>${datos.fecha}</td>
-
-                    <td>${datos.horaInicio} - ${datos.horaFin}</td>
-
-                </tr>
-
+                tabla.innerHTML += `
+                    <tr>
+                        <td>${datos.nombre}</td>
+                        <td>${datos.materia}</td>
+                        <td>${datos.tipo}</td>
+                        <td>${datos.fecha}</td>
+                        <td>${datos.horaInicio} - ${datos.horaFin}</td>
+                    </tr>
                 `;
 
             });
 
         }
 
-
-
-        /*====================================
-                INICIAR DASHBOARD
-        ====================================*/
-
         cargarDashboard();
 
     </script>
 
 </body>
-
 </html>
