@@ -141,15 +141,21 @@
 
                 consulta.forEach((documento)=>{
 
-                    const datos = documento.data();
+    const datos = documento.data();
 
-                    if(datos.correo === correo){
+    if(datos.correo === correo){
 
-                        usuarioEncontrado = datos;
+        usuarioEncontrado = {
 
-                    }
+            id: documento.id,
 
-                });
+            ...datos
+
+        };
+
+    }
+
+});
 
                 if(!usuarioEncontrado){
 
@@ -162,15 +168,17 @@
                 // Guardar datos para usarlos en el resto del sistema
                 localStorage.setItem("uid", uid);
 
-                localStorage.setItem("nombre", usuarioEncontrado.nombre);
+localStorage.setItem("documentoUsuario", usuarioEncontrado.id);
 
-                localStorage.setItem("usuario", usuarioEncontrado.usuario);
+localStorage.setItem("nombre", usuarioEncontrado.nombre);
 
-                localStorage.setItem("correo", usuarioEncontrado.correo);
+localStorage.setItem("usuario", usuarioEncontrado.usuario);
 
-                localStorage.setItem("carrera", usuarioEncontrado.carrera);
+localStorage.setItem("correo", usuarioEncontrado.correo);
 
-                localStorage.setItem("rol", usuarioEncontrado.rol);
+localStorage.setItem("carrera", usuarioEncontrado.carrera || "");
+
+localStorage.setItem("rol", usuarioEncontrado.rol);
 
                 // Ir al inicio
                 window.location.href = "Inicio.html";

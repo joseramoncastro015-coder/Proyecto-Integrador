@@ -5,23 +5,31 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Perfil | IAEV Asesorías</title>
 
-    <link rel="stylesheet" href="Estilo.css">
+    <link rel="stylesheet"
+          href="Estilo.css">
 
 </head>
 
 <body>
 
-    <!--=================================
-            MENÚ LATERAL
-    =================================-->
+    <!--=========================================
+                MENÚ LATERAL
+    ==========================================-->
 
     <nav class="sidebar">
 
-        <h2>IAEV ASESORÍAS</h2>
+        <h2>
+
+            IAEV
+            <br>
+            ASESORÍAS
+
+        </h2>
 
         <hr>
 
@@ -49,13 +57,12 @@
 
         </a>
 
-        <a href="Perfil.html" class="active">
+        <a href="Perfil.html"
+           class="active">
 
             Perfil
 
         </a>
-
-        <!-- SOLO ADMINISTRADOR -->
 
         <div id="menuAdmin">
 
@@ -75,15 +82,15 @@
 
     </nav>
 
-    <!--=================================
-            CONTENIDO
-    =================================-->
+    <!--=========================================
+                CONTENIDO
+    ==========================================-->
 
     <main class="main">
 
-        <!--=================================
-                HEADER
-        =================================-->
+        <!--=========================================
+                    ENCABEZADO
+        ==========================================-->
 
         <header class="header">
 
@@ -93,7 +100,7 @@
                     class="avatar"
                     id="avatar">
 
-                    MA
+                    AD
 
                 </div>
 
@@ -107,7 +114,7 @@
 
                     <small id="rolUsuario">
 
-                        Maestro
+                        Rol
 
                     </small>
 
@@ -115,248 +122,279 @@
 
                 <img
                     src="logoIAEV.png"
-                    alt="Logo IAEV"
-                    class="header-logo">
+                    class="header-logo"
+                    alt="Logo">
 
             </div>
 
-            <div class="header-buttons">
+            <a
+                href="#"
+                id="cerrarSesion"
+                class="btn btn-danger">
 
-                <a
-                    href="Login.html"
-                    class="btn btn-danger"
-                    id="cerrarSesion">
+                Salir
 
-                    Salir
-
-                </a>
-
-            </div>
+            </a>
 
         </header>
 
-        <!--=================================
-                TÍTULO
-        =================================-->
+        <!--=========================================
+                    TÍTULO
+        ==========================================-->
 
-        <h1 class="mb-30">
+        <h1>
 
-            Mi Perfil
+            👤 Mi Perfil
 
         </h1>
 
-        <!--=================================
-                PERFIL
-        =================================-->
+        <p>
 
-        <section class="profile-card">
+            Consulta y actualiza tu información personal.
 
-            <div class="profile-header">
+        </p>
 
-                <div class="avatar" id="avatarPerfil">
+        <!--=========================================
+                    TARJETA PERFIL
+        ==========================================-->
 
-                    MA
+        <section class="card">
 
-                </div>
+            <div
+                class="avatar avatar-grande"
+                id="avatarPerfil">
 
-                <h2 id="nombrePerfil">
+                AD
+
+            </div>
+
+            <br>
+
+            <div class="form-group">
+
+                <label>
+
+                    Nombre
+
+                </label>
+
+                <input
+                    type="text"
+                    id="perfilNombre"
+                    readonly>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
 
                     Usuario
 
-                </h2>
+                </label>
+
+                <input
+                    type="text"
+                    id="perfilUsuario"
+                    readonly>
 
             </div>
 
-            <div class="profile-info">
+            <div class="form-group">
 
-                <label>Usuario</label>
+                <label>
 
-                <p id="usuarioPerfil">
+                    Correo
 
-                    25080529
+                </label>
 
-                </p>
-
-                <label>Correo</label>
-
-                <p id="correoPerfil">
-
-                    usuario@upgop.edu.mx
-
-                </p>
-
-                <label>Carrera</label>
-
-                <p id="carreraPerfil">
-
-                    Ingeniería en Animación y Efectos Visuales
-
-                </p>
-
-                <label>Rol</label>
-
-                <p id="rolPerfil">
-
-                    Maestro
-
-                </p>
+                <input
+                    type="email"
+                    id="perfilCorreo"
+                    readonly>
 
             </div>
 
-        </section>
+            <div class="form-group">
 
-        <!--=================================
-            SOLO ADMINISTRADOR
-        =================================-->
+                <label>
 
-        <section
-            class="card"
-            id="panelAdministrador">
+                    Carrera
 
-            <h2 class="mb-20">
+                </label>
 
-                Información del Sistema
+                <input
+                    type="text"
+                    id="perfilCarrera"
+                    readonly>
 
-            </h2>
+            </div>
 
-            <div class="card-grid">
+            <div class="form-group">
 
-                <div class="card">
+                <label>
 
-                    <h3>Usuarios</h3>
+                    Rol
 
-                    <h2 id="usuariosSistema">
+                </label>
 
-                        2
-
-                    </h2>
-
-                </div>
-
-                <div class="card">
-
-                    <h3>Maestros</h3>
-
-                    <h2 id="maestrosSistema">
-
-                        1
-
-                    </h2>
-
-                </div>
+                <input
+                    type="text"
+                    id="perfilRol"
+                    readonly>
 
             </div>
 
         </section>
-
-    </main>
 
         <script type="module">
-            import { auth, db } from "./firebase.js";
 
-import { signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+/*=========================================
+        IMPORTAR FIREBASE
+=========================================*/
+
+import { auth, db } from "./firebase.js";
 
 import {
-    collection,
-    query,
-    where,
-    getDocs
+
+    signOut
+
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+import {
+
+    doc,
+    getDoc,
+    updateDoc
+
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-        //====================================
-        // OBTENER DATOS DEL LOGIN
-        //====================================
 
-        const rol = localStorage.getItem("rol");
 
-        const nombre = localStorage.getItem("nombre");
+/*=========================================
+        DATOS DEL USUARIO
+=========================================*/
 
-        const correo = localStorage.getItem("correo");
+const documentoUsuario = localStorage.getItem("documentoUsuario");
 
-        const menuAdmin = document.getElementById("menuAdmin");
+const nombre = localStorage.getItem("nombre");
 
-        const nombreUsuario = document.getElementById("nombreUsuario");
+const rol = localStorage.getItem("rol");
 
-        const rolUsuario = document.getElementById("rolUsuario");
 
-        const avatar = document.getElementById("avatar");
+/*=========================================
+        VALIDAR SESIÓN
+=========================================*/
 
-        const avatarPerfil = document.getElementById("avatarPerfil");
+if(!documentoUsuario){
 
-        const nombrePerfil = document.getElementById("nombrePerfil");
-
-        const usuarioPerfil = document.getElementById("usuarioPerfil");
-
-        const correoPerfil = document.getElementById("correoPerfil");
-
-        const carreraPerfil = document.getElementById("carreraPerfil");
-
-        const rolPerfil = document.getElementById("rolPerfil");
-
-        const panelAdministrador = document.getElementById("panelAdministrador");
-
-        //====================================
-        // VERIFICAR SESIÓN
-        //====================================
-
-        if(!rol){
-
-            window.location.href="Login.html";
-
-        }
-
-        //====================================
-        // DATOS GENERALES
-        //====================================
-
-        //====================================
-// DATOS GENERALES
-//====================================
-
-nombreUsuario.textContent = nombre;
-
-nombrePerfil.textContent = nombre;
-
-//====================================
-// MAESTRO Y ADMINISTRADOR
-//====================================
-
-if(rol==="maestro"){
-
-    menuAdmin.style.display="none";
-
-    panelAdministrador.style.display="none";
-
-    rolUsuario.textContent="Maestro";
-
-    rolPerfil.textContent="Maestro";
-
-    avatar.textContent="MA";
-
-    avatarPerfil.textContent="MA";
+    window.location.href = "Login.html";
 
 }
 
-if(rol==="administrador"){
 
-    menuAdmin.style.display="block";
+/*=========================================
+        MOSTRAR ENCABEZADO
+=========================================*/
 
-    panelAdministrador.style.display="block";
+document.getElementById("nombreUsuario").textContent = nombre;
 
-    rolUsuario.textContent="Administrador";
+document.getElementById("rolUsuario").textContent = rol;
 
-    rolPerfil.textContent="Administrador";
 
-    avatar.textContent="AD";
+/*=========================================
+        AVATAR
+=========================================*/
 
-    avatarPerfil.textContent="AD";
+const iniciales = nombre
 
-}        
+.split(" ")
 
-        //====================================
-        // CERRAR SESIÓN
-        //====================================
+.map(p=>p.charAt(0))
 
-        document.getElementById("cerrarSesion").addEventListener("click", async function(e){
+.join("")
+
+.substring(0,2)
+
+.toUpperCase();
+
+document.getElementById("avatar").textContent = iniciales;
+
+document.getElementById("avatarPerfil").textContent = iniciales;
+
+
+/*=========================================
+        OCULTAR MENÚ ADMIN
+=========================================*/
+
+if(rol !== "administrador"){
+
+    document.getElementById("menuAdmin").style.display = "none";
+
+}
+
+
+/*=========================================
+        CARGAR PERFIL
+=========================================*/
+
+async function cargarPerfil(){
+
+    try{
+
+        const referencia = doc(
+
+            db,
+
+            "usuarios",
+
+            documentoUsuario
+
+        );
+
+        const documento = await getDoc(referencia);
+
+        if(!documento.exists()){
+
+            alert("No se encontró el perfil.");
+
+            return;
+
+        }
+
+        const datos = documento.data();
+
+        document.getElementById("perfilNombre").value = datos.nombre || "";
+
+        document.getElementById("perfilUsuario").value = datos.usuario || "";
+
+        document.getElementById("perfilCorreo").value = datos.correo || "";
+
+        document.getElementById("perfilCarrera").value = datos.carrera || "";
+
+        document.getElementById("perfilRol").value = datos.rol || "";
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("Error al cargar el perfil.");
+
+    }
+
+}
+
+
+/*=========================================
+        CERRAR SESIÓN
+=========================================*/
+
+document.getElementById("cerrarSesion").addEventListener(
+
+"click",
+
+async(e)=>{
 
     e.preventDefault();
 
@@ -367,76 +405,16 @@ if(rol==="administrador"){
     window.location.href="Login.html";
 
 });
-        //====================================
-// CARGAR DATOS DEL USUARIO
-//====================================
 
-async function cargarPerfil(){
-
-    try{
-
-        const consulta = query(
-
-            collection(db,"usuarios"),
-
-            where("correo","==",correo)
-
-        );
-
-        const resultado = await getDocs(consulta);
-
-        resultado.forEach((doc)=>{
-
-            const datos = doc.data();
-
-            usuarioPerfil.textContent = datos.usuario || "No disponible";
-
-            correoPerfil.textContent = datos.correo || "No disponible";
-
-            carreraPerfil.textContent = datos.carrera || "No registrada";
-
-        });
-
-        if(rol==="administrador"){
-
-            const usuarios = await getDocs(collection(db,"usuarios"));
-
-            let totalUsuarios = 0;
-            let totalMaestros = 0;
-
-            usuarios.forEach((doc)=>{
-
-                totalUsuarios++;
-
-                if(doc.data().rol==="maestro"){
-
-                    totalMaestros++;
-
-                }
-
-            });
-
-            document.getElementById("usuariosSistema").textContent = totalUsuarios;
-
-            document.getElementById("maestrosSistema").textContent = totalMaestros;
-
-        }
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        alert("No se pudo cargar el perfil.");
-
-    }
-
-}
+/*=========================================
+        INICIAR
+=========================================*/
 
 cargarPerfil();
 
-    </script>
+</script>
+
+    </main>
 
 </body>
 
