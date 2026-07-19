@@ -3,66 +3,141 @@
 
 <head>
 
+    <!--=========================================
+                CONFIGURACIÓN
+    ==========================================-->
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Historial | IAEV Asesorías</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="Estilo.css">
+    <title>Historial de Asesorías | IAEV</title>
+
+    <!--=========================================
+                ESTILOS
+    ==========================================-->
+
+    <link rel="stylesheet"
+          href="Estilo.css">
 
 </head>
 
 <body>
 
+    <!--=========================================
+                MENÚ LATERAL
+    ==========================================-->
+
     <nav class="sidebar">
 
-        <h2>IAEV ASESORÍAS</h2>
+        <h2>
+
+            IAEV
+            <br>
+            ASESORÍAS
+
+        </h2>
 
         <hr>
 
-        <a href="Inicio.html">Inicio</a>
-        <a href="Registrar.html">Registrar</a>
-        <a href="Historial.html" class="active">Historial</a>
-        <a href="Reportes.html">Reportes</a>
-        <a href="Perfil.html">Perfil</a>
+        <a href="Inicio.html">
 
-        <div id="menuAdmin">
+            Inicio
 
-            <a href="Maestros.html">Maestros</a>
+        </a>
+
+        <a href="Registrar.html">
+
+            Registrar
+
+        </a>
+
+        <a href="Historial.html"
+           class="active">
+
+            Historial
+
+        </a>
+
+        <a href="Reportes.html">
+
+            Reportes
+
+        </a>
+
+        <a href="Perfil.html">
+
+            Perfil
+
+        </a>
+
+        <!--
+            Opciones exclusivas
+            para el administrador.
+        -->
+
+            <a href="Maestros.html">
+
+                Maestros
+
+            </a>
 
         </div>
 
     </nav>
 
+    <!--=========================================
+                CONTENIDO PRINCIPAL
+    ==========================================-->
+
     <main class="main">
+
+        <!--=========================================
+                    ENCABEZADO
+        ==========================================-->
 
         <header class="header">
 
             <div class="user-info">
 
-                <div class="avatar" id="avatar">MA</div>
+                <div
+                    class="avatar"
+                    id="avatar">
+
+                    AD
+
+                </div>
 
                 <div>
 
-                    <h3 id="nombreUsuario">Usuario</h3>
+                    <h3 id="nombreUsuario">
 
-                    <small id="rolUsuario">Maestro</small>
+                        Usuario
+
+                    </h3>
+
+                    <small id="rolUsuario">
+
+                        Rol
+
+                    </small>
 
                 </div>
 
                 <img
                     src="logoIAEV.png"
-                    alt="Logo IAEV"
+                    alt="Logo"
                     class="header-logo">
 
             </div>
 
-            <div class="header-buttons">
+            <div>
 
                 <a
                     href="Login.html"
-                    class="btn btn-danger"
-                    id="cerrarSesion">
+                    id="cerrarSesion"
+                    class="btn btn-danger">
 
                     Salir
 
@@ -72,42 +147,126 @@
 
         </header>
 
-        <h1 class="mb-30">Historial de Asesorías</h1>
+        <!--=========================================
+                    TÍTULO
+        ==========================================-->
 
-                <section class="card">
+        <h1>
 
-            <div class="search-box">
+            📚 Historial de Asesorías
 
-                <input
-                    type="text"
-                    id="buscador"
-                    placeholder="Buscar por alumno, matrícula o materia...">
+        </h1>
+
+        <!--=========================================
+                    DESCRIPCIÓN
+        ==========================================-->
+
+        <section class="card">
+
+            <p>
+
+                En esta sección puedes consultar todas las asesorías registradas.
+
+            </p>
+
+            <p>
+
+                Utiliza el buscador para localizar asesorías por alumno, matrícula, materia o maestro.
+
+            </p>
+
+        </section>
+
+                <!--=========================================
+                    HERRAMIENTAS
+        ==========================================-->
+
+        <section class="card">
+
+            <div class="toolbar">
+
+                <!--==============================
+                        BUSCADOR
+                ==============================-->
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="buscar"
+                        placeholder="🔍 Buscar por matrícula, alumno, materia o maestro...">
+
+                </div>
+
+                <!--==============================
+                    CONTADOR
+                ==============================-->
+
+                <div class="contador">
+
+                    <strong>
+
+                        Total de asesorías:
+
+                    </strong>
+
+                    <span id="totalRegistros">
+
+                        0
+
+                    </span>
+
+                </div>
 
             </div>
 
+        </section>
+
+        <!--=========================================
+                    TABLA
+        ==========================================-->
+
+        <section class="card">
+
             <div class="table-responsive">
 
-                <table>
+                <table class="tabla">
 
                     <thead>
 
                         <tr>
 
                             <th>Matrícula</th>
+
                             <th>Alumno</th>
+
                             <th>Materia</th>
-                            <th>Cuatrimestre</th>
+
                             <th>Tipo</th>
+
                             <th>Fecha</th>
+
                             <th>Horario</th>
-                            <th>Tema</th>
+
+                            <th>Tiempo</th>
+
                             <th>Maestro</th>
+
+                            <th>Acciones</th>
 
                         </tr>
 
                     </thead>
 
-                    <tbody id="tablaHistorial"></tbody>
+                    <tbody id="tablaAsesorias">
+
+                        <!--
+                            Firestore llenará
+                            automáticamente
+                            esta tabla.
+                        -->
+
+                    </tbody>
 
                 </table>
 
@@ -115,40 +274,265 @@
 
         </section>
 
-    </main>
+        <!--=========================================
+                MODAL EDITAR
+        ==========================================-->
 
-    <script type="module">
+        <div
+            class="modal"
+            id="modalEditar">
+
+            <div class="modal-content">
+
+                <h2>
+
+                    ✏ Editar Asesoría
+
+                </h2>
+
+                <input
+                    type="hidden"
+                    id="editarId">
+
+                <!--==============================
+                        MATRÍCULA
+                ==============================-->
+
+                <label>
+
+                    Matrícula
+
+                </label>
+
+                <input
+                    type="text"
+                    id="editarMatricula">
+
+                <!--==============================
+                        ALUMNO
+                ==============================-->
+
+                <label>
+
+                    Alumno
+
+                </label>
+
+                <input
+                    type="text"
+                    id="editarNombre">
+
+                <!--==============================
+                        MATERIA
+                ==============================-->
+
+                <label>
+
+                    Materia
+
+                </label>
+
+                <input
+                    type="text"
+                    id="editarMateria">
+
+                <!--==============================
+                        TIPO
+                ==============================-->
+
+                <label>
+
+                    Tipo
+
+                </label>
+
+                <select
+                    id="editarTipo">
+
+                    <option value="Académica">
+
+                        Académica
+
+                    </option>
+
+                    <option value="Proyecto">
+
+                        Proyecto
+
+                    </option>
+
+                </select>
+
+                <!--==============================
+                        FECHA
+                ==============================-->
+
+                <label>
+
+                    Fecha
+
+                </label>
+
+                <input
+                    type="date"
+                    id="editarFecha">
+
+                <!--==============================
+                        HORAS
+                ==============================-->
+
+                <label>
+
+                    Hora Inicio
+
+                </label>
+
+                <input
+                    type="time"
+                    id="editarHoraInicio">
+
+                <label>
+
+                    Hora Fin
+
+                </label>
+
+                <input
+                    type="time"
+                    id="editarHoraFin">
+
+                <!--==============================
+                        TEMA
+                ==============================-->
+
+                <label>
+
+                    Tema
+
+                </label>
+
+                <textarea
+                    id="editarTema"
+                    rows="4"></textarea>
+
+                <!--==============================
+                        BOTONES
+                ==============================-->
+
+                <div class="modal-buttons">
+
+                    <button
+                        id="guardarCambios"
+                        class="btn btn-primary">
+
+                        💾 Guardar
+
+                    </button>
+
+                    <button
+                        id="cerrarModal"
+                        class="btn btn-danger">
+
+                        Cancelar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+            <script type="module">
+
+        /*=========================================
+                IMPORTAR FIREBASE
+        ==========================================*/
 
         import { auth, db } from "./firebase.js";
 
         import {
+
             signOut
+
         } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
         import {
+
             collection,
-            getDocs
+            getDocs,
+            query,
+            orderBy,
+            doc,
+            updateDoc,
+            deleteDoc
+
         } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-        const nombre = localStorage.getItem("nombre");
-        const rol = localStorage.getItem("rol");
-        const documentoUsuario = localStorage.getItem("documentoUsuario");
 
-        if (!documentoUsuario) {
+        /*=========================================
+                VARIABLES GLOBALES
+        ==========================================*/
+
+        const tabla = document.getElementById("tablaAsesorias");
+
+        const buscador = document.getElementById("buscar");
+
+        const totalRegistros = document.getElementById("totalRegistros");
+
+        const rol = localStorage.getItem("rol");
+
+        const nombre = localStorage.getItem("nombre");
+
+        const uid = localStorage.getItem("uid");
+
+        let asesorias = [];
+
+
+        /*=========================================
+                VALIDAR SESIÓN
+        ==========================================*/
+
+        if (!uid) {
 
             window.location.href = "Login.html";
 
         }
 
+
+        /*=========================================
+                MOSTRAR INFORMACIÓN
+                DEL USUARIO
+        ==========================================*/
+
         document.getElementById("nombreUsuario").textContent = nombre;
+
         document.getElementById("rolUsuario").textContent = rol;
 
-        document.getElementById("avatar").textContent = nombre
+
+        /*=========================================
+                CREAR AVATAR
+        ==========================================*/
+
+        const iniciales = nombre
+
             .split(" ")
+
             .map(p => p.charAt(0))
+
             .join("")
+
             .substring(0, 2)
+
             .toUpperCase();
+
+        document.getElementById("avatar").textContent = iniciales;
+
+
+        /*=========================================
+                OCULTAR MENÚ
+                ADMINISTRADOR
+        ==========================================*/
 
         if (rol !== "administrador") {
 
@@ -156,7 +540,20 @@
 
         }
 
-        document.getElementById("cerrarSesion").addEventListener("click", async e => {
+
+        /*=========================================
+                REFERENCIA
+                FIRESTORE
+        ==========================================*/
+
+        const asesoriasRef = collection(db, "asesorias");
+
+
+        /*=========================================
+                CERRAR SESIÓN
+        ==========================================*/
+
+        document.getElementById("cerrarSesion").addEventListener("click", async function (e) {
 
             e.preventDefault();
 
@@ -168,58 +565,379 @@
 
         });
 
-                async function cargarHistorial() {
+                /*=========================================
+                CARGAR ASESORÍAS
+        ==========================================*/
 
-            const tabla = document.getElementById("tablaHistorial");
+        async function cargarAsesorias(){
 
             tabla.innerHTML = "";
 
-            const consulta = await getDocs(collection(db, "asesorias"));
+            asesorias = [];
 
-            consulta.forEach(documento => {
+            try{
 
-                const datos = documento.data();
+                const consulta = query(
 
-                if (
-                    rol === "maestro" &&
-                    datos.maestro !== nombre
-                ) return;
+                    asesoriasRef,
+
+                    orderBy("fechaRegistro","desc")
+
+                );
+
+                const snapshot = await getDocs(consulta);
+
+                snapshot.forEach((documento)=>{
+
+                    const datos = documento.data();
+
+                    datos.id = documento.id;
+
+                    /*
+                        Si es maestro,
+                        solamente verá
+                        sus asesorías.
+                    */
+
+                    if(
+                        rol === "administrador" ||
+                        datos.uid === uid
+                    ){
+
+                        asesorias.push(datos);
+
+                    }
+
+                });
+
+                mostrarTabla(asesorias);
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                alert("Error al cargar las asesorías.");
+
+            }
+
+        }
+
+
+
+        /*=========================================
+                MOSTRAR TABLA
+        ==========================================*/
+
+        function mostrarTabla(lista){
+
+            tabla.innerHTML = "";
+
+            totalRegistros.textContent = lista.length;
+
+            lista.forEach((asesoria)=>{
 
                 tabla.innerHTML += `
-                    <tr>
-                        <td>${datos.matricula}</td>
-                        <td>${datos.nombre}</td>
-                        <td>${datos.materia}</td>
-                        <td>${datos.cuatrimestre}</td>
-                        <td>${datos.tipo}</td>
-                        <td>${datos.fecha}</td>
-                        <td>${datos.horaInicio} - ${datos.horaFin}</td>
-                        <td>${datos.tema}</td>
-                        <td>${datos.maestro}</td>
-                    </tr>
+
+                <tr>
+
+                    <td>${asesoria.matricula}</td>
+
+                    <td>${asesoria.nombre}</td>
+
+                    <td>${asesoria.materia}</td>
+
+                    <td>${asesoria.tipo}</td>
+
+                    <td>${asesoria.fecha}</td>
+
+                    <td>
+
+                        ${asesoria.horaInicio}
+
+                        -
+
+                        ${asesoria.horaFin}
+
+                    </td>
+
+                    <td>${asesoria.tiempo}</td>
+
+                    <td>${asesoria.maestro}</td>
+
+                    <td>
+
+                        <button
+
+                            class="btn btn-warning btnEditar"
+
+                            data-id="${asesoria.id}">
+
+                            ✏ Editar
+
+                        </button>
+
+                        ${rol==="administrador"
+                        ?
+
+                        `<button
+
+                            class="btn btn-danger btnEliminar"
+
+                            data-id="${asesoria.id}">
+
+                            🗑 Eliminar
+
+                        </button>`
+
+                        :
+
+                        ""
+
+                        }
+
+                    </td>
+
+                </tr>
+
                 `;
 
             });
 
         }
 
-        document.getElementById("buscador").addEventListener("keyup", function () {
+
+
+        /*=========================================
+                BUSCADOR
+        ==========================================*/
+
+        buscador.addEventListener("keyup",function(){
 
             const texto = this.value.toLowerCase();
 
-            document.querySelectorAll("#tablaHistorial tr").forEach(fila => {
+            const resultado = asesorias.filter((asesoria)=>{
 
-                fila.style.display = fila.textContent
-                    .toLowerCase()
-                    .includes(texto)
-                    ? ""
-                    : "none";
+                return(
+
+                    asesoria.matricula.toLowerCase().includes(texto)
+
+                    ||
+
+                    asesoria.nombre.toLowerCase().includes(texto)
+
+                    ||
+
+                    asesoria.materia.toLowerCase().includes(texto)
+
+                    ||
+
+                    asesoria.maestro.toLowerCase().includes(texto)
+
+                );
 
             });
 
+            mostrarTabla(resultado);
+
         });
 
-        cargarHistorial();
+
+
+        /*=========================================
+                CARGAR AL INICIAR
+        ==========================================*/
+
+        cargarAsesorias();
+
+                /*=========================================
+                EDITAR ASESORÍA
+        ==========================================*/
+
+        tabla.addEventListener("click",function(e){
+
+            /*==============================
+                BOTÓN EDITAR
+            ==============================*/
+
+            if(e.target.classList.contains("btnEditar")){
+
+                const id=e.target.dataset.id;
+
+                const asesoria=asesorias.find(a=>a.id===id);
+
+                if(!asesoria) return;
+
+                document.getElementById("editarId").value=id;
+
+                document.getElementById("editarMatricula").value=asesoria.matricula;
+
+                document.getElementById("editarNombre").value=asesoria.nombre;
+
+                document.getElementById("editarMateria").value=asesoria.materia;
+
+                document.getElementById("editarTipo").value=asesoria.tipo;
+
+                document.getElementById("editarFecha").value=asesoria.fecha;
+
+                document.getElementById("editarHoraInicio").value=asesoria.horaInicio;
+
+                document.getElementById("editarHoraFin").value=asesoria.horaFin;
+
+                document.getElementById("editarTema").value=asesoria.tema;
+
+                document.getElementById("modalEditar").style.display="flex";
+
+            }
+
+            /*==============================
+                BOTÓN ELIMINAR
+            ==============================*/
+
+            if(e.target.classList.contains("btnEliminar")){
+
+                eliminarAsesoria(e.target.dataset.id);
+
+            }
+
+        });
+
+
+
+        /*=========================================
+                CERRAR MODAL
+        ==========================================*/
+
+        document.getElementById("cerrarModal").addEventListener("click",function(){
+
+            document.getElementById("modalEditar").style.display="none";
+
+        });
+
+
+
+        /*=========================================
+                GUARDAR CAMBIOS
+        ==========================================*/
+
+        document.getElementById("guardarCambios").addEventListener("click",async function(){
+
+            const id=document.getElementById("editarId").value;
+
+            const horaInicio=document.getElementById("editarHoraInicio").value;
+
+            const horaFin=document.getElementById("editarHoraFin").value;
+
+            if(horaFin<=horaInicio){
+
+                alert("La hora final debe ser mayor que la hora inicial.");
+
+                return;
+
+            }
+
+            const inicio=new Date(`2000-01-01T${horaInicio}`);
+
+            const fin=new Date(`2000-01-01T${horaFin}`);
+
+            const diferencia=(fin-inicio)/60000;
+
+            const horas=Math.floor(diferencia/60);
+
+            const minutos=diferencia%60;
+
+            let tiempo="";
+
+            if(horas>0){
+
+                tiempo+=horas+" h ";
+
+            }
+
+            if(minutos>0){
+
+                tiempo+=minutos+" min";
+
+            }
+
+            try{
+
+                await updateDoc(doc(db,"asesorias",id),{
+
+                    matricula:document.getElementById("editarMatricula").value,
+
+                    nombre:document.getElementById("editarNombre").value,
+
+                    materia:document.getElementById("editarMateria").value,
+
+                    tipo:document.getElementById("editarTipo").value,
+
+                    fecha:document.getElementById("editarFecha").value,
+
+                    horaInicio:horaInicio,
+
+                    horaFin:horaFin,
+
+                    tiempo:tiempo,
+
+                    tema:document.getElementById("editarTema").value
+
+                });
+
+                alert("✅ Asesoría actualizada correctamente.");
+
+                document.getElementById("modalEditar").style.display="none";
+
+                cargarAsesorias();
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                alert("Error al actualizar la asesoría.");
+
+            }
+
+        });
+
+
+
+        /*=========================================
+                ELIMINAR ASESORÍA
+        ==========================================*/
+
+        async function eliminarAsesoria(id){
+
+            const confirmar=confirm("¿Desea eliminar esta asesoría?");
+
+            if(!confirmar){
+
+                return;
+
+            }
+
+            try{
+
+                await deleteDoc(doc(db,"asesorias",id));
+
+                alert("🗑 Asesoría eliminada correctamente.");
+
+                cargarAsesorias();
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                alert("Error al eliminar la asesoría.");
+
+            }
+
+        }
 
     </script>
 

@@ -86,50 +86,7 @@
 
         </section>
 
-        <section class="card-grid">
-
-            <div class="card">
-
-                <h3>📚 Total de Asesorías</h3>
-
-                <h2 id="totalAsesorias">0</h2>
-
-                <p>Asesorías registradas en el sistema.</p>
-
-            </div>
-
-            <div class="card">
-
-                <h3>👨‍🎓 Alumnos Atendidos</h3>
-
-                <h2 id="totalAlumnos">0</h2>
-
-                <p>Alumnos diferentes que han recibido asesoría.</p>
-
-            </div>
-
-            <div class="card">
-
-                <h3>⏱ Horas Impartidas</h3>
-
-                <h2 id="horasTotales">0</h2>
-
-                <p>Horas acumuladas de asesorías.</p>
-
-            </div>
-
-            <div class="card">
-
-                <h3>👨‍🏫 Maestros</h3>
-
-                <h2 id="totalMaestros">0</h2>
-
-                <p>Maestros registrados en el sistema.</p>
-
-            </div>
-
-        </section>
-
+        
                 <section class="table-container">
 
             <h2>Últimas Asesorías Registradas</h2>
@@ -242,11 +199,6 @@
                 recientes.push(datos);
 
             });
-
-            document.getElementById("totalAsesorias").textContent = totalAsesorias;
-            document.getElementById("totalAlumnos").textContent = alumnos.size;
-            document.getElementById("horasTotales").textContent = horasTotales.toFixed(1);
-            document.getElementById("totalMaestros").textContent = totalMaestros;
 
             recientes.sort((a, b) => b.fecha.localeCompare(a.fecha));
 
