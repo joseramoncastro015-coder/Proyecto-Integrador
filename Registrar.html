@@ -112,71 +112,7 @@
 
                         <select id="materia" required>
 
-                            <option value="">Selecciona una materia</option>
-
-                            <option>INGLÉS I</option>
-                            <option>INGLÉS II</option>
-                            <option>INGLÉS III</option>
-                            <option>INGLÉS IV</option>
-                            <option>INGLÉS V</option>
-                            <option>INGLÉS VI</option>
-                            <option>INGLÉS VII</option>
-                            <option>INGLÉS VIII</option>
-
-                            <option>DESARROLLO HUMANO Y VALORES</option>
-                            <option>HABILIDADES SOCIOEMOCIONALES Y MANEJO DE CONFLICTOS</option>
-                            <option>DESARROLLO DEL PENSAMIENTO Y TOMA DE DECISIONES</option>
-                            <option>ÉTICA PROFESIONAL</option>
-                            <option>LIDERAZGO DE EQUIPOS DE ALTO DESEMPEÑO</option>
-                            <option>HABILIDADES GERENCIALES</option>
-                            <option>DINÁMICOS Y FLUIDOS</option>
-                            <option>DINÁMICOS DE TELA Y CABELLO</option>
-
-                            <option>FUNDAMENTOS MATEMÁTICOS</option>
-                            <option>CÁLCULO DIFERENCIAL</option>
-                            <option>CÁLCULO INTEGRAL</option>
-                            <option>CÁLCULO DE VARIAS VARIABLES</option>
-                            <option>ECUACIONES DIFERENCIALES</option>
-
-                            <option>DIBUJO Y TÉCNICAS DE REPRESENTACIÓN</option>
-                            <option>FÍSICA</option>
-                            <option>SEMIÓTICA Y CREACIÓN DE PERSONAJES</option>
-                            <option>PROBABILIDAD Y ESTADÍSTICA</option>
-                            <option>GRABACIÓN Y DISEÑO DE AUDIO</option>
-
-                            <option>HISTORIA DEL ARTE</option>
-                            <option>DIBUJO DIGITAL Y TEORÍA DEL COLOR</option>
-                            <option>FUNDAMENTOS DE LA ANIMACIÓN</option>
-                            <option>ANIMACIÓN 2D</option>
-                            <option>TÉCNICAS DE CINE</option>
-
-                            <option>NARRATIVA Y GUIONISMO</option>
-                            <option>ANATOMÍA HUMANA Y ANIMAL</option>
-                            <option>TALLER DE ESCULTURA Y MAQUETAS</option>
-                            <option>INTRODUCCIÓN AL MODELADO 3D</option>
-                            <option>ESCULTURA DIGITAL DE PERSONAJES</option>
-
-                            <option>COMUNICACIÓN Y HABILIDADES DIGITALES</option>
-                            <option>STORYBOARD</option>
-                            <option>PROYECTO INTEGRADOR I</option>
-                            <option>DIRECCIÓN FOTOGRÁFICA</option>
-                            <option>PROYECTO INTEGRADOR II</option>
-
-                            <option>FUNDAMENTOS Y PRODUCCIÓN DE EFECTOS VISUALES</option>
-                            <option>RENDERING</option>
-                            <option>POSTPRODUCCIÓN DIGITAL</option>
-                            <option>INTRODUCCIÓN A LA ANIMACIÓN 3D</option>
-                            <option>ANIMACIÓN DE PERSONAJES EN 3D</option>
-                            <option>ANIMACIÓN 3D AVANZADA</option>
-                            <option>RIGGING</option>
-                            <option>RIGGING FACIAL</option>
-                            <option>MOTORES GRÁFICOS</option>
-                            <option>TEXTURIZADO E ILUMINACIÓN 3D</option>
-                            <option>COMPOSICIÓN DE EFECTOS</option>
-                            <option>PROPIEDAD INTELECTUAL</option>
-                            <option>CINEMATOGRAFÍA</option>
-                            <option>MOTION GRAPHICS</option>
-                            <option>PROYECTO INTEGRADOR III</option>
+                            <option value="">Selecciona un cuatrimestre primero</option>
 
                         </select>
 
@@ -189,15 +125,15 @@
                         <select id="cuatrimestre" required>
 
                             <option value="">Selecciona</option>
-                            <option>1°</option>
-                            <option>2°</option>
-                            <option>3°</option>
-                            <option>4°</option>
-                            <option>5°</option>
-                            <option>6°</option>
-                            <option>7°</option>
-                            <option>8°</option>
-                            <option>9°</option>
+                            <option value="1">1°</option>
+                            <option value="2">2°</option>
+                            <option value="3">3°</option>
+                            <option value="4">4°</option>
+                            <option value="5">5°</option>
+                            <option value="6">6°</option>
+                            <option value="7">7°</option>
+                            <option value="8">8°</option>
+                            <option value="9">9°</option>
 
                         </select>
 
@@ -337,6 +273,116 @@ document.getElementById("cerrarSesion").addEventListener("click", async e => {
 
 });
 
+const materiasPorCuatrimestre = {
+    1: [
+        "Inglés I",
+        "Desarrollo Humano y Valores",
+        "Fundamentos Matemáticos",
+        "Dibujo y Técnicas de Representación",
+        "Historia del Arte",
+        "Narrativa y Guionismo",
+        "Comunicación y Habilidades Digitales"
+    ],
+
+    2: [
+        "Inglés II",
+        "Habilidades Socioemocionales y Manejo de Conflictos",
+        "Cálculo Diferencial",
+        "Física",
+        "Dibujo Digital y Teoría del Color",
+        "Anatomía Humana y Animal",
+        "Storyboard"
+    ],
+
+    3: [
+        "Inglés III",
+        "Desarrollo del Pensamiento y Toma de Decisiones",
+        "Cálculo Integral",
+        "Semiótica y Creación de Personajes",
+        "Fundamentos de la Animación",
+        "Taller de Escultura y Maquetas",
+        "Proyecto Integrador I"
+    ],
+
+    4: [
+        "Inglés IV",
+        "Ética Profesional",
+        "Cálculo de Varias Variables",
+        "Probabilidad y Estadística",
+        "Animación 2D",
+        "Introducción al Modelado 3D",
+        "Dirección Fotográfica"
+    ],
+
+    5: [
+        "Inglés V",
+        "Liderazgo de Equipos de Alto Desempeño",
+        "Ecuaciones Diferenciales",
+        "Grabación y Diseño de Audio",
+        "Técnicas de Cine",
+        "Escultura Digital de Personajes",
+        "Proyecto Integrador II"
+    ],
+
+    6: [
+        "Inglés VI",
+        "Fundamentos y Producción de Efectos Visuales"
+    ],
+
+    7: [
+        "Inglés VII",
+        "Habilidades Gerenciales",
+        "Rendering",
+        "Introducción a la Animación 3D",
+        "Rigging",
+        "Texturizado e Iluminación 3D",
+        "Cinematografía"
+    ],
+
+    8: [
+        "Inglés VIII",
+        "Dinámicos y Fluidos",
+        "Postproducción Digital",
+        "Animación de Personajes en 3D",
+        "Rigging Facial",
+        "Composición de Efectos",
+        "Motion Graphics"
+    ],
+
+    9: [
+        "Dinámicos de Tela y Cabello",
+        "Animación 3D Avanzada",
+        "Motores Gráficos",
+        "Propiedad Intelectual",
+        "Proyecto Integrador III"
+    ]
+};
+
+const selectCuatrimestre = document.getElementById("cuatrimestre");
+const selectMateria = document.getElementById("materia");
+
+selectCuatrimestre.addEventListener("change", () => {
+
+    const cuatrimestre = selectCuatrimestre.value;
+
+    selectMateria.innerHTML =
+        '<option value="">Selecciona una materia</option>';
+
+    if (!materiasPorCuatrimestre[cuatrimestre]) return;
+
+    materiasPorCuatrimestre[cuatrimestre].forEach(materia => {
+
+        const opcion = document.createElement("option");
+
+        opcion.value = materia;
+        opcion.textContent = materia;
+
+        selectMateria.appendChild(opcion);
+
+    });
+
+});
+
 document.getElementById("formAsesoria").addEventListener("submit", async e => {
 
     e.preventDefault();
@@ -372,7 +418,7 @@ document.getElementById("formAsesoria").addEventListener("submit", async e => {
             matricula: document.getElementById("matricula").value,
             nombre: document.getElementById("nombre").value,
             materia: document.getElementById("materia").value,
-            cuatrimestre: document.getElementById("cuatrimestre").value,
+            cuatrimestre: document.getElementById("cuatrimestre").selectedOptions[0].text,
             tipo: document.getElementById("tipo").value,
             fecha: document.getElementById("fecha").value,
             horaInicio: horaInicio,
