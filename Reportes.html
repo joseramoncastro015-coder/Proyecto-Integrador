@@ -27,9 +27,7 @@
         <a href="Perfil.html">Perfil</a>
 
         <div id="menuAdmin">
-
             <a href="Maestros.html">Maestros</a>
-
         </div>
 
     </nav>
@@ -57,18 +55,14 @@
 
             </div>
 
-            <div>
+            <a
+                href="Login.html"
+                id="cerrarSesion"
+                class="btn btn-danger">
 
-                <a
-                    href="Login.html"
-                    id="cerrarSesion"
-                    class="btn btn-danger">
+                Salir
 
-                    Salir
-
-                </a>
-
-            </div>
+            </a>
 
         </header>
 
@@ -77,54 +71,54 @@
         <section class="card">
 
             <p>
-
                 Consulta las estadísticas generales del sistema de asesorías.
-
             </p>
 
             <p>
-
                 La información se obtiene automáticamente desde Firebase Firestore.
-
             </p>
 
         </section>
 
-                <section class="cards-grid">
+        <section class="card-grid">
 
-            <div class="card card-info">
+            <div class="card">
 
                 <h3>📚 Total de Asesorías</h3>
 
-                <h1 id="totalAsesorias">0</h1>
+                <h2 id="totalAsesorias">0</h2>
+
+                <p>Asesorías registradas en el sistema.</p>
 
             </div>
 
-            <div class="card card-info">
+            <div class="card">
 
-                <h3>⏱ Horas Totales</h3>
+                <h3>👨‍🎓 Usuarios</h3>
 
-                <h1 id="horasTotales">0 h</h1>
+                <h2 id="totalUsuarios">0</h2>
 
-            </div>
-
-            <div
-                class="card card-info"
-                id="cardUsuarios">
-
-                <h3>👥 Usuarios</h3>
-
-                <h1 id="totalUsuarios">0</h1>
+                <p>Usuarios registrados.</p>
 
             </div>
 
-            <div
-                class="card card-info"
-                id="cardMaestros">
+            <div class="card">
+
+                <h3>⏱ Horas Impartidas</h3>
+
+                <h2 id="horasTotales">0 h</h2>
+
+                <p>Horas acumuladas de asesorías.</p>
+
+            </div>
+
+            <div class="card" id="cardMaestros">
 
                 <h3>👨‍🏫 Maestros</h3>
 
-                <h1 id="totalMaestros">0</h1>
+                <h2 id="totalMaestros">0</h2>
+
+                <p>Maestros registrados en el sistema.</p>
 
             </div>
 
@@ -133,9 +127,7 @@
         <section class="card">
 
             <h2 class="mb-20">
-
-                Asesorías por Materia
-
+                📈 Asesorías por Materia
             </h2>
 
             <canvas id="graficaMaterias"></canvas>
@@ -149,10 +141,8 @@
                 <thead>
 
                     <tr>
-
                         <th>Materia</th>
                         <th>Total de Asesorías</th>
-
                     </tr>
 
                 </thead>
@@ -171,170 +161,192 @@
 
         import { auth, db } from "./firebase.js";
 
-        import { signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-        import {
-            collection,
-            getDocs
-        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import {
+    collection,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-                const rol = localStorage.getItem("rol");
-        const nombre = localStorage.getItem("nombre");
+const rol = localStorage.getItem("rol");
+const nombre = localStorage.getItem("nombre");
 
-        if (!rol) {
+if (!rol) {
+    window.location.href = "Login.html";
+}
 
-            window.location.href = "Login.html";
+document.getElementById("nombreUsuario").textContent = nombre;
+
+document.getElementById("rolUsuario").textContent =
+    rol.charAt(0).toUpperCase() + rol.slice(1);
+
+document.getElementById("avatar").textContent = nombre
+    .split(" ")
+    .map(p => p.charAt(0))
+    .join("")
+    .substring(0, 2)
+    .toUpperCase();
+
+if (rol !== "administrador") {
+
+    document.getElementById("menuAdmin").style.display = "none";
+
+    document.getElementById("totalUsuarios")
+        .closest(".card").style.display = "none";
+
+    document.getElementById("cardMaestros").style.display = "none";
+
+}
+
+document.getElementById("cerrarSesion").addEventListener("click", async e => {
+
+    e.preventDefault();
+
+    await signOut(auth);
+
+    localStorage.clear();
+
+    window.location.href = "Login.html";
+
+});
+
+async function cargarReportes() {
+
+    const asesorias = await getDocs(collection(db, "asesorias"));
+    const usuarios = await getDocs(collection(db, "usuarios"));
+
+    let totalAsesorias = 0;
+    let horasTotales = 0;
+    let totalUsuarios = 0;
+    let totalMaestros = 0;
+
+    const materias = {};
+
+    asesorias.forEach(doc => {
+
+        const datos = doc.data();
+
+        totalAsesorias++;
+
+        if (datos.horaInicio && datos.horaFin) {
+
+            const inicio = datos.horaInicio.split(":");
+            const fin = datos.horaFin.split(":");
+
+            const minutosInicio =
+                parseInt(inicio[0]) * 60 + parseInt(inicio[1]);
+
+            const minutosFin =
+                parseInt(fin[0]) * 60 + parseInt(fin[1]);
+
+            horasTotales += minutosFin - minutosInicio;
 
         }
 
-        document.getElementById("nombreUsuario").textContent = nombre;
-        document.getElementById("rolUsuario").textContent =
-            rol.charAt(0).toUpperCase() + rol.slice(1);
+        materias[datos.materia] =
+            (materias[datos.materia] || 0) + 1;
 
-        document.getElementById("avatar").textContent = nombre
-            .split(" ")
-            .map(p => p.charAt(0))
-            .join("")
-            .substring(0, 2)
-            .toUpperCase();
+    });
 
-        if (rol !== "administrador") {
+    usuarios.forEach(doc => {
 
-            document.getElementById("menuAdmin").style.display = "none";
-            document.getElementById("cardUsuarios").style.display = "none";
-            document.getElementById("cardMaestros").style.display = "none";
+        totalUsuarios++;
+
+        if (doc.data().rol === "maestro") {
+
+            totalMaestros++;
 
         }
 
-        document.getElementById("cerrarSesion").addEventListener("click", async e => {
+    });
 
-            e.preventDefault();
+    document.getElementById("totalAsesorias").textContent = totalAsesorias;
 
-            await signOut(auth);
+    document.getElementById("horasTotales").textContent =
+        (horasTotales / 60).toFixed(1) + " h";
 
-            localStorage.clear();
+    document.getElementById("totalUsuarios").textContent = totalUsuarios;
 
-            window.location.href = "Login.html";
+    document.getElementById("totalMaestros").textContent = totalMaestros;
 
-        });
+    const tabla = document.getElementById("tablaMaterias");
 
-        async function cargarReportes() {
+    tabla.innerHTML = "";
 
-            const asesorias = await getDocs(collection(db, "asesorias"));
-            const usuarios = await getDocs(collection(db, "usuarios"));
+    Object.entries(materias).forEach(([materia, total]) => {
 
-            let totalAsesorias = 0;
-            let horasTotales = 0;
-            let totalUsuarios = 0;
-            let totalMaestros = 0;
+        tabla.innerHTML += `
+            <tr>
+                <td>${materia}</td>
+                <td>${total}</td>
+            </tr>
+        `;
 
-            const materias = {};
+    });
 
-            asesorias.forEach(doc => {
+    new Chart(document.getElementById("graficaMaterias"), {
 
-                const datos = doc.data();
+        type: "bar",
 
-                totalAsesorias++;
+        data: {
 
-                if (datos.horaInicio && datos.horaFin) {
+            labels: Object.keys(materias),
 
-                    const inicio = datos.horaInicio.split(":");
-                    const fin = datos.horaFin.split(":");
+            datasets: [{
 
-                    const minutosInicio =
-                        parseInt(inicio[0]) * 60 + parseInt(inicio[1]);
+                label: "Asesorías",
 
-                    const minutosFin =
-                        parseInt(fin[0]) * 60 + parseInt(fin[1]);
+                data: Object.values(materias),
 
-                    horasTotales += minutosFin - minutosInicio;
+                backgroundColor: "#FFC107",
+
+                borderColor: "#E0A800",
+
+                borderWidth: 1
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+
+                    position: "top"
 
                 }
 
-                materias[datos.materia] =
-                    (materias[datos.materia] || 0) + 1;
+            },
 
-            });
+            scales: {
 
-            usuarios.forEach(doc => {
+                y: {
 
-                totalUsuarios++;
+                    beginAtZero: true,
 
-                if (doc.data().rol === "maestro") {
+                    ticks: {
 
-                    totalMaestros++;
-
-                }
-
-            });
-
-            document.getElementById("totalAsesorias").textContent = totalAsesorias;
-            document.getElementById("horasTotales").textContent = (horasTotales / 60).toFixed(1) + " h";
-            document.getElementById("totalUsuarios").textContent = totalUsuarios;
-            document.getElementById("totalMaestros").textContent = totalMaestros;
-
-            const tabla = document.getElementById("tablaMaterias");
-
-            tabla.innerHTML = "";
-
-            Object.entries(materias).forEach(([materia, total]) => {
-
-                tabla.innerHTML += `
-                    <tr>
-                        <td>${materia}</td>
-                        <td>${total}</td>
-                    </tr>
-                `;
-
-            });
-
-            new Chart(document.getElementById("graficaMaterias"), {
-
-                type: "bar",
-
-                data: {
-
-                    labels: Object.keys(materias),
-
-                    datasets: [{
-
-                        label: "Asesorías",
-
-                        data: Object.values(materias),
-
-                        backgroundColor: "#FFC107",
-
-                        borderColor: "#E0A800",
-
-                        borderWidth: 1
-
-                    }]
-
-                },
-
-                options: {
-
-                    responsive: true,
-
-                    scales: {
-
-                        y: {
-
-                            beginAtZero: true
-
-                        }
+                        precision: 0
 
                     }
 
                 }
 
-            });
+            }
 
         }
 
-        cargarReportes();
+    });
 
-    </script>
+}
+
+cargarReportes();
+
+</script>
 
 </body>
 

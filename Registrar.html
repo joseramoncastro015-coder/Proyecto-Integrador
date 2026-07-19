@@ -27,9 +27,7 @@
         <a href="Perfil.html">Perfil</a>
 
         <div id="menuAdmin">
-
             <a href="Maestros.html">Maestros</a>
-
         </div>
 
     </nav>
@@ -50,17 +48,19 @@
 
                 </div>
 
-                <img src="logoIAEV.png"
-                     alt="Logo IAEV"
-                     class="header-logo">
+                <img
+                    src="logoIAEV.png"
+                    alt="Logo IAEV"
+                    class="header-logo">
 
             </div>
 
             <div class="header-buttons">
 
-                <a href="Login.html"
-                   class="btn btn-danger"
-                   id="cerrarSesion">
+                <a
+                    href="Login.html"
+                    class="btn btn-danger"
+                    id="cerrarSesion">
 
                     Salir
 
@@ -76,7 +76,7 @@
 
             <form id="formAsesoria">
 
-                                <div class="form-row">
+                <div class="form-row">
 
                     <div class="form-group">
 
@@ -110,11 +110,75 @@
 
                         <label>Materia</label>
 
-                        <input
-                            type="text"
-                            id="materia"
-                            placeholder="Ej. Programación"
-                            required>
+                        <select id="materia" required>
+
+                            <option value="">Selecciona una materia</option>
+
+                            <option>INGLÉS I</option>
+                            <option>INGLÉS II</option>
+                            <option>INGLÉS III</option>
+                            <option>INGLÉS IV</option>
+                            <option>INGLÉS V</option>
+                            <option>INGLÉS VI</option>
+                            <option>INGLÉS VII</option>
+                            <option>INGLÉS VIII</option>
+
+                            <option>DESARROLLO HUMANO Y VALORES</option>
+                            <option>HABILIDADES SOCIOEMOCIONALES Y MANEJO DE CONFLICTOS</option>
+                            <option>DESARROLLO DEL PENSAMIENTO Y TOMA DE DECISIONES</option>
+                            <option>ÉTICA PROFESIONAL</option>
+                            <option>LIDERAZGO DE EQUIPOS DE ALTO DESEMPEÑO</option>
+                            <option>HABILIDADES GERENCIALES</option>
+                            <option>DINÁMICOS Y FLUIDOS</option>
+                            <option>DINÁMICOS DE TELA Y CABELLO</option>
+
+                            <option>FUNDAMENTOS MATEMÁTICOS</option>
+                            <option>CÁLCULO DIFERENCIAL</option>
+                            <option>CÁLCULO INTEGRAL</option>
+                            <option>CÁLCULO DE VARIAS VARIABLES</option>
+                            <option>ECUACIONES DIFERENCIALES</option>
+
+                            <option>DIBUJO Y TÉCNICAS DE REPRESENTACIÓN</option>
+                            <option>FÍSICA</option>
+                            <option>SEMIÓTICA Y CREACIÓN DE PERSONAJES</option>
+                            <option>PROBABILIDAD Y ESTADÍSTICA</option>
+                            <option>GRABACIÓN Y DISEÑO DE AUDIO</option>
+
+                            <option>HISTORIA DEL ARTE</option>
+                            <option>DIBUJO DIGITAL Y TEORÍA DEL COLOR</option>
+                            <option>FUNDAMENTOS DE LA ANIMACIÓN</option>
+                            <option>ANIMACIÓN 2D</option>
+                            <option>TÉCNICAS DE CINE</option>
+
+                            <option>NARRATIVA Y GUIONISMO</option>
+                            <option>ANATOMÍA HUMANA Y ANIMAL</option>
+                            <option>TALLER DE ESCULTURA Y MAQUETAS</option>
+                            <option>INTRODUCCIÓN AL MODELADO 3D</option>
+                            <option>ESCULTURA DIGITAL DE PERSONAJES</option>
+
+                            <option>COMUNICACIÓN Y HABILIDADES DIGITALES</option>
+                            <option>STORYBOARD</option>
+                            <option>PROYECTO INTEGRADOR I</option>
+                            <option>DIRECCIÓN FOTOGRÁFICA</option>
+                            <option>PROYECTO INTEGRADOR II</option>
+
+                            <option>FUNDAMENTOS Y PRODUCCIÓN DE EFECTOS VISUALES</option>
+                            <option>RENDERING</option>
+                            <option>POSTPRODUCCIÓN DIGITAL</option>
+                            <option>INTRODUCCIÓN A LA ANIMACIÓN 3D</option>
+                            <option>ANIMACIÓN DE PERSONAJES EN 3D</option>
+                            <option>ANIMACIÓN 3D AVANZADA</option>
+                            <option>RIGGING</option>
+                            <option>RIGGING FACIAL</option>
+                            <option>MOTORES GRÁFICOS</option>
+                            <option>TEXTURIZADO E ILUMINACIÓN 3D</option>
+                            <option>COMPOSICIÓN DE EFECTOS</option>
+                            <option>PROPIEDAD INTELECTUAL</option>
+                            <option>CINEMATOGRAFÍA</option>
+                            <option>MOTION GRAPHICS</option>
+                            <option>PROYECTO INTEGRADOR III</option>
+
+                        </select>
 
                     </div>
 
@@ -171,7 +235,7 @@
 
                 </div>
 
-                                <div class="form-row">
+                <div class="form-row">
 
                     <div class="form-group">
 
@@ -227,89 +291,115 @@
 
         import { auth, db } from "./firebase.js";
 
-        import {
-            signOut
-        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-        import {
-            collection,
-            addDoc
-        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import {
+    collection,
+    addDoc
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-        const nombre = localStorage.getItem("nombre");
-        const rol = localStorage.getItem("rol");
-        const documentoUsuario = localStorage.getItem("documentoUsuario");
+const nombre = localStorage.getItem("nombre");
+const rol = localStorage.getItem("rol");
+const documentoUsuario = localStorage.getItem("documentoUsuario");
 
-        if (!documentoUsuario) {
+if (!documentoUsuario) {
 
-            window.location.href = "Login.html";
+    window.location.href = "Login.html";
 
-        }
+}
 
-        document.getElementById("nombreUsuario").textContent = nombre;
-        document.getElementById("rolUsuario").textContent = rol;
+document.getElementById("nombreUsuario").textContent = nombre;
 
-        document.getElementById("avatar").textContent = nombre
-            .split(" ")
-            .map(p => p.charAt(0))
-            .join("")
-            .substring(0, 2)
-            .toUpperCase();
+document.getElementById("rolUsuario").textContent = rol;
 
-        if (rol !== "administrador") {
+document.getElementById("avatar").textContent = nombre
+    .split(" ")
+    .map(p => p.charAt(0))
+    .join("")
+    .substring(0, 2)
+    .toUpperCase();
 
-            document.getElementById("menuAdmin").style.display = "none";
+if (rol !== "administrador") {
 
-        }
+    document.getElementById("menuAdmin").style.display = "none";
 
-        document.getElementById("cerrarSesion").addEventListener("click", async e => {
+}
 
-            e.preventDefault();
+document.getElementById("cerrarSesion").addEventListener("click", async e => {
 
-            await signOut(auth);
+    e.preventDefault();
 
-            localStorage.clear();
+    await signOut(auth);
 
-            window.location.href = "Login.html";
+    localStorage.clear();
+
+    window.location.href = "Login.html";
+
+});
+
+document.getElementById("formAsesoria").addEventListener("submit", async e => {
+
+    e.preventDefault();
+
+    const horaInicio = document.getElementById("horaInicio").value;
+    const horaFin = document.getElementById("horaFin").value;
+
+    if (horaFin <= horaInicio) {
+
+        alert("La hora final debe ser mayor que la hora inicial.");
+        return;
+
+    }
+
+    const inicio = new Date(`2000-01-01T${horaInicio}`);
+    const fin = new Date(`2000-01-01T${horaFin}`);
+
+    const diferencia = (fin - inicio) / 60000;
+
+    const horas = Math.floor(diferencia / 60);
+    const minutos = diferencia % 60;
+
+    let tiempo = "";
+
+    if (horas > 0) tiempo += horas + " h ";
+
+    if (minutos > 0) tiempo += minutos + " min";
+
+    try {
+
+        await addDoc(collection(db, "asesorias"), {
+
+            matricula: document.getElementById("matricula").value,
+            nombre: document.getElementById("nombre").value,
+            materia: document.getElementById("materia").value,
+            cuatrimestre: document.getElementById("cuatrimestre").value,
+            tipo: document.getElementById("tipo").value,
+            fecha: document.getElementById("fecha").value,
+            horaInicio: horaInicio,
+            horaFin: horaFin,
+            tiempo: tiempo,
+            tema: document.getElementById("tema").value,
+            maestro: nombre,
+            uid: documentoUsuario,
+            fechaRegistro: new Date()
 
         });
 
-                document.getElementById("formAsesoria").addEventListener("submit", async e => {
+        alert("✅ Asesoría registrada correctamente.");
 
-            e.preventDefault();
+        document.getElementById("formAsesoria").reset();
 
-            try {
+    } catch (error) {
 
-                await addDoc(collection(db, "asesorias"), {
+        console.error(error);
 
-                    matricula: document.getElementById("matricula").value,
-                    nombre: document.getElementById("nombre").value,
-                    materia: document.getElementById("materia").value,
-                    cuatrimestre: document.getElementById("cuatrimestre").value,
-                    tipo: document.getElementById("tipo").value,
-                    fecha: document.getElementById("fecha").value,
-                    horaInicio: document.getElementById("horaInicio").value,
-                    horaFin: document.getElementById("horaFin").value,
-                    tema: document.getElementById("tema").value,
-                    maestro: nombre
+        alert("Ocurrió un error al registrar la asesoría.");
 
-                });
+    }
 
-                alert("Asesoría registrada correctamente.");
+});
 
-                document.getElementById("formAsesoria").reset();
-
-            } catch (error) {
-
-                console.error(error);
-
-                alert("Ocurrió un error al registrar la asesoría.");
-
-            }
-
-        });
-
-    </script>
+</script>
 
 </body>
 
